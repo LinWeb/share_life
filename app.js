@@ -7,6 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var categoryRouter = require('./routes/category');
 
 var app = express();
 
@@ -14,17 +15,27 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
+// 设置头部
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-control-Allow-Methods', 'GET,POST,OPTIONS,PUT,PATCH,DELETE')
+  res.setHeader('Access-control-Allow-Headers', 'X-Requested-With,content-type')
+  res.setHeader('Access-control-Allow-Credentials', true)
+  next()
+})
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use([express.static(path.join(__dirname, 'public')), express.static(path.join(__dirname, 'app/build'))]);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/category', categoryRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -41,7 +52,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-let categoryController = require('./controller/category')
+// let categoryController = require('./controller/category')
 
 
 

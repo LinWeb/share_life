@@ -1,0 +1,157 @@
+#
+# Created by TszFung D. Lam on 2017/7/10.
+#
+# Copyright © 2017 Joytech Creation Technology Inc. All rights reserved.
+#
+# http://www.joytech-creation.com
+#
+# @author : TszFung D. Lam
+# programmers : TszFung D. Lam
+#
+# Description: Git Ignore Configure File
+#
+# Created by .ignore support plugin (hsz.mobi)
+### SublimeText template
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+# *.sublime-project
+
+# sftp configuration file
+sftp-config.json
+
+# Package control specific files
+Package Control.last-run
+Package Control.ca-list
+Package Control.ca-bundle
+Package Control.system-ca-bundle
+Package Control.cache/
+Package Control.ca-certs/
+Package Control.merged-ca-bundle
+Package Control.user-ca-bundle
+oscrypto-ca-bundle.crt
+bh_unicode_properties.cache
+
+# Sublime-github package stores a github token in this file
+# https://packagecontrol.io/packages/sublime-github
+GitHub.sublime-settings
+### Linux template
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+### CVS template
+/CVS/*
+**/CVS/*
+.cvsignore
+*/.cvsignore
+### macOS template
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+target/*
+gen### Windows template
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+# *.jar
+*.war
+*.ear
+#*.zip
+*.tar.gz
+*.rar
+
+
+### SVN template
+.svn/
+
+*.numbers
+
+SERVER-CONFIG.md
+keystore*
+kgyjf-boss/kgyjf-boss-admin/target/
+kgyjf-boss/kgyjf-boss-commons/target/
+kgyjf-boss/kgyjf-boss-db/target/
+e8-api/target/
+e8-commons/target/
+e8-db/target/
+e8-upms/target/
+
+node_modules/
+
