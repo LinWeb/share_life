@@ -2,15 +2,14 @@ let catetoryModel = require('../model/category')
 
 let catetory = {
     add(req, res) {
-        catetoryModel.insertMany([req.params], function (err, result) {
+        catetoryModel.insertMany([{ name: req.param('name') }], function (err, result) {
             if (err) throw new Error(err)
-            console.log(11111111111, result, req.params)
+            res.send({ status: 200 })
         })
     },
     id(req, res) {
         catetoryModel.findOne({}).exec(function (err, result) {
             if (err) throw new Error(err)
-            console.log(req.params)
             res.send(result)
         })
     },
@@ -18,7 +17,6 @@ let catetory = {
         catetoryModel.find({}).exec(function (err, result) {
             if (err) throw new Error(err)
             res.send(result)
-            console.log(result)
         })
     }
 }

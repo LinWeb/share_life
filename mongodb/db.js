@@ -13,16 +13,14 @@ db.once('open', function () {
 
 // let categorySchema = new mongoose.Schema({
 //     name: String,
-//     age: Number
 // })
 
-// let Category = mongoose.model('category', categorySchema)
-// let c = new Category({
+// let categoryModel = mongoose.model('category', categorySchema)
+// let category = new categoryModel({
 //     name: '短袖',
-//     age: 11
 // })
 
-// c.save(function (err, res) {
+// category.save(function (err, res) {
 //     if (err) return console.error(err);
 //     console.log('insert succeed')
 // })
