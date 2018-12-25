@@ -31,7 +31,11 @@ class Test extends Component {
         }))
     }
     render() {
-        return <div><input type='text' value={this.state.categoryVal} onChange={this.onChange} /><button onClick={this.addCategory}>增加分类</button></div>
+        return <div>
+            <div className='addCategory'>
+                <input type='text' value={this.state.categoryVal} onChange={this.onChange} /><button onClick={this.addCategory}>增加分类</button>
+            </div>
+        </div>
     }
 }
 

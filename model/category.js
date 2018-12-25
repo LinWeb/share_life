@@ -1,7 +1,15 @@
 let mongoose = require('mongoose')
+let config = require('../config/index')
 
-let category = new mongoose.Schema({
-    name: String,
-})
+let categorySchema = new mongoose.Schema(
+    {
+        name: {
+            type: String,
+            unique: true,
+            required: true
+        },
+    },
+    config.SCHEMA_OPTION
+)
 
-module.exports = mongoose.model('category', category)
+module.exports = mongoose.model('category', categorySchema, 'category')

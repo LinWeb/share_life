@@ -1,10 +1,14 @@
 let catetoryModel = require('../model/category')
 
-let catetory = {
+let catetoryController = {
     add(req, res) {
-        catetoryModel.insertMany([{ name: req.param('name') }], function (err, result) {
+        let name = req.param('name')
+        if (name === '') {
+            res.status(200).send({ status: 0, msg: 'param should not empty' })
+        }
+        catetoryModel.insertMany([{ name }], function (err, result) {
             if (err) throw new Error(err)
-            res.send({ status: 200 })
+            res.send({ status: 200, msg: 'insert succeed' })
         })
     },
     id(req, res) {
@@ -21,4 +25,4 @@ let catetory = {
     }
 }
 
-module.exports = catetory
+module.exports = catetoryController
