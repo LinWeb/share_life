@@ -36,15 +36,18 @@ let userSchema = new mongoose.Schema(
         hobbies: [String],
         birthday: {
             type: Date,
-            default: Date.now
+            default: Date.now()
         },
         hometown: String,
         follow_ids: [ObjectId], // user表id集合
         fan_ids: [ObjectId],// user表id集合
-        dynamic_ids: [ObjectId],// dynamic表id集合
+        dynamic_ids: [{
+            type: ObjectId,
+            ref: 'dynamic'
+        }],// dynamic表id集合
         new_user_ids: [ObjectId],// new表对
     },
     config.SCHEMA_OPTION
 )
-
-module.exports = mongoose.model('user', userSchema, 'user')
+let userModel = mongoose.model('user', userSchema, 'user')
+module.exports = userModel

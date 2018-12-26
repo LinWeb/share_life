@@ -11,6 +11,7 @@ let dynamic = {
     images: Array,
     create_time: Date,
     category_id: Number,
+    author_id: Number,
     comment_ids: Array, // commont表id集合
     like_ids: Array // user表id集合
 }
