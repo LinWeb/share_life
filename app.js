@@ -2,6 +2,7 @@ var db = require('./mongodb/db.js')
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+let session = require('express-session')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let router = require('./router/index')
@@ -28,6 +29,23 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+
+// 登录状态session和cookie验证的原理是：
+// 第一次请求登录后生成session，以cookie把加密后的sessionid值发送到客户端并保存下来
+// 第二次请求的时候验证请求的cookie值是否跟服务端的session值一致，如果是一致的话说明用户已登录的
+// 用户注销的时候删除服务端的session
+app.use(session({
+  name: 'login_id', // cookie名称，默认'connect.sid'
+  secret: 'user_id', // cookie签名标识
+  resave: true, // 是否允许重新设置session
+  rolling: true, // 是否按照原设定的maxAge值重设session同步到cookie中
+  saveUninitialized: false,// 是否设置session在存储容器不给修改，false为允许修改
+  cookie: {
+    maxAge: 12 * 1000
+  }
+}))
+
+
 app.use([express.static(path.join(__dirname, 'public')), express.static(path.join(__dirname, 'app/build'))]);
 
 router(app)
