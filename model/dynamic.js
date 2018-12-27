@@ -9,22 +9,25 @@ let dynamicSchema = new mongoose.Schema({
         maxlength: 200
     },
     images: [String],
+    address: String,
     create_time: {
-        type: Date,
+        type: Number,
         default: Date.now()
     },
-    category_id: {
+    _category: {
         type: ObjectId,
         required: true,
         ref: 'category'
     },
-    author_id: {
+    _author: {
         type: ObjectId,
         required: true,
         ref: 'user'
     },
-    comment_ids: [ObjectId],// commont表id集合
-    like_ids: [ObjectId] // user表id集合
+    _likes: [{
+        type: ObjectId,
+        ref: 'user'
+    }] // user表id集合
 })
 let dynamicModel = mongoose.model('dynamic', dynamicSchema, 'dynamic')
 module.exports = dynamicModel

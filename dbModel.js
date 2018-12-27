@@ -1,5 +1,8 @@
+try {
 
-
+} catch (err) {
+    config.RES_ERROR(err, res)
+}
 // 动态类别
 let category = {
     name: String
@@ -13,7 +16,9 @@ let dynamic = {
     category_id: Number,
     author_id: Number,
     comment_ids: Array, // commont表id集合
-    like_ids: Array // user表id集合
+    like_ids: Array, // user表id集合
+    address: String,
+
 }
 
 // 用户
@@ -37,8 +42,9 @@ let user = {
 // 评论
 let comment = {
     user_id: Number,
+    dynamic_id: Number,
     content: String,
-    address: String
+    create_time: Date,
 }
 
 

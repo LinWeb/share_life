@@ -35,17 +35,22 @@ let userSchema = new mongoose.Schema(
         },
         hobbies: [String],
         birthday: {
-            type: Date,
+            type: Number,
             default: Date.now()
         },
         hometown: String,
-        follow_ids: [ObjectId], // user表id集合
-        fan_ids: [ObjectId],// user表id集合
-        dynamic_ids: [{
+        _follows: [{
             type: ObjectId,
-            ref: 'dynamic'
-        }],// dynamic表id集合
-        new_user_ids: [ObjectId],// new表对
+            ref: 'user'
+        }], // user表id集合
+        _fans: [{
+            type: ObjectId,
+            ref: 'user'
+        }],// user表id集合
+        _chats: [{
+            type: ObjectId,
+            ref: 'user'
+        }],// chat表对
     },
     config.SCHEMA_OPTION
 )

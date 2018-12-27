@@ -3,46 +3,46 @@ let config = require('../config/index')
 
 let userController = {
     // 注册
-    register(req, res) {
-        let username = req.param('username'),
-            password = req.param('password');
-        userModel.insertMany({ username, password }, function (err, result) {
-            if (err) {
-                config.RES_ERROR(err, res)
-            }
-            res.send({ status: 200, msg: 'register succeed' })
-        })
+    async register(req, res) {
+        try {
+            let username = req.param('username'),
+                password = req.param('password');
+            await userModel.insertMany({ username, password })
+            res.send({ status: 1, msg: 'register succeed' })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
     },
     // 登录
-    login(req, res) {
-        let username = req.param('username'),
-            password = req.param('password');
-        userModel.findOne({ username, password }, function (err, result) {
-            if (err) {
-                config.RES_ERROR(err, res)
-            }
+    async login(req, res) {
+        try {
+            let username = req.param('username'),
+                password = req.param('password');
+            let result = await userModel.findOne({ username, password })
             req.session.user_id = result._id
-            res.send({ status: 200, msg: 'login succeed' })
-        })
+            res.send({ status: 1, msg: 'login succeed' })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
     },
     // 注销
     logout(req, res) {
         if (req.session.user_id) {
             delete req.session.user_id
-            res.send({ status: 200, msg: 'logout succeed' })
+            res.send({ status: 1, msg: 'logout succeed' })
         } else {
-            res.send({ status: 0, msg: 'logout fail' })
+            res.send({ status: 0, msg: 'already logout' })
         }
     },
     // 获取用户数据
-    getUserInfo(req, res) {
-        let id = req.param('id');
-        userModel.findById(id, function (err, result) {
-            if (err) {
-                config.RES_ERROR(err, res)
-            }
-            res.send({ status: 200, msg: 'find succeed', data: result })
-        })
+    async getUserInfo(req, res) {
+        try {
+            let id = req.param('id');
+            let result = await userModel.findById(id)
+            res.send({ status: 1, msg: 'find succeed', data: result })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
     }
 }
 

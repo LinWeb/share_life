@@ -3,34 +3,45 @@ let config = require('../config/index')
 
 
 let dynamicController = {
-    all(req, res) {
-        dynamicModel.find({}).exec(function (err, result) {
-            if (err) {
-                config.RES_ERROR(err, res)
-            }
+    async all(req, res) {
+        try {
+            let result = await dynamicModel.find({})
             res.send({ status: 1, msg: 'find succeed', data: result })
-        })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
     },
-    add(req, res) {
-        let content = req.param('content')
-        let category_id = req.param('category_id')
-        let author_id = req.param('author_id')
-        dynamicModel.insertMany([{ content, category_id, author_id }], function (err, result) {
-            if (err) {
-                config.RES_ERROR(err, res)
-            }
-            res.send({ status: 1, msg: 'insert succeed', data: result })
-        })
+    async add(req, res) {
+        try {
+            let content = req.param('content')
+            let _category = req.param('_category')
+            let _author = req.param('_author')
+            await dynamicModel.insertMany([{ content, _category, _author }])
+            res.send({ status: 1, msg: 'insert succeed' })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
     },
-    id(req, res) {
-        let id = req.param('id')
-        dynamicModel.findById(id).populate('category_id', 'name').populate('author_id', 'username password').exec(function (err, result) {
-            if (err) {
-                config.RES_ERROR(err, res)
-            }
+    async del(req, res) {
+        try {
+            let id = req.param('id')
+            await dynamicModel.findByIdAndDelete(id)
+            res.send({ status: 1, msg: 'delete succeed' })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
+    },
+    async id(req, res) {
+        try {
+            let id = req.param('id')
+            let result = await dynamicModel.findById(id)
+                .populate({ path: '_category', select: 'name -_id' })
+                .populate({ path: '_author', select: 'username password -_id' })
             res.send({ status: 1, msg: 'find succeed', data: result })
-        })
-    }
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
+    },
 }
 
 module.exports = dynamicController

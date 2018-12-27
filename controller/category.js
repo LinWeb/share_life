@@ -1,27 +1,32 @@
 let catetoryModel = require('../model/category')
+let config = require('../config/index')
 
 let catetoryController = {
-    add(req, res) {
-        let name = req.param('name')
-        if (name === '') {
-            res.status(200).send({ status: 0, msg: 'param should not empty' })
+    async add(req, res) {
+        try {
+            let name = req.param('name')
+            await catetoryModel.insertMany([{ name }])
+            res.send({ status: 1, msg: 'insert succeed' })
+        } catch (err) {
+            config.RES_ERROR(err, res)
         }
-        catetoryModel.insertMany([{ name }], function (err, result) {
-            if (err) throw new Error(err)
-            res.send({ status: 200, msg: 'insert succeed' })
-        })
     },
-    id(req, res) {
-        catetoryModel.findOne({}).exec(function (err, result) {
-            if (err) throw new Error(err)
-            res.send(result)
-        })
+    async id(req, res) {
+        try {
+            let id = req.param('id')
+            let result = await catetoryModel.findById(id)
+            res.send({ status: 1, msg: 'find succeed', data: result })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
     },
-    all(req, res) {
-        catetoryModel.find({}).exec(function (err, result) {
-            if (err) throw new Error(err)
-            res.send(result)
-        })
+    async all(req, res) {
+        try {
+            let result = await catetoryModel.find({})
+            res.send({ status: 1, msg: 'find succeed', data: result })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
     }
 }
 

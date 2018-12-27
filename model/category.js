@@ -8,10 +8,6 @@ let categorySchema = new mongoose.Schema(
             unique: true,
             required: true
         },
-        dynamic_ids: [{
-            type: ObjectId,
-            ref: 'dynamic'
-        }],// dynamic表id集合
     },
     config.SCHEMA_OPTION
 )
