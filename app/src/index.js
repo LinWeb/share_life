@@ -1,12 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import dva from 'dva';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import 'antd-mobile/dist/antd-mobile.css';
+import createLoading from 'dva-loading';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// 1. Initialize
+const app = dva({
+    initialState: {
+    }
+});
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// 2. Plugins
+// app.use();
+// app.use(createLoading({ namespace: 'Loading' }));
+
+// 3. Model
+// app.model(require('./models/test').default);
+
+// 4. Router
+app.router(require('./router').default);
+
+// 5. Start
+app.start('#root');

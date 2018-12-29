@@ -1,26 +1,29 @@
 {
-  "name": "app",
-  "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "axios": "^0.18.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-scripts": "2.1.1"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "roadhog server",
+    "build": "roadhog build",
+    "lint": "eslint --ext .js src test",
+    "precommit": "npm run lint"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "antd-mobile": "^2.2.7",
+    "babel-plugin-import": "^1.11.0",
+    "dva": "^2.4.1",
+    "dva-loading": "^2.0.6",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "babel-plugin-dva-hmr": "^0.3.2",
+    "eslint": "^4.14.0",
+    "eslint-config-umi": "^0.1.1",
+    "eslint-plugin-flowtype": "^2.34.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "husky": "^0.12.0",
+    "redbox-react": "^1.4.3",
+    "roadhog": "^2.0.0"
+  }
 }
