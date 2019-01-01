@@ -1,136 +1,70 @@
 import React, { Component } from 'react';
 import { TabBar } from 'antd-mobile';
-import { Route } from 'dva/router'; import Home from '../../routes/home/home';
+import { Redirect, withRouter } from 'dva/router';
+
 class Footer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tabIds: ['index', 'publish', 'news', 'my'],
-            selectedTab: 'redTab',
+            tabsData: [{
+                icon: { uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' },
+                selectedIcon: { uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' },
+                title: '首页',
+                key: '/',
+            }, {
+                icon: { uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' },
+                selectedIcon: { uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' },
+                title: '发表',
+                key: '/publish',
+            }, {
+                icon: { uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' },
+                selectedIcon: { uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' },
+                title: '消息',
+                key: '/news',
+            }, {
+                icon: { uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' },
+                selectedIcon: { uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' },
+                title: '我的',
+                key: '/my',
+            }],
+            selectedTab: '/',
             hidden: false,
             fullScreen: true,
         };
     }
 
-    renderContent(pageText) {
-        return (
-            <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
-                {/* <Route path="/home" component={Home} />  {pageText} */}
-            </div>
-        );
+
+    clickTab(key) {
+        let { history } = this.props
+        this.setState(
+            () => ({ selectedTab: key }),
+            () => {
+                history.push(key)
+            });
     }
 
     render() {
-        let [index, publish, news, my] = this.state.tabIds
+        let { tabsData, selectedTab } = this.state
         return (
-            <div style={this.state.fullScreen ? { position: 'fixed', height: '100%', width: '100%', top: 0 } : { height: 400 }}>
+            <div style={this.state.fullScreen ? { position: 'fixed', width: '100%', bottom: 0 } : { height: 400 }}>
                 <TabBar
                     unselectedTintColor="#949494"
                     tintColor="#33A3F4"
                     barTintColor="white"
                     hidden={this.state.hidden}
+                    noRenderContent={true}
                 >
-                    <TabBar.Item
-                        title="首页"
-                        key={index}
-                        icon={<div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat'
-                        }}
-                        />
-                        }
-                        selectedIcon={<div style={{
-                            width: '22px',
-                            height: '22px',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat'
-                        }}
-                        />
-                        }
-                        selected={this.state.selectedTab === 'blueTab'}
-                        badge={1}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: 'blueTab',
-                            });
-                        }}
-                        data-seed="logId"
-                    >
-                        {this.renderContent(index)}
-                    </TabBar.Item>
-                    <TabBar.Item
-                        icon={
-                            <div style={{
-                                width: '22px',
-                                height: '22px',
-                                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat'
-                            }}
-                            />
-                        }
-                        selectedIcon={
-                            <div style={{
-                                width: '22px',
-                                height: '22px',
-                                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat'
-                            }}
-                            />
-                        }
-                        title="发表"
-                        key={publish}
-                        badge={'new'}
-                        selected={this.state.selectedTab === 'redTab'}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: 'redTab',
-                            });
-                        }}
-                        data-seed="logId1"
-                    >
-                        {this.renderContent(publish)}
-                    </TabBar.Item>
-                    <TabBar.Item
-                        icon={
-                            <div style={{
-                                width: '22px',
-                                height: '22px',
-                                background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat'
-                            }}
-                            />
-                        }
-                        selectedIcon={
-                            <div style={{
-                                width: '22px',
-                                height: '22px',
-                                background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat'
-                            }}
-                            />
-                        }
-                        title="消息"
-                        key={news}
-                        dot
-                        selected={this.state.selectedTab === 'greenTab'}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: 'greenTab',
-                            });
-                        }}
-                    >
-                        {this.renderContent(news)}
-                    </TabBar.Item>
-                    <TabBar.Item
-                        icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-                        selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
-                        title="我的"
-                        key={my}
-                        selected={this.state.selectedTab === 'yellowTab'}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: 'yellowTab',
-                            });
-                        }}
-                    >
-                        {this.renderContent(my)}
-                    </TabBar.Item>
+                    {tabsData.map(({ icon, selectedIcon, title, key }) =>
+                        <TabBar.Item
+                            icon={icon}
+                            selectedIcon={selectedIcon}
+                            title={title}
+                            key={key}
+                            selected={selectedTab === key}
+                            onPress={() => this.clickTab(key)}
+                        >
+                        </TabBar.Item>
+                    )}
                 </TabBar>
             </div>
         );
@@ -138,5 +72,5 @@ class Footer extends Component {
 }
 
 
-export default Footer
+export default withRouter(Footer)
 
