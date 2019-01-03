@@ -20,7 +20,7 @@ let userController = {
                 password = req.param('password');
             let result = await userModel.findOne({ username, password })
             req.session.user_id = result._id
-            res.send({ status: 1, msg: 'login succeed' })
+            res.send({ status: 1, msg: 'login succeed', data: { user_id: result._id } })
         } catch (err) {
             config.RES_ERROR(err, res)
         }

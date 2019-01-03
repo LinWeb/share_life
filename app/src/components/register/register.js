@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
 import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:3000/';
-class Register extends Component {
-    submit() {
-        const { getFieldValue } = this.props.form;
-        let username = getFieldValue('username'),
-            password = getFieldValue('password');
+import API from '../../services/index'
 
-        axios.post('/user/register', {
-            username,
-            password
-        }).then(function (response) {
-            // if(response.)
-        }).catch(function (error) {
-            console.log(error);
-        });
+class Register extends Component {
+    async submit() {
+        let { form, history } = this.props,
+            { getFieldValue } = form,
+            username = getFieldValue('username'),
+            password = getFieldValue('password');
+        let data = await API.REGISTER({ username, password })
+        data && history.push('/login')
     }
     render() {
         const { getFieldProps } = this.props.form;

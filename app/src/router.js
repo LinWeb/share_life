@@ -4,6 +4,7 @@ import Index from './components/index/index';
 import Publish from './components/publish/publish';
 import News from './components/news/news';
 import User from './components/user/user';
+import Header from './components/header/header'
 import Footer from './components/footer/footer'
 
 import Register from './components/register/register'
@@ -13,6 +14,9 @@ function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <div className='app-container'>
+        <div className='header-container'>
+          <Header></Header>
+        </div>
         <Switch>
           <Route path="/" exact component={Index} />
           <Route path="/login" exact component={Login} />

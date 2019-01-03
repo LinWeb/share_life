@@ -14,12 +14,12 @@ let userSchema = new mongoose.Schema(
             unique: true,
             required: true,
             maxlength: 12,
-            minlength: 6
+            minlength: 1
         },
         password: {
             type: String,
             required: true,
-            minlength: 6
+            minlength: 1
         },
         head_img_url: {
             type: String,

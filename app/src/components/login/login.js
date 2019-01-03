@@ -1,29 +1,14 @@
 import React, { Component } from 'react';
 import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:3000/';
-
-axios.interceptors.request.use((config) => {
-    config.withCredentials = true
-    return config
-}, (error) => {
-    return Promise.reject(error)
-})
+import { connect } from 'dva';
 class Login extends Component {
-    submit() {
-        const { getFieldValue } = this.props.form;
-        let username = getFieldValue('username'),
+    async submit() {
+        let { form, dispatch } = this.props,
+            { getFieldValue } = form,
+            username = getFieldValue('username'),
             password = getFieldValue('password');
-
-        axios.post('/user/login', {
-            username,
-            password
-        }).then(function (response) {
-            console.log(response);
-        }).catch(function (error) {
-            console.log(error);
-        });
+        dispatch({ type: 'user/login', data: { username, password } })
     }
     render() {
         const { getFieldProps } = this.props.form;
@@ -48,4 +33,4 @@ class Login extends Component {
     }
 }
 
-export default createForm()(Login)
+export default connect()(createForm()(Login))

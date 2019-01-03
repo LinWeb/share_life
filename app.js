@@ -17,7 +17,7 @@ app.set('view engine', 'pug');
 // 设置头部
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000')
-  res.setHeader('Access-control-Allow-Methods', 'GET,POST,OPTIONS,PUT,PATCH,DELETE')
+  res.setHeader('Access-control-Allow-Methods', '*')
   res.setHeader('Access-control-Allow-Headers', 'X-Requested-With,content-type')
   res.setHeader('Access-control-Allow-Credentials', true)
   next()
@@ -42,6 +42,7 @@ app.use(session({
   saveUninitialized: false,// 是否设置session在存储容器不给修改，false为允许修改
   cookie: {
     maxAge: 12 * 1000,
+    httpOnly: false
   }
 }))
 
