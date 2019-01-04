@@ -25,27 +25,18 @@ class Footer extends Component {
                 icon: { uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' },
                 selectedIcon: { uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' },
                 title: '我的',
-                key: '/my',
+                key: '/user',
             }],
-            selectedTab: '/',
             hidden: false,
             fullScreen: true,
         };
     }
 
-
-    clickTab(key) {
-        let { history } = this.props
-        this.setState(
-            () => ({ selectedTab: key }),
-            () => {
-                history.push(key)
-            });
-    }
-
     render() {
-        let { tabsData, selectedTab } = this.state
-        return (
+        let { tabsData } = this.state
+        let { history, location, includesPages } = this.props,
+            pathname = location.pathname;
+        return (!includesPages.includes(pathname) ? null :
             <div style={this.state.fullScreen ? { position: 'fixed', width: '100%', bottom: 0 } : { height: 400 }}>
                 <TabBar
                     unselectedTintColor="#949494"
@@ -60,8 +51,8 @@ class Footer extends Component {
                             selectedIcon={selectedIcon}
                             title={title}
                             key={key}
-                            selected={selectedTab === key}
-                            onPress={() => this.clickTab(key)}
+                            selected={pathname === key}
+                            onPress={() => { history.push(key) }}
                         >
                         </TabBar.Item>
                     )}

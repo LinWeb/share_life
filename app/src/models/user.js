@@ -1,5 +1,6 @@
 import API from '../services/index'
 import { routerRedux } from 'dva/router';
+
 export default {
     namespace: 'user',
     state: {
@@ -11,13 +12,12 @@ export default {
         }
     },
     effects: {
-        *login({ data }, { put, call, select }) {
+        *login({ data, from }, { put, call, select }) {
             let res = yield call(API.LOGIN, data)
             if (res) {
                 let userId = res.data.user_id
                 yield put({ type: 'updateLogin', userId })
-                console.log(document.cookie)
-                yield put(routerRedux.push('/'))
+                yield put(routerRedux.push(from))
             }
         }
     }

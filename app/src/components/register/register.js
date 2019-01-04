@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import API from '../../services/index'
+import { Link } from 'dva/router';
 
 class Register extends Component {
     async submit() {
@@ -20,12 +21,12 @@ class Register extends Component {
                     <InputItem
                         {...getFieldProps('username')}
                         type="text"
-                        placeholder="请输入账号"
-                    >账号</InputItem>
+                        placeholder="请输入新账号"
+                    >新账号</InputItem>
                     <InputItem
                         {...getFieldProps('password')}
                         type="password"
-                        placeholder="请输入密码"
+                        placeholder="请输入新密码"
                     >新密码</InputItem>
                     <InputItem
                         {...getFieldProps('rePassword')}
@@ -34,7 +35,13 @@ class Register extends Component {
                     >确认密码</InputItem>
                 </List>
                 <WhiteSpace />
+                <WhiteSpace />
+                <WhiteSpace />
+                <WhiteSpace />
                 <Button type="primary" onClick={() => this.submit()}>注册</Button>
+                <WhiteSpace />
+                <WhiteSpace />
+                <Link to='/login' style={{ float: 'right', color: '#666', textDecoration: 'underline' }}>已有账号？去登录</Link>
             </div>
         )
     }

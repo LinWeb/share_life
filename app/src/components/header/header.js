@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { NavBar, Icon } from 'antd-mobile';
-import { withRouter } from 'dva/router';
+import { withRouter, Link } from 'dva/router';
+import routerConfig from '../../../config/router_config'
 
 class Header extends Component {
-
     render() {
-        let { history } = this.props
-        return (
+        let { history, location, excludesPages, mainPages } = this.props,
+            pathname = location.pathname;
+        let target = routerConfig.find(item => item.path === pathname)
+        let title = target ? target.title : ''
+        return (excludesPages.includes(pathname) ? null :
             <div>
                 <NavBar
                     mode="light"
-                    icon={<Icon type="left" />}
+                    icon={mainPages.includes(pathname) ? null : <Icon type="left" />}
                     onLeftClick={() => { history.go(-1) }}
-                    rightContent={[
+                    rightContent={mainPages.includes(pathname) ? null : [
                         // <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
-                        <Icon key="1" type="ellipsis" onClick={() => { history.push('/') }} />,
+                        <Link to='/' key="1"><Icon type="ellipsis" /></Link>
                     ]}
-                >NavBar</NavBar>
+                >{title}</NavBar>
             </div>
         )
     }
