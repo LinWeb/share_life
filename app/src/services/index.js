@@ -4,9 +4,9 @@ import * as USER from './user';
 
 axios.defaults.baseURL = 'http://localhost:3000/';
 
-
 // 设置浏览器自动存储服务器cookie
 axios.interceptors.request.use((config) => {
+    Toast.loading('', 0)
     config.withCredentials = true
     return config
 }, (error) => {

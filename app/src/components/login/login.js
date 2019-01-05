@@ -17,9 +17,8 @@ class Login extends Component {
         dispatch({ type: 'user/login', data: { username, password }, from })
     }
     render() {
-        let { form, history } = this.props,
+        let { form } = this.props,
             { getFieldProps } = form;
-        console.log(getFieldProps('username'))
         return (
             <div className='register-container' style={{ padding: '0 10px', marginTop: '120px' }}>
                 <List>

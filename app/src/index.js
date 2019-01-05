@@ -10,7 +10,6 @@ const app = dva({
 });
 
 // 2. Plugins
-// app.use();
 // app.use(createLoading({ namespace: 'Loading' }));
 
 // 3. Model
