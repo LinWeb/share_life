@@ -1,12 +1,14 @@
 import axios from 'axios'
 import { Toast } from 'antd-mobile';
 import * as USER from './user';
+import * as CATEGORY from './category'
+import * as DYNAMIC from './dynamic'
 
 axios.defaults.baseURL = 'http://localhost:3000/';
 
 // 设置浏览器自动存储服务器cookie
 axios.interceptors.request.use((config) => {
-    Toast.loading('', 0)
+    // Toast.loading('', 0)
     config.withCredentials = true
     return config
 }, (error) => {
@@ -18,7 +20,7 @@ axios.interceptors.response.use(function (response) {
         Toast.fail(response.data.msg, 1);
         return null
     } else {
-        Toast.success(response.data.msg, 1);
+        // Toast.success(response.data.msg, 1);
         return response.data
     }
 }, function (error) {
@@ -27,5 +29,5 @@ axios.interceptors.response.use(function (response) {
 });
 
 export default {
-    ...USER
+    ...USER, ...CATEGORY, ...DYNAMIC
 }

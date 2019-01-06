@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TabBar } from 'antd-mobile';
-import { Redirect, withRouter } from 'dva/router';
+import { withRouter } from 'dva/router';
 
 class Footer extends Component {
     constructor(props) {

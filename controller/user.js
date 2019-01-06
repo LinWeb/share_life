@@ -27,12 +27,11 @@ let userController = {
     },
     // 注销
     logout(req, res) {
-        if (req.session.user_id) {
-            delete req.session.user_id
+        req.session.destroy(function (err) {
+            if (err) res.send({ status: 0, msg: 'logout failed' })
+            res.clearCookie('login_id')
             res.send({ status: 1, msg: 'logout succeed' })
-        } else {
-            res.send({ status: 0, msg: 'already logout' })
-        }
+        })
     },
     // 获取用户数据
     async getUserInfo(req, res) {

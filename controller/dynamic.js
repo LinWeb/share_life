@@ -5,7 +5,18 @@ let config = require('../config/index')
 let dynamicController = {
     async all(req, res) {
         try {
-            let result = await dynamicModel.find({})
+            let _category = req.param('_category')
+            let obj = {}
+            if (_category) {
+                obj = { _category }
+            }
+            let result = await dynamicModel.find(obj)
+            result = result.map((item) => {
+                likesCount = item._likes.length
+                return { ...item, likesCount }
+            })
+            console.log(result)
+
             res.send({ status: 1, msg: 'find succeed', data: result })
         } catch (err) {
             config.RES_ERROR(err, res)

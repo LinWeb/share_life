@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch, withRouter } from 'dva/router';
+import { Router, Route, Switch, } from 'dva/router';
 import Header from '../components/header/header'
 import Footer from '../components/footer/footer'
 import PrivateRoute from './private_route'

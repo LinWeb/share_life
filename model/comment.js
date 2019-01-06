@@ -18,7 +18,7 @@ let commentSchema = new mongoose.Schema({
     },
     create_time: {
         type: Number,
-        default: Date.now()
+        default: Math.floor(Date.now() / 1000)
     },
 })
 

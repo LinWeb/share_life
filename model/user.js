@@ -36,7 +36,7 @@ let userSchema = new mongoose.Schema(
         hobbies: [String],
         birthday: {
             type: Number,
-            default: Date.now()
+            default: Math.floor(Date.now() / 1000)
         },
         hometown: String,
         _follows: [{

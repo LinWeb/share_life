@@ -45,7 +45,7 @@ app.use(session({
   rolling: true, // 是否按照原设定的maxAge值重设session同步到cookie中
   saveUninitialized: false,// 是否设置session在存储容器不给修改，false为允许修改
   cookie: {
-    maxAge: 12 * 1000,
+    maxAge: 60 * 60 * 1000,
     httpOnly: false
   }
 }))
