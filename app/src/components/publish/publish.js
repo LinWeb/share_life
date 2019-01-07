@@ -18,34 +18,47 @@ class Publish extends Component {
             let data = res.data.map(({ name, _id }) => {
                 return { label: name, value: _id }
             });
+            data.forEach(({ value }, index) => {
+                if (index === 0) {
+                    this.selectCategory(value)
+                }
+            });
             this.setState(() => ({ categoryData: data }))
         }
     }
     componentWillMount() {
         this.getCategory()
     }
-    onChange = (files, type, index) => {
-        console.log(files, type, index);
-        this.setState({
-            files,
-        });
-    }
-    selectCategory = ([id]) => {
+    selectCategory(id) {
         if (id) {
             this.setState(() => ({
                 categoryId: id,
             }))
         }
     }
+    selectImgs = async (files, type, index) => {
+        console.log(files, type, index);
+        console.log(this.state.files)
+        // 增加的图片文件，单张图片上传还是多张图片上传
+        // let addFiles = files.slice(oldFiles.length)
+        // console.log(addFiles)
+        this.setState({
+            files,
+        });
+        let res = await API.UPLOAD(files)
+    }
     submit = async () => {
-        let { form, history, _author } = this.props,
-            { getFieldValue, validateFields } = form,
-            content = getFieldValue('content'),
-            _category = this.state.categoryId;
-        let res = await API.PUBLISH({ content, _category, _author })
-        if (res) {
-            history.replace('/')
-        }
+        let res = await API.UPLOAD({})
+
+        // let { form, history, _author } = this.props,
+        //     { getFieldValue, validateFields } = form,
+        //     content = getFieldValue('content'),
+        //     { categoryId, files } = this.state;
+
+        // let res = await API.PUBLISH({ content, _category: categoryId, _author, images: files })
+        // if (res) {
+        //     history.replace('/')
+        // }
     }
     render() {
         let { files, categoryData, categoryId } = this.state;
@@ -58,7 +71,7 @@ class Publish extends Component {
                     data={categoryData}
                     cols={1}
                     value={[categoryId]}
-                    onChange={this.selectCategory}
+                    onChange={([id]) => { this.selectCategory(id) }}
                 >
                     <List.Item arrow="horizontal">#话题#</List.Item>
                 </Picker>
@@ -74,9 +87,9 @@ class Publish extends Component {
                 <WingBlank>
                     <ImagePicker
                         files={files}
-                        onChange={this.onChange}
+                        onChange={this.selectImgs}
                         onImageClick={(index, fs) => console.log(index, fs)}
-                        selectable={files.length < 10}
+                        selectable={files.length < 9}
                         multiple={true}
                     />
                 </WingBlank>

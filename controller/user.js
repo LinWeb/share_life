@@ -5,9 +5,11 @@ let userController = {
     // 注册
     async register(req, res) {
         try {
+            let origin = req.protocol + '://' + req.get('host');
+            let head_img_url = origin + config.DEFAULT_HEAD_URL
             let username = req.param('username'),
                 password = req.param('password');
-            await userModel.insertMany({ username, password })
+            await userModel.insertMany({ username, password, head_img_url })
             res.send({ status: 1, msg: 'register succeed' })
         } catch (err) {
             config.RES_ERROR(err, res)
