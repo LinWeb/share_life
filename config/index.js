@@ -7,5 +7,7 @@ module.exports = {
     RES_ERROR(err, res) {
         res.send({ status: 0, msg: err.message })
     },
-    DEFAULT_HEAD_URL: '/images/default_head.png'
+    PUBLIC: 'public',
+    DEFAULT_HEAD_URL: '/images/default_head.png',
+    DYNAMIC_IMGS_UPLOAD_URL: '/upload/dynamic_imgs/',
 }

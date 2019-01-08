@@ -51,13 +51,13 @@ class Dynamic extends Component {
                         />
                         <Card.Body>
                             <div style={{ marginBottom: '5px' }}>{item.content}</div>
-                            <Grid data={data1}
+                            <Grid data={item.images}
                                 columnNum={3}
                                 hasLine={false}
                                 activeStyle={false}
                                 renderItem={dataItem => (
                                     <div style={{ padding: '0px 5px' }}>
-                                        <img src={dataItem.icon} style={{ width: '100%', height: '100%' }} alt="" />
+                                        <img src={dataItem} style={{ width: '100%', height: '100%' }} alt="" />
                                     </div>
                                 )}
                             />

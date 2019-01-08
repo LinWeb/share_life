@@ -11,6 +11,7 @@ class Publish extends Component {
         files: [],
         categoryData: [],
         categoryId: '',
+        images: []
     }
     async getCategory() {
         let res = await API.CATEGORY()
@@ -37,28 +38,31 @@ class Publish extends Component {
         }
     }
     selectImgs = async (files, type, index) => {
-        console.log(files, type, index);
-        console.log(this.state.files)
-        // 增加的图片文件，单张图片上传还是多张图片上传
-        // let addFiles = files.slice(oldFiles.length)
-        // console.log(addFiles)
-        this.setState({
-            files,
+        let newFile = files[files.length - 1].file
+        // console.log(files, type, index);
+        // console.log(this.state.files)
+        // console.log(newFile)
+        let res = await API.UPLOAD(newFile)
+        let imgUrl = res.data.url
+        this.setState((preState) => {
+            let images = [...preState.images, imgUrl]
+            return {
+                files,
+                images,
+            }
         });
-        let res = await API.UPLOAD(files)
     }
     submit = async () => {
-        let res = await API.UPLOAD({})
 
-        // let { form, history, _author } = this.props,
-        //     { getFieldValue, validateFields } = form,
-        //     content = getFieldValue('content'),
-        //     { categoryId, files } = this.state;
+        let { form, history, _author } = this.props,
+            { getFieldValue } = form,
+            content = getFieldValue('content'),
+            { categoryId, images } = this.state;
 
-        // let res = await API.PUBLISH({ content, _category: categoryId, _author, images: files })
-        // if (res) {
-        //     history.replace('/')
-        // }
+        let res = await API.PUBLISH({ content, _category: categoryId, _author, images })
+        if (res) {
+            history.replace('/')
+        }
     }
     render() {
         let { files, categoryData, categoryId } = this.state;

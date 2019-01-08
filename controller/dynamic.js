@@ -38,21 +38,29 @@ let dynamicController = {
             let content = req.param('content')
             let _category = req.param('_category')
             let _author = req.param('_author')
-            await dynamicModel.insertMany([{ content, _category, _author }])
+            await dynamicModel.insertMany([req.body])
             res.send({ status: 1, msg: 'insert succeed' })
         } catch (err) {
             config.RES_ERROR(err, res)
         }
     },
     async upload(req, res) {
+
         try {
             let form = new formidable.IncomingForm();
             form.parse(req, function (err, fields, files) {
                 console.log(files)
-                let data = fs.readFileSync(files.files.path)
-                fs.writeFile('test1.png', data, (err, result) => {
+                let data = fs.readFileSync(files.file.path)
+                let name = files.file.name
+                let index = name.lastIndexOf('.')
+                let filename = name.slice(0, index) + '_' + Date.now()
+                let ext = name.slice(index)
+                let fileUrl = config.PUBLIC + config.DYNAMIC_IMGS_UPLOAD_URL + filename + ext
+                fs.writeFile(fileUrl, data, (err, result) => {
                     if (!err) {
-                        res.send({ status: 1, msg: 'insert succeed' })
+                        let origin = req.protocol + '://' + req.get('host');
+                        let url = origin + config.DYNAMIC_IMGS_UPLOAD_URL + filename + ext
+                        res.send({ status: 1, msg: 'insert succeed', data: { url } })
                     }
                 })
             })
