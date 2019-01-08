@@ -7,7 +7,7 @@ let fs = require('fs')
 let dynamicController = {
     async search(req, res) {
         try {
-            let { _category, _author, keyword } = req.params
+            let { _category, _author, keyword } = req.query
             let obj = {}
             if (_category) {
                 obj = { _category }
@@ -15,10 +15,33 @@ let dynamicController = {
             if (_author) {
                 obj = { _author }
             }
-            // 模糊查询content
-            // if (keyword) {
-            //     obj = { content:{$reg:} }
-            // }
+            if (keyword) {
+                let keywordReg = new RegExp(keyword)
+                obj = { content: { $regex: keywordReg } }
+            }
+
+
+            // 分页器
+            let { page, per_page_count } = req.query
+            if (!page) {
+                page = 1
+            }
+
+            if (!per_page_count) {
+                per_page_count = 20
+            }
+            let total = result.length
+            let page_num = Math.ceil(total / per_page_count)
+
+            let pagination = {
+                total,
+                page,
+                page_num,
+                per_page_count
+            }
+
+            // 数据根据分页数据查询
+
             let result = await dynamicModel.find(obj)
                 .populate({ path: '_author', select: 'username head_img_url' })
                 .lean()
@@ -35,7 +58,9 @@ let dynamicController = {
                 item['url'] = config.DEFAULT_HEAD_URL
             })
 
-            res.send({ status: 1, msg: 'find succeed', data: result })
+
+
+            res.send({ status: 1, msg: 'find succeed', data: result, pagination })
         } catch (err) {
             config.RES_ERROR(err, res)
         }
