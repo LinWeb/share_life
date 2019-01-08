@@ -4,7 +4,7 @@ let router = express.Router()
 let dynamicController = require('../controller/dynamic')
 
 
-router.get('/', dynamicController.all)
+router.get('/search', dynamicController.search)
 router.post('/add', dynamicController.add)
 router.post('/del', dynamicController.del)
 router.get('/id', dynamicController.id)

@@ -13,10 +13,10 @@ class Index extends Component {
 
     return (
       <div className='index-container'>
-        <div className='search-container'>
+        <div className='search-container' style={{ position: 'fixed', top: '0px', width: '100%', zIndex: 10 }}>
           <Search></Search>
         </div>
-        <div className='dynamic-container'>
+        <div className='dynamic-container' style={{ marginTop: '53px' }} >
           <Dynamic></Dynamic>
         </div>
       </div>

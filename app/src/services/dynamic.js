@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import { PUBLISH_URL, DYNAMIC_URL, UPLOAD_URL } from '../../config/api'
+import { PUBLISH_URL, DYNAMIC_SEARCH_URL, UPLOAD_URL } from '../../config/api'
 
 let PUBLISH = async (data) => {
     return await axios.post(PUBLISH_URL, data)
@@ -14,11 +14,11 @@ let UPLOAD = async (file) => {
     return await axios.post(UPLOAD_URL, formData, config)
 }
 
-let DYNAMIC = async (data) => {
-    return await axios.get(DYNAMIC_URL, data)
+let DYNAMIC_SEARCH = async (data) => {
+    return await axios.get(DYNAMIC_SEARCH_URL, { params: data })
 }
 
 
 export {
-    PUBLISH, DYNAMIC, UPLOAD
+    PUBLISH, DYNAMIC_SEARCH, UPLOAD
 }

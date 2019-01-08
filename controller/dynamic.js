@@ -5,13 +5,20 @@ let formidable = require('formidable')
 let fs = require('fs')
 
 let dynamicController = {
-    async all(req, res) {
+    async search(req, res) {
         try {
-            let _category = req.param('_category')
+            let { _category, _author, keyword } = req.params
             let obj = {}
             if (_category) {
                 obj = { _category }
             }
+            if (_author) {
+                obj = { _author }
+            }
+            // 模糊查询content
+            // if (keyword) {
+            //     obj = { content:{$reg:} }
+            // }
             let result = await dynamicModel.find(obj)
                 .populate({ path: '_author', select: 'username head_img_url' })
                 .lean()
