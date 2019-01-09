@@ -7,32 +7,42 @@ let fs = require('fs')
 let dynamicController = {
     async search(req, res) {
         try {
-            let { _category, _author, keyword } = req.query
-            let obj = {}
+            let { _category, _author, keyword, page, per_page_count } = req.query
+            let query = {} // 查询参数对象
             if (_category) {
-                obj = { _category }
+                query = { _category } // 分类条件查询
             }
             if (_author) {
-                obj = { _author }
+                query = { _author }  // 用户条件查询
             }
             if (keyword) {
                 let keywordReg = new RegExp(keyword)
-                obj = { content: { $regex: keywordReg } }
+                query = { content: { $regex: keywordReg } }  // 搜索关键词查询
+            }
+            if (page) {
+                page = Number(page)
+            } else {
+                page = 1   // 页码条件查询，默认1
+            }
+            if (per_page_count) {
+                per_page_count = Number(per_page_count)
+            } else {
+                per_page_count = 20  // 每页显示数条件查询，默认20
             }
 
+            // 数据根据分页数据查询
+            let result = await dynamicModel.find(query)
+                .populate({ path: '_author', select: 'username head_img_url' })
+                .skip(per_page_count * (page - 1)) // 跳到指定位置
+                .limit(per_page_count) // 限制查询数据条数
+                .sort({ create_time: -1 }) // 按照时间倒序
+                .lean() // 转化为JavaScript对象
 
-            // 分页器
-            let { page, per_page_count } = req.query
-            if (!page) {
-                page = 1
-            }
-
-            if (!per_page_count) {
-                per_page_count = 20
-            }
-            let total = result.length
+            // 查询全部数据的个数
+            let total = (await dynamicModel.find(query).count())
             let page_num = Math.ceil(total / per_page_count)
 
+            // 分页数据集合
             let pagination = {
                 total,
                 page,
@@ -40,12 +50,6 @@ let dynamicController = {
                 per_page_count
             }
 
-            // 数据根据分页数据查询
-
-            let result = await dynamicModel.find(obj)
-                .populate({ path: '_author', select: 'username head_img_url' })
-                .lean()
-                .sort({ create_time: -1 })
             result.forEach(item => {
                 let _dynamic = item._id,
                     commentCount = 0,
@@ -53,12 +57,10 @@ let dynamicController = {
                 commentModel.count({ _dynamic }, function (err, count) {
                     commentCount = count
                 })
-                item['likes_count'] = likesCount
-                item['comment_count'] = commentCount
-                item['url'] = config.DEFAULT_HEAD_URL
+                item['likes_count'] = likesCount  // 点赞数
+                item['comment_count'] = commentCount  // 评论数
+                item['url'] = config.DEFAULT_HEAD_URL   // 默认头像
             })
-
-
 
             res.send({ status: 1, msg: 'find succeed', data: result, pagination })
         } catch (err) {
