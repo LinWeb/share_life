@@ -3,10 +3,14 @@
 const REGISTER_URL = '/user/register'
 const LOGIN_URL = '/user/login'
 const LOGOUT_URL = '/user/logout'
-
 const CATEGORY_URL = '/category'
 const PUBLISH_URL = '/dynamic/add'
 const UPLOAD_URL = '/dynamic/upload'
 const DYNAMIC_SEARCH_URL = '/dynamic/search'
+const DYNAMIC_LIKE_URL = '/dynamic/like'
 
-export { REGISTER_URL, LOGIN_URL, CATEGORY_URL, PUBLISH_URL, UPLOAD_URL, LOGOUT_URL, DYNAMIC_SEARCH_URL }
+export {
+    REGISTER_URL, LOGIN_URL, CATEGORY_URL,
+    PUBLISH_URL, UPLOAD_URL, LOGOUT_URL,
+    DYNAMIC_SEARCH_URL, DYNAMIC_LIKE_URL
+}

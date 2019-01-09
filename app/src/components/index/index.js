@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import Search from './search/search'
-import Dynamic from './dynamic/dynamic'
+import TabDynamic from './tab_dynamic/tab_dynamic'
 
 class Index extends Component {
   renderContent = tab =>
@@ -17,7 +17,7 @@ class Index extends Component {
           <Search></Search>
         </div>
         <div className='dynamic-container' style={{ marginTop: '53px' }} >
-          <Dynamic></Dynamic>
+          <TabDynamic></TabDynamic>
         </div>
       </div>
     );

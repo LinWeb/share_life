@@ -3,6 +3,8 @@ let commentModel = require('../model/comment')
 let config = require('../config/index')
 let formidable = require('formidable')
 let fs = require('fs')
+let mongoose = require('mongoose')
+
 
 let dynamicController = {
     async search(req, res) {
@@ -57,6 +59,9 @@ let dynamicController = {
                 commentModel.count({ _dynamic }, function (err, count) {
                     commentCount = count
                 })
+                // console.log(item._likes, req.session)
+                // 判断是否已经点赞了,为何取不了session.user_id?
+                item['is_liked'] = item._likes.includes(req.session.user_id)
                 item['likes_count'] = likesCount  // 点赞数
                 item['comment_count'] = commentCount  // 评论数
                 item['url'] = config.DEFAULT_HEAD_URL   // 默认头像
@@ -98,6 +103,22 @@ let dynamicController = {
                     }
                 })
             })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
+    },
+    async like(req, res) {
+        try {
+            let _id = req.param('_id')
+            let _author = req.param('_author')
+            let _likes = (await dynamicModel.findById(_id))._likes
+            if (_likes.includes(_author)) {
+                res.send({ status: 0, msg: 'already like' })
+            } else {
+                _likes.push(_author)
+                let data = await dynamicModel.findByIdAndUpdate(_id, { $set: { _likes } }, { new: true })
+                res.send({ status: 1, msg: 'update succeed', data: { count: data._likes.length } })
+            }
         } catch (err) {
             config.RES_ERROR(err, res)
         }

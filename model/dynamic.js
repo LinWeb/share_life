@@ -25,7 +25,7 @@ let dynamicSchema = new mongoose.Schema({
         ref: 'user'
     },
     _likes: [{
-        type: ObjectId,
+        type: String,
         ref: 'user'
     }] // user表id集合
 })
