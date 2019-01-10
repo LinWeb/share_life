@@ -2,12 +2,13 @@ let express = require('express')
 let router = express.Router()
 
 let dynamicController = require('../controller/dynamic')
+let checkLogin = require('../middlewares/check_login')
 
 
 router.get('/search', dynamicController.search)
-router.post('/add', dynamicController.add)
-router.post('/del', dynamicController.del)
+router.post('/add', checkLogin, dynamicController.add)
+router.post('/del', checkLogin, dynamicController.del)
 router.get('/id', dynamicController.id)
-router.post('/upload', dynamicController.upload)
-router.post('/update_like', dynamicController.update_like)
+router.post('/upload', checkLogin, dynamicController.upload)
+router.post('/update_like', checkLogin, dynamicController.update_like)
 module.exports = router

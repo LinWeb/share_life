@@ -7,23 +7,23 @@ class Footer extends Component {
         super(props);
         this.state = {
             tabsData: [{
-                icon: { uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' },
-                selectedIcon: { uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' },
+                icon: 'icon-shouye',
+                selectedIcon: 'icon-shouye',
                 title: '首页',
                 key: '/',
             }, {
-                icon: { uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' },
-                selectedIcon: { uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' },
+                icon: 'icon-fabiaoyouji',
+                selectedIcon: 'icon-fabiaoyouji',
                 title: '发表',
                 key: '/publish',
             }, {
-                icon: { uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' },
-                selectedIcon: { uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' },
+                icon: 'icon-xiaoxi',
+                selectedIcon: 'icon-xiaoxi',
                 title: '消息',
                 key: '/news',
             }, {
-                icon: { uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' },
-                selectedIcon: { uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' },
+                icon: 'icon-wode',
+                selectedIcon: 'icon-wode',
                 title: '我的',
                 key: '/user',
             }],
@@ -47,8 +47,8 @@ class Footer extends Component {
                 >
                     {tabsData.map(({ icon, selectedIcon, title, key }) =>
                         <TabBar.Item
-                            icon={icon}
-                            selectedIcon={selectedIcon}
+                            icon={<span className={'iconfont ' + icon} />}
+                            selectedIcon={<span className={'iconfont ' + selectedIcon} />}
                             title={title}
                             key={key}
                             selected={pathname === key}

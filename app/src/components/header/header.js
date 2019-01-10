@@ -17,7 +17,7 @@ class Header extends Component {
                     onLeftClick={() => { history.go(-1) }}
                     rightContent={mainPages.includes(pathname) ? null : [
                         // <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
-                        <Link to='/' key="1"><Icon type="ellipsis" /></Link>
+                        <Link to='/' key="1"><span className='iconfont icon-shouye' /></Link>
                     ]}
                 >{title}</NavBar>
             </div>

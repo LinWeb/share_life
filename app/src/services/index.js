@@ -3,13 +3,22 @@ import { Toast } from 'antd-mobile';
 import * as USER from './user';
 import * as CATEGORY from './category'
 import * as DYNAMIC from './dynamic'
+import { BASE_URL, PRIVATE_URLS } from '../../config/api'
+import { routerRedux } from 'dva/router'
+import checkLogin from '../check/check_login'
 
-axios.defaults.baseURL = 'http://localhost:3000/';
-
-// 设置浏览器自动存储服务器cookie
+axios.defaults.baseURL = BASE_URL;
 axios.interceptors.request.use((config) => {
     // Toast.loading('', 0)
-    config.withCredentials = true
+    if (PRIVATE_URLS.includes(config.url)) {
+        // 判断哪些url需要验证是否已登录
+        // 要怎么跳转？要怎么取消请求？
+        if (!checkLogin()) {
+            window.location = '#login'
+            return Promise.reject(new Error('no login'))
+        }
+    }
+    config.withCredentials = true  // 设置浏览器自动存储服务器cookie
     return config
 }, (error) => {
     return Promise.reject(error)
@@ -27,6 +36,7 @@ axios.interceptors.response.use(function (response) {
     Toast.fail(error.message, 1);
     return Promise.reject(error);
 });
+
 
 export default {
     ...USER, ...CATEGORY, ...DYNAMIC

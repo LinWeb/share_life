@@ -1,5 +1,7 @@
 
 
+
+const BASE_URL = "http://localhost:3000"
 const REGISTER_URL = '/user/register'
 const LOGIN_URL = '/user/login'
 const LOGOUT_URL = '/user/logout'
@@ -10,7 +12,12 @@ const DYNAMIC_SEARCH_URL = '/dynamic/search'
 const DYNAMIC_UPDATE_LIKE_URL = '/dynamic/update_like'
 const UPDATE_FOLLOW_URL = '/user/update_follow'
 
+
+const PRIVATE_URLS = [DYNAMIC_UPDATE_LIKE_URL, UPDATE_FOLLOW_URL,]
+
 export {
+    BASE_URL,
+    PRIVATE_URLS,
     REGISTER_URL, LOGIN_URL, CATEGORY_URL,
     PUBLISH_URL, UPLOAD_URL, LOGOUT_URL,
     DYNAMIC_SEARCH_URL, DYNAMIC_UPDATE_LIKE_URL, UPDATE_FOLLOW_URL

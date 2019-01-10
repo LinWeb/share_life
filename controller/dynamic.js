@@ -52,8 +52,14 @@ let dynamicController = {
                 per_page_count
             }
             let user_id = req.session.user_id; // 当前用户id
-
-            let _follows = (await userModel.findById(user_id))._follows // 获取当前用户关注的人的集合
+            let user = null,
+                _follows = [];
+            if (user_id) {
+                user = await userModel.findById(user_id)
+                if (user) {
+                    _follows = user._follows// 获取当前用户关注的人的集合
+                }
+            }
 
             result.forEach(item => {
                 let _dynamic = item._id,
@@ -64,7 +70,7 @@ let dynamicController = {
                 })
                 let author_id = item._author._id.toString()
                 item['is_followed'] = _follows.includes(author_id)  // 当前用户是否已经关注当前动态的作者
-                item['is_liked'] = item._likes.includes(user_id)  // 当前用户是否已经点赞
+                item['is_liked'] = user ? item._likes.includes(user_id) : false  // 当前用户是否已经点赞
                 item['likes_count'] = likesCount  // 点赞数
                 item['comment_count'] = commentCount  // 评论数
                 item['url'] = config.DEFAULT_HEAD_URL   // 默认头像
