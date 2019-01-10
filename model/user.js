@@ -40,15 +40,15 @@ let userSchema = new mongoose.Schema(
         },
         hometown: String,
         _follows: [{
-            type: ObjectId,
+            type: String,
             ref: 'user'
         }], // user表id集合
         _fans: [{
-            type: ObjectId,
+            type: String,
             ref: 'user'
         }],// user表id集合
         _chats: [{
-            type: ObjectId,
+            type: String,
             ref: 'user'
         }],// chat表对
     },

@@ -1,9 +1,9 @@
 let dynamicModel = require('../model/dynamic')
 let commentModel = require('../model/comment')
+let userModel = require('../model/user')
 let config = require('../config/index')
 let formidable = require('formidable')
 let fs = require('fs')
-let mongoose = require('mongoose')
 
 
 let dynamicController = {
@@ -51,6 +51,9 @@ let dynamicController = {
                 page_num,
                 per_page_count
             }
+            let user_id = req.session.user_id; // 当前用户id
+
+            let _follows = (await userModel.findById(user_id))._follows // 获取当前用户关注的人的集合
 
             result.forEach(item => {
                 let _dynamic = item._id,
@@ -59,9 +62,9 @@ let dynamicController = {
                 commentModel.count({ _dynamic }, function (err, count) {
                     commentCount = count
                 })
-                // console.log(item._likes, req.session)
-                // 判断是否已经点赞了,为何取不了session.user_id?
-                item['is_liked'] = item._likes.includes(req.session.user_id)
+                let author_id = item._author._id.toString()
+                item['is_followed'] = _follows.includes(author_id)  // 当前用户是否已经关注当前动态的作者
+                item['is_liked'] = item._likes.includes(user_id)  // 当前用户是否已经点赞
                 item['likes_count'] = likesCount  // 点赞数
                 item['comment_count'] = commentCount  // 评论数
                 item['url'] = config.DEFAULT_HEAD_URL   // 默认头像
@@ -74,9 +77,6 @@ let dynamicController = {
     },
     async add(req, res) {
         try {
-            let content = req.param('content')
-            let _category = req.param('_category')
-            let _author = req.param('_author')
             await dynamicModel.insertMany([req.body])
             res.send({ status: 1, msg: 'insert succeed' })
         } catch (err) {
@@ -84,11 +84,9 @@ let dynamicController = {
         }
     },
     async upload(req, res) {
-
         try {
             let form = new formidable.IncomingForm();
             form.parse(req, function (err, fields, files) {
-                console.log(files)
                 let data = fs.readFileSync(files.file.path)
                 let name = files.file.name
                 let index = name.lastIndexOf('.')
@@ -107,18 +105,30 @@ let dynamicController = {
             config.RES_ERROR(err, res)
         }
     },
-    async like(req, res) {
+    async update_like(req, res) {
         try {
             let _id = req.param('_id')
             let _author = req.param('_author')
+            let is_liked = req.param('is_liked')
             let _likes = (await dynamicModel.findById(_id))._likes
-            if (_likes.includes(_author)) {
-                res.send({ status: 0, msg: 'already like' })
+            if (is_liked) {
+                // 点赞
+                if (_likes.includes(_author)) {
+                    res.send({ status: 0, msg: 'already like' })
+                } else {
+                    _likes.push(_author)
+                }
             } else {
-                _likes.push(_author)
-                let data = await dynamicModel.findByIdAndUpdate(_id, { $set: { _likes } }, { new: true })
-                res.send({ status: 1, msg: 'update succeed', data: { count: data._likes.length } })
+                // 取消点赞
+                if (!_likes.includes(_author)) {
+                    res.send({ status: 0, msg: 'never like' })
+                } else {
+                    _likes = _likes.filter(item => item !== _author)
+                }
             }
+            let data = await dynamicModel.findByIdAndUpdate(_id, { $set: { _likes } }, { new: true })
+            res.send({ status: 1, msg: 'update succeed', data: { count: data._likes.length } })
+
         } catch (err) {
             config.RES_ERROR(err, res)
         }

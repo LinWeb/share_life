@@ -9,6 +9,5 @@ router.post('/add', dynamicController.add)
 router.post('/del', dynamicController.del)
 router.get('/id', dynamicController.id)
 router.post('/upload', dynamicController.upload)
-router.post('/like', dynamicController.like)
-
+router.post('/update_like', dynamicController.update_like)
 module.exports = router

@@ -8,12 +8,12 @@ class DynamicList extends Component {
     // state = {
     //     dynamicData: []
     // }
-    follow(id) {
-        console.log(id)
+    async updateFollow(_id, is_followed) {
+        let res = await API.UPDATE_FOLLOW({ _id, is_followed })
     }
-    async like(_id) {
+    async updateLike(_id, is_liked) {
         let _author = this.props._author
-        let res = await API.DYNAMIC_LIKE({ _id, _author })
+        let res = await API.DYNAMIC_UPDATE_LIKE({ _id, _author, is_liked })
         // if (res) {
         //     // let likes_count = res.data.count
         //     // this.updateDynamicData({ likes_count })
@@ -25,16 +25,17 @@ class DynamicList extends Component {
     render() {
         let { data } = this.props
         let noData = <div style={{ backgroundColor: '#fff', textAlign: 'center', padding: '12px 0' }}>暂无数据</div>
+
         return (
             <div >
                 {!data.length ? noData :
                     data.map((item, key) =>
-                        <Card full key={key}>
+                        <Card full key={key} style={{ marginBottom: '15px' }}>
                             <Card.Header
                                 title={<div>{item._author.username}</div>}
                                 thumb={<div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px' }}><img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} /></div>}
-                                extra={<Button type="warning" inline size="small" style={{ marginRight: '4px' }}
-                                    onClick={() => { this.follow(item._author._id) }}>关注</Button>}
+                                extra={<Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
+                                    onClick={() => { this.updateFollow(item._author._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>}
                             />
                             <Card.Body>
                                 <div style={{ marginBottom: '5px' }}>{item.content}</div>
@@ -52,7 +53,7 @@ class DynamicList extends Component {
                             <Card.Footer style={{ margin: '12px 0 5px' }}
                                 content={getDetailDate(item.create_time)}
                                 extra={<div>
-                                    <span style={{ marginRight: '20px' }} onClick={() => { this.like(item._id) }}>点赞 {item.likes_count}</span>
+                                    <span style={{ marginRight: '20px' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}>{item.is_liked ? '取消点赞' : '点赞'} {item.likes_count}</span>
                                     <Link to='/hhh' style={{ color: '#888' }}>评论 {item.comment_count}</Link>
                                 </div>} />
                         </Card>

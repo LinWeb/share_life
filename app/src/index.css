@@ -1,0 +1,3 @@
+.am-card-body::before {
+    display: none !important;
+}

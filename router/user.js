@@ -7,5 +7,6 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/getUserInfo', checkLogin, userController.getUserInfo)
+router.post('/update_follow', checkLogin, userController.update_follow)
 
 module.exports = router;
