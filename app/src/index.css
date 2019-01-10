@@ -1,3 +1,9 @@
-.am-card-body::before {
+:global(.iconfont) {
+    font-size: 22px;
+}
+:global(.am-card-body) {
+    padding: 0px 15px 6px!important;
+}
+:global(.am-card-body::before) {
     display: none !important;
 }
