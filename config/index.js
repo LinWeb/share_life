@@ -1,6 +1,8 @@
 let path = require('path')
 
 module.exports = {
+    MAIN_DB_URL: 'mongodb://localhost:27017/share_life',
+    SESSION_DB_URL: 'mongodb://localhost:27017/session',
     SCHEMA_OPTION: {
         versionKey: false
     },

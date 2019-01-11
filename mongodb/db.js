@@ -1,5 +1,6 @@
 let mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/share_life', {
+let config = require('../config/index')
+mongoose.connect(config.MAIN_DB_URL, {
     useNewUrlParser: true, useCreateIndex: true
 })
 // mongoose.set('userCreateIndex', true)

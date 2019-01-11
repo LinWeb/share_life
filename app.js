@@ -3,6 +3,8 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 let session = require('express-session')
+let MongoStore = require('connect-mongo')(session);
+let config = require('./config/index')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let router = require('./router/index')
@@ -48,9 +50,11 @@ app.use(session({
   cookie: {
     maxAge: 60 * 60 * 1000,
     httpOnly: false
-  }
+  },
+  store: new MongoStore({
+    url: config.SESSION_DB_URL
+  })
 }))
-
 
 app.use([express.static(path.join(__dirname, 'public')), express.static(path.join(__dirname, 'app/build'))]);
 
