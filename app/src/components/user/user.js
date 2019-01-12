@@ -12,6 +12,13 @@ const Brief = Item.Brief;
 class User extends Component {
     state = {
         userInfo: {},
+        sexData: [{
+            value: 0,
+            label: '女'
+        }, {
+            value: 1,
+            label: '男'
+        }],
         hobbiesData: [
             {
                 value: '1',
@@ -86,8 +93,8 @@ class User extends Component {
     render() {
         let { username, head_img_url, sign,
             dynamic_count, follows_count,
-            fans_count, birthday, address } = this.state.userInfo
-        let { hobbiesData } = this.state
+            fans_count, birthday, address, sex } = this.state.userInfo
+        let { sexData, hobbiesData } = this.state
         let { getFieldProps } = this.props.form
 
         return (
@@ -100,7 +107,14 @@ class User extends Component {
                         onClick={() => { }}
                         className={styles.head_img}
                     >
-                        {username} <Brief>{sign}</Brief>
+                        {username}
+                        &nbsp;
+                        {sex ?
+                            <span className="iconfont icon-nan" style={{ color: 'rgb(51, 163, 244)' }} />
+                            :
+                            <span className="iconfont icon-nv" style={{ color: 'rgb(255, 77, 148)' }} />
+                        }
+                        <Brief>{sign}</Brief>
                     </Item>
                 </List>
                 <WhiteSpace />
@@ -113,12 +127,22 @@ class User extends Component {
                 <WhiteSpace />
                 <WhiteSpace />
                 <List>
+                    <Picker extra="请选择"
+                        data={sexData}
+                        cols={1}
+                        {...getFieldProps('sexData', {
+                            initialValue: [sex],
+                        })}
+                        onOk={([val]) => this.updateUserInfo({ sex: val })}
+                    >
+                        <List.Item arrow="horizontal">性别</List.Item>
+                    </Picker>
                     <DatePicker
                         mode="date"
                         value={birthday ? new Date(birthday) : new Date()}
                         minDate={new Date(1900, 1, 1)}
                         maxDate={new Date()}
-                        onChange={date => this.updateUserInfo({ birthday: date })}
+                        onChange={val => this.updateUserInfo({ birthday: val })}
                     >
                         <List.Item arrow="horizontal">出生日期</List.Item>
                     </DatePicker>
@@ -127,7 +151,7 @@ class User extends Component {
                         {...getFieldProps('district', {
                             initialValue: address,
                         })}
-                        onOk={date => this.updateUserInfo({ address: date })}
+                        onOk={val => this.updateUserInfo({ address: val })}
                     >
                         <List.Item arrow="horizontal">所在家乡</List.Item>
                     </Picker>

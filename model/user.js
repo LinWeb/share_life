@@ -24,9 +24,9 @@ let userSchema = new mongoose.Schema(
             type: String,
             default: ''
         },
-        age: {
+        sex: {
             type: Number,
-            min: 1
+            default: 1
         },
         sign: {
             type: String,
