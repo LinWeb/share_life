@@ -9,3 +9,7 @@ export let getDetailDate = (time) => {
     seconds = date.getSeconds();
   return year + '/' + (month < 10 ? '0' : '') + month + '/' + (day < 10 ? '0' : '') + day + ' ' + (hour < 10 ? '0' : '') + hour + ":" + (minutes < 10 ? '0' : '') + minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
+export let timeToDateType = (time) => {
+  if (!time) return time;
+
+}

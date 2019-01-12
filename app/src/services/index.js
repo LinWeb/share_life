@@ -15,7 +15,7 @@ axios.interceptors.request.use((config) => {
         // 要怎么跳转？要怎么取消请求？
         if (!checkLogin()) {
             window.location = '#login'
-            return Promise.reject(new Error('no login'))
+            return new Error('no login')
         }
     }
     config.withCredentials = true  // 设置浏览器自动存储服务器cookie
@@ -33,6 +33,7 @@ axios.interceptors.response.use(function (response) {
         return response.data
     }
 }, function (error) {
+    console.log(error)
     Toast.fail(error.message, 1);
     return Promise.reject(error);
 });

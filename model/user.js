@@ -1,6 +1,5 @@
 let mongoose = require('mongoose')
 let config = require('../config/index')
-let ObjectId = mongoose.Schema.Types.ObjectId
 
 let userSchema = new mongoose.Schema(
     {
@@ -31,14 +30,20 @@ let userSchema = new mongoose.Schema(
         },
         sign: {
             type: String,
-            default: ''
+            default: config.USER_DEFAULT_SIGN
         },
         hobbies: [String],
-        birthday: {
+        create_time: {
             type: Number,
             default: Math.floor(Date.now() / 1000)
         },
-        hometown: String,
+        birthday: {
+            type: Date
+        },
+        hometown: {
+            type: String,
+            default: ''
+        },
         _follows: [{
             type: String,
             ref: 'user'

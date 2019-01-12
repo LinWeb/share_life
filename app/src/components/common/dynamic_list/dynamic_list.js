@@ -24,7 +24,7 @@ class DynamicList extends Component {
     // }
     render() {
         let { data, userId } = this.props
-        let noData = <div style={{ backgroundColor: '#fff', textAlign: 'center', padding: '12px 0' }}>暂无数据</div>
+        let noData = <div style={{ backgroundColor: '#fff', textAlign: 'center', height: "634px", lineHeight: '634px' }}>暂无数据</div>
 
         return (
             <div >

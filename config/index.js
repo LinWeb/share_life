@@ -3,13 +3,12 @@ let path = require('path')
 module.exports = {
     MAIN_DB_URL: 'mongodb://localhost:27017/share_life',
     SESSION_DB_URL: 'mongodb://localhost:27017/session',
-    SCHEMA_OPTION: {
-        versionKey: false
-    },
-    RES_ERROR(err, res) {
-        res.send({ status: 0, msg: err.message })
-    },
+    SCHEMA_OPTION: { versionKey: false },
+    USER_DEFAULT_SIGN: '这个人很懒，个人签名都不写~',
     PUBLIC: 'public',
     DEFAULT_HEAD_URL: '/images/default_head.png',
     DYNAMIC_IMGS_UPLOAD_URL: '/upload/dynamic_imgs/',
+    RES_ERROR(err, res) {
+        res.send({ status: 0, msg: err.message })
+    },
 }

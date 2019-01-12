@@ -1,11 +1,11 @@
-.user_container{
+.user_container {}
 
-}
-.head_img img{
-    width: auto;
-    height: auto;
+.head_img img {
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
 }
-.head_img .am-list-line-multiple{
+
+.head_img .am-list-line-multiple {
     padding: 120px 0;
 }

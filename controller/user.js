@@ -1,5 +1,6 @@
 let userModel = require('../model/user')
 let config = require('../config/index')
+let dynamicModel = require('../model/dynamic')
 
 let userController = {
     // 注册
@@ -36,11 +37,27 @@ let userController = {
         })
     },
     // 获取用户数据
-    async getUserInfo(req, res) {
+    async info(req, res) {
         try {
             let id = req.param('id');
-            let result = await userModel.findById(id)
+            let result = await userModel.findById(id).lean()
+            let dynamic_count = await dynamicModel.find({ _author: id }).count()
+            result['dynamic_count'] = dynamic_count || 0
+            result['follows_count'] = result._follows.length
+            result['fans_count'] = result._fans.length
             res.send({ status: 1, msg: 'find succeed', data: result })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
+    },
+    // 更新用户资料
+    async update_info(req, res) {
+        try {
+            let data = req.body;
+            let user_id = req.session.user_id;
+            console.log(data)
+            let result = await userModel.findByIdAndUpdate(user_id, { $set: data });
+            res.send({ status: 1, msg: 'update succeed', data: result })
         } catch (err) {
             config.RES_ERROR(err, res)
         }
@@ -49,25 +66,30 @@ let userController = {
     async update_follow(req, res) {
         try {
             let user_id = req.session.user_id; // 当前用户id
-            let _id = req.param('_id')
+            let _id = req.param('_id') // 对方用户id
             let is_followed = req.param('is_followed')
-            let _follows = (await userModel.findById(user_id))._follows
+            let _follows = (await userModel.findById(user_id))._follows // 当前用户的关注集合
+            let _fans = (await userModel.findById(_id))._fans // 对方用户的粉丝集合
             if (is_followed) {
-                // 点赞
+                // 关注
                 if (_follows.includes(_id)) {
                     res.send({ status: 0, msg: 'already follow' })
                 } else {
                     _follows.push(_id)
+                    _fans.push(user_id)
                 }
             } else {
-                // 取消点赞
+                // 取消关注
                 if (!_follows.includes(_id)) {
                     res.send({ status: 0, msg: 'never follow' })
                 } else {
                     _follows = _follows.filter(item => item !== _id)
+                    _fans = _fans.filter(item => item !== user_id)
                 }
             }
             let data = await userModel.findByIdAndUpdate(user_id, { $set: { _follows } }, { new: true })
+            await userModel.findByIdAndUpdate(_id, { $set: { _fans } }, { new: true })
+
             res.send({ status: 1, msg: 'update succeed', data: { count: data._follows.length } })
 
         } catch (err) {
