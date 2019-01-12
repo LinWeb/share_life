@@ -40,9 +40,9 @@ let userSchema = new mongoose.Schema(
         birthday: {
             type: Date
         },
-        hometown: {
-            type: String,
-            default: ''
+        address: {
+            type: [String],
+            default: []
         },
         _follows: [{
             type: String,
