@@ -4,6 +4,9 @@ import News from '../src/components/news/news';
 import User from '../src/components/user/user';
 import Register from '../src/components/register/register'
 import Login from '../src/components/login/login'
+import MyProfile from '../src/components/my_profile/my_profile';
+import MyDynamic from '../src/components/my_dynamic/my_dynamic';
+
 
 export default [
     {
@@ -47,6 +50,20 @@ export default [
         exact: true,
         component: Login,
         isPrivate: false,
+    },
+    {
+        path: '/user/profile',
+        title: '我的资料',
+        exact: true,
+        component: MyProfile,
+        isPrivate: true,
+    },
+    {
+        path: '/user/dynamic',
+        title: '我的动态',
+        exact: true,
+        component: MyDynamic,
+        isPrivate: true,
     }
 
 ]

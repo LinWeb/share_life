@@ -5,12 +5,14 @@ import { PUBLISH_URL, DYNAMIC_SEARCH_URL, UPLOAD_URL, DYNAMIC_UPDATE_LIKE_URL } 
 let PUBLISH = async (data) => {
     return await axios.post(PUBLISH_URL, data)
 }
-let UPLOAD = async (file) => {
+let UPLOAD = async ({ file, type }) => {
     let config = {
         headers: { 'Content-Type': 'multipart/form-data' }
     }
     let formData = new FormData();
     formData.append('file', file)
+    formData.append('type', type)
+
     return await axios.post(UPLOAD_URL, formData, config)
 }
 

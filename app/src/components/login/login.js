@@ -14,7 +14,7 @@ class Login extends Component {
             console.log(11111, error, value);
         });
         // 采用插件来校验？
-        dispatch({ type: 'user/login', data: { username, password }, from })
+        dispatch({ type: 'user/loginAction', data: { username, password }, from })
     }
     render() {
         let { form } = this.props,

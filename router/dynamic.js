@@ -9,6 +9,5 @@ router.get('/search', dynamicController.search)
 router.post('/add', checkLogin, dynamicController.add)
 router.post('/del', checkLogin, dynamicController.del)
 router.get('/id', dynamicController.id)
-router.post('/upload', checkLogin, dynamicController.upload)
 router.post('/update_like', checkLogin, dynamicController.update_like)
 module.exports = router

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
-    List, WhiteSpace, Button, TextareaItem,
-    ImagePicker, WingBlank, SegmentedControl, Picker
+    List, Button, TextareaItem,
+    ImagePicker, WingBlank, Picker
 } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import API from '../../services/index'
@@ -42,7 +42,7 @@ class Publish extends Component {
         // console.log(files, type, index);
         // console.log(this.state.files)
         // console.log(newFile)
-        let res = await API.UPLOAD(newFile)
+        let res = await API.UPLOAD({ file: newFile, type: 2 })
         let imgUrl = res.data.url
         this.setState((preState) => {
             let images = [...preState.images, imgUrl]
