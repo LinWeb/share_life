@@ -44,7 +44,17 @@ export default {
             let res = yield call(API.UPDATE_USER_INFO, data)
             if (res) {
                 yield put({ type: 'updateUserInfo', userInfo: res.data })
+                yield put(routerRedux.go(-1))
             }
+        }
+    },
+    subscriptions: {
+        get({ history, dispatch }) {
+            return history.listen(({ pathname }, action) => {
+                if (pathname === '/user') {
+                    dispatch({ type: 'getUserInfoAction' })
+                }
+            })
         }
     }
 }

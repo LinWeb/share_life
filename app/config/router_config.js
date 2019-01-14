@@ -53,7 +53,7 @@ export default [
     },
     {
         path: '/user/profile',
-        title: '我的资料',
+        title: '编辑资料',
         exact: true,
         component: MyProfile,
         isPrivate: true,

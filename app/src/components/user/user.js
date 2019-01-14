@@ -12,10 +12,6 @@ class User extends Component {
         let { dispatch } = this.props
         dispatch({ type: 'user/logout' })
     }
-    componentWillMount() {
-        let { dispatch } = this.props
-        dispatch({ type: 'user/getUserInfoAction' })
-    }
     render() {
         let { username, head_img_url, sign,
             dynamic_count, follows_count,
