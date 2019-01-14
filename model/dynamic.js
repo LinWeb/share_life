@@ -12,7 +12,7 @@ let dynamicSchema = new mongoose.Schema({
     address: String,
     create_time: {
         type: Number,
-        default: Math.floor(Date.now() / 1000)
+        default: Date.now
     },
     _category: {
         type: ObjectId,

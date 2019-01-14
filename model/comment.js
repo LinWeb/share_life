@@ -18,7 +18,7 @@ let commentSchema = new mongoose.Schema({
     },
     create_time: {
         type: Number,
-        default: Math.floor(Date.now() / 1000)
+        default: Date.now
     },
     _likes: [String]
 })

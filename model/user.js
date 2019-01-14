@@ -35,7 +35,7 @@ let userSchema = new mongoose.Schema(
         hobbies: [String],
         create_time: {
             type: Number,
-            default: Math.floor(Date.now() / 1000)
+            default: Date.now
         },
         birthday: {
             type: Date

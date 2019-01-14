@@ -1,6 +1,6 @@
 export let getDetailDate = (time) => {
   if (!time) return time;
-  let date = new Date(time * 1000),
+  let date = new Date(time),
     year = date.getFullYear(),
     month = date.getMonth() + 1,
     day = date.getDate(),
