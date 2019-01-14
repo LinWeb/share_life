@@ -10,7 +10,7 @@ const Brief = Item.Brief;
 class User extends Component {
     logout = async () => {
         let { dispatch } = this.props
-        dispatch({ type: 'user/logout' })
+        dispatch({ type: 'user/logoutAction' })
     }
     render() {
         let { username, head_img_url, sign,

@@ -49,7 +49,7 @@ class DynamicDetail extends Component {
         console.log(commentData)
         return (
             <div>
-                <DynamicList data={dynamicDetailData} />
+                <DynamicList data={dynamicDetailData} type={1} />
                 <div className={styles.comment_list}>
                     <div className={styles.comment_count}>评价 {commentData.length}</div>
                     {commentData.map((item, key) => (

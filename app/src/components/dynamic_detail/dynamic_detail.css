@@ -1,5 +1,6 @@
 .comment_list {
     margin-top: 12px;
+    margin-bottom: 45px
 }
 
 .comment_count {
@@ -34,6 +35,9 @@
     display: inline-block;
     margin-left: 70px;
     margin-top: 4px;
+    width: 70%;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .username {
@@ -66,6 +70,7 @@
     left: 0;
     right: 0;
     background-color: #fff;
+    border: 1px solid #d0cece;
 }
 
 .input {
@@ -75,6 +80,7 @@
 .submit {
     position: absolute !important;
     right: 0px;
+    height: 100%;
     top: 0px;
     bottom: 0px;
     border-radius: 0px

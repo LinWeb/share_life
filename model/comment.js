@@ -8,7 +8,7 @@ let commentSchema = new mongoose.Schema({
         ref: 'user'
     },
     _dynamic: {
-        type: ObjectId,
+        type: String,
         required: true,
         ref: 'dynamic'
     },

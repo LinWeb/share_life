@@ -68,9 +68,11 @@ let dynamicController = {
                 let _dynamic = item._id,
                     commentCount = 0,
                     likesCount = item._likes.length;
-                commentModel.count({ _dynamic }, function (err, count) {
-                    commentCount = count
-                })
+                // 这个如何做异步获取数据？
+                // commentModel.count({ _dynamic }, function (err, count) {
+                //     commentCount = count
+                //     console.log(commentCount)
+                // })
                 let author_id = item._author._id.toString()
                 item['is_followed'] = _follows.includes(author_id)  // 当前用户是否已经关注当前动态的作者
                 item['is_liked'] = user ? item._likes.includes(user_id) : false  // 当前用户是否已经点赞
@@ -125,16 +127,6 @@ let dynamicController = {
             let id = req.param('id')
             await dynamicModel.findByIdAndDelete(id)
             res.send({ status: 1, msg: 'delete succeed' })
-        } catch (err) {
-            config.RES_ERROR(err, res)
-        }
-    },
-    async id(req, res) {
-        try {
-            let id = req.query.id
-            let result = await dynamicModel.findById(id)
-                .populate({ path: '_author', select: 'username head_img_url' })
-            res.send({ status: 1, msg: 'find succeed', data: result })
         } catch (err) {
             config.RES_ERROR(err, res)
         }

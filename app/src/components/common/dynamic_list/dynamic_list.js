@@ -53,10 +53,10 @@ class DynamicList extends Component {
                             <Card.Footer style={{ margin: '12px 0 5px' }}
                                 content={getDetailDate(item.create_time)}
                                 extra={<div>
-                                    <span style={{ marginRight: '20px', color: item.is_liked ? '#e94f4f' : '' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}>
+                                    <span style={{ color: item.is_liked ? '#e94f4f' : '' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}>
                                         <span className='iconfont icon-dianzan' /> {item.likes_count}
                                     </span>
-                                    <Link to={'/dynamic/id/' + item._id} style={{ color: '#888' }}><span className='iconfont icon-weibiaoti527' /> {item.comment_count}</Link>
+                                    {this.props.type ? null : <Link to={'/dynamic/id/' + item._id} style={{ marginLeft: '20px', color: '#888' }}><span className='iconfont icon-weibiaoti527' /> {item.comment_count}</Link>}
                                 </div>} />
                         </Card>
                     )}
