@@ -39,7 +39,7 @@ class TabDynamic extends Component {
     tabOnChange = (tabData, index) => {
         this.changeCurrentCategoryId(tabData._id)
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.getCategory()
     }
     content = item => {
@@ -51,7 +51,7 @@ class TabDynamic extends Component {
         </div>)
     }
     render() {
-        let { categoryData, dynamicData, initialPage } = this.state
+        let { categoryData, initialPage } = this.state
         return (
             <div>
                 <Tabs tabs={categoryData}

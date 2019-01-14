@@ -9,11 +9,11 @@ class DynamicList extends Component {
     //     dynamicData: []
     // }
     async updateFollow(_id, is_followed) {
-        let res = await API.UPDATE_FOLLOW({ _id, is_followed })
+        await API.UPDATE_FOLLOW({ _id, is_followed })
     }
     async updateLike(_id, is_liked) {
         let _author = this.props.userId
-        let res = await API.DYNAMIC_UPDATE_LIKE({ _id, _author, is_liked })
+        await API.DYNAMIC_UPDATE_LIKE({ _id, _author, is_liked })
         // if (res) {
         //     // let likes_count = res.data.count
         //     // this.updateDynamicData({ likes_count })
@@ -33,7 +33,8 @@ class DynamicList extends Component {
                         <Card full key={key} style={{ marginBottom: '15px' }}>
                             <Card.Header
                                 title={<div>{item._author.username}</div>}
-                                thumb={<div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece' }}><img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} /></div>}
+                                thumb={<div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
+                                    <img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} alt='' /></div>}
                                 extra={item._author._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
                                     onClick={() => { this.updateFollow(item._author._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>}
                             />
@@ -54,7 +55,7 @@ class DynamicList extends Component {
                                 content={getDetailDate(item.create_time)}
                                 extra={<div>
                                     <span style={{ color: item.is_liked ? '#e94f4f' : '' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}>
-                                        <span className='iconfont icon-dianzan' /> {item.likes_count}
+                                        <span className='iconfont icon-dianzan' /> {item.likes_count || '赞'}
                                     </span>
                                     {this.props.type ? null : <Link to={'/dynamic/id/' + item._id} style={{ marginLeft: '20px', color: '#888' }}><span className='iconfont icon-weibiaoti527' /> {item.comment_count}</Link>}
                                 </div>} />

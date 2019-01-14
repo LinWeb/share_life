@@ -24,7 +24,14 @@ let commentController = {
             let content = req.param('content'),
                 _user = req.session.user_id,
                 _dynamic = req.param('_dynamic');
-            let result = await commnetModel.create({ content, _user, _dynamic })
+            let resultData = await commnetModel.create({ content, _user, _dynamic })
+            let _id = resultData._id
+            let result = await commnetModel.findById(_id)
+                .populate({ path: '_user', select: 'username head_img_url' })
+                .sort({ create_time: -1 }) // 按照时间倒序
+                .lean() // 转化为JavaScript对象
+            result['is_liked'] = 0
+            result['likes_count'] = 0
             res.send({ status: 1, msg: 'insert succeed', data: result })
         } catch (err) {
             config.RES_ERROR(err, res)

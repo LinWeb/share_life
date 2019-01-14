@@ -5,7 +5,6 @@ import * as CATEGORY from './category'
 import * as COMMENT from './comment'
 import * as DYNAMIC from './dynamic'
 import { BASE_URL, PRIVATE_URLS } from '../../config/api'
-import { routerRedux } from 'dva/router'
 import checkLogin from '../check/check_login'
 
 axios.defaults.baseURL = BASE_URL;

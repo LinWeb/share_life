@@ -4,7 +4,6 @@ import Header from '../components/header/header'
 import Footer from '../components/footer/footer'
 import PrivateRoute from './private_route'
 import routerConfig from '../../config/router_config'
-import index from '../components/index';
 
 function RouterConfig({ history }) {
   return (
@@ -17,7 +16,7 @@ function RouterConfig({ history }) {
         }}>
           <Header excludesPages={['/']} mainPages={['/news', '/user']} ></Header>
         </div>
-        <div className='content-container' style={{ marginTop: '45px' }}>
+        <div className='content-container' style={{ marginTop: '45px', marginBottom: '45px' }}>
           <Switch>
             {routerConfig.map(({ isPrivate, ...res }, key) =>
               isPrivate ?

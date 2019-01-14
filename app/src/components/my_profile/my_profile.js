@@ -71,7 +71,7 @@ class MyProfile extends Component {
             this.updateNewUserInfo({ hobbies: [...hobbies, value] })
         }
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.setState(() => ({
             newUserInfo: { ...this.props.userInfo }
         }));
@@ -86,7 +86,7 @@ class MyProfile extends Component {
                 <List>
                     <Item
                         arrow="horizontal"
-                        extra={<img src={head_img_url} />}
+                        extra={<img src={head_img_url} alt='' />}
                     >
                         <label htmlFor='file' style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0 }}></label>
                         <input type='file' accept="image/*" id="file" style={{ display: 'none' }} onChange={(e) => { this.replaceHeadImg(e) }} />

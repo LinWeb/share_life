@@ -27,7 +27,7 @@ class Publish extends Component {
             this.setState(() => ({ categoryData: data }))
         }
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.getCategory()
     }
     selectCategory(id) {

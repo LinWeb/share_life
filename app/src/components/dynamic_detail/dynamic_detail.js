@@ -34,19 +34,38 @@ class DynamicDetail extends Component {
             content = getFieldValue('content'),
             _dynamic = this.props.match.params.id;
         let res = await API.ADD_COMMENT({ _dynamic, content })
+        if (res) {
+            this.setState(() => ({
+                commentData: [res.data, ...this.state.commentData]
+            }))
+        }
     }
     async updateLike(_id, is_liked) {
         let res = await API.COMMENT_UPDATE_LIKE({ _id, is_liked })
+        if (res) {
+            let count = res.data.count;
+            let commentData = this.state.commentData.map(item => {
+                let likes_count = item.likes_count
+                let is_liked = item.is_liked
+                if (item._id === _id) {
+                    likes_count = count
+                    is_liked = !is_liked
+                }
+                return { ...item, likes_count, is_liked }
+            })
+            this.setState((preState) => ({
+                commentData
+            }))
+        }
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.getDynamicDetail();
-        this.getCommentData()
+        this.getCommentData();
     }
     render() {
         let { dynamicDetailData, commentData } = this.state
         let { form } = this.props,
             { getFieldProps } = form;
-        console.log(commentData)
         return (
             <div>
                 <DynamicList data={dynamicDetailData} type={1} />
@@ -54,7 +73,7 @@ class DynamicDetail extends Component {
                     <div className={styles.comment_count}>评价 {commentData.length}</div>
                     {commentData.map((item, key) => (
                         <div className={styles.comment_item} key={key}>
-                            <div className={styles.head_img}><img src={item._user.head_img_url} /></div>
+                            <div className={styles.head_img}><img src={item._user.head_img_url} alt='' /></div>
                             <div className={styles.comment_main}>
                                 <div className={styles.username}>{item._user.username} </div>
                                 <div className={styles.content}>{item.content} </div>
