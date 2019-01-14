@@ -64,22 +64,19 @@ let dynamicController = {
                 }
             }
 
-            result.forEach(item => {
+            for (let item of result) {
                 let _dynamic = item._id,
                     commentCount = 0,
                     likesCount = item._likes.length;
-                // 这个如何做异步获取数据？
-                // commentModel.count({ _dynamic }, function (err, count) {
-                //     commentCount = count
-                //     console.log(commentCount)
-                // })
+
+                commentCount = await commentModel.count({ _dynamic })
                 let author_id = item._author._id.toString()
                 item['is_followed'] = _follows.includes(author_id)  // 当前用户是否已经关注当前动态的作者
                 item['is_liked'] = user ? item._likes.includes(user_id) : false  // 当前用户是否已经点赞
                 item['likes_count'] = likesCount  // 点赞数
                 item['comment_count'] = commentCount  // 评论数
                 item['url'] = config.DEFAULT_HEAD_URL   // 默认头像
-            })
+            }
 
             res.send({ status: 1, msg: 'find succeed', data: result, pagination })
         } catch (err) {
