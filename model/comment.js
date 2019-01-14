@@ -20,6 +20,7 @@ let commentSchema = new mongoose.Schema({
         type: Number,
         default: Math.floor(Date.now() / 1000)
     },
+    _likes: [String]
 })
 
 let commentModel = mongoose.model('comment', commentSchema, 'comment')

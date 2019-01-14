@@ -27,7 +27,7 @@ let dynamicSchema = new mongoose.Schema({
     _likes: [{
         type: String,
         ref: 'user'
-    }] // user表id集合
+    }]
 })
 let dynamicModel = mongoose.model('dynamic', dynamicSchema, 'dynamic')
 module.exports = dynamicModel

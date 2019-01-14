@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Toast } from 'antd-mobile';
 import * as USER from './user';
 import * as CATEGORY from './category'
+import * as COMMENT from './comment'
 import * as DYNAMIC from './dynamic'
 import { BASE_URL, PRIVATE_URLS } from '../../config/api'
 import { routerRedux } from 'dva/router'
@@ -40,5 +41,5 @@ axios.interceptors.response.use(function (response) {
 
 
 export default {
-    ...USER, ...CATEGORY, ...DYNAMIC
+    ...USER, ...CATEGORY, ...DYNAMIC, ...COMMENT
 }

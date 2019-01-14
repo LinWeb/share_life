@@ -1,0 +1,81 @@
+.comment_list {
+    margin-top: 12px;
+}
+
+.comment_count {
+    background-color: #fff;
+    padding: 12px 15px;
+    border-bottom: 1px solid #e6e3e3;
+}
+
+.comment_item {
+    overflow: hidden;
+    padding: 15px 0 12px;
+    position: relative;
+    background-color: #fff;
+}
+
+.head_img {
+    position: absolute;
+    left: 12px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #d0cece;
+}
+
+.head_img img {
+    width: 100%;
+    height: 100%;
+}
+
+.comment_main {
+    display: inline-block;
+    margin-left: 70px;
+    margin-top: 4px;
+}
+
+.username {
+    font-size: 14px;
+    margin-top: 3px;
+    color: #108ee9;
+}
+
+.content {
+    font-size: 16px;
+    margin-top: 9px;
+    color: #333;
+}
+
+.create_time {
+    color: #999;
+    margin-top: 22px;
+}
+
+.like {
+    position: absolute;
+    top: 14px;
+    right: 12px;
+    color: #666;
+}
+
+.comment {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+}
+
+.input {
+    padding-right: 80px
+}
+
+.submit {
+    position: absolute !important;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    border-radius: 0px
+}

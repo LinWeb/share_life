@@ -50,7 +50,6 @@ class MyProfile extends Component {
         let file = event.target.files[0]
         let res = await API.UPLOAD({ file, type: 1 })
         let head_img_url = res.data.url
-        console.log(111111111)
         this.updateNewUserInfo({ head_img_url })
     }
     updateNewUserInfo(data) {

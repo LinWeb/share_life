@@ -6,7 +6,7 @@ import Register from '../src/components/register/register'
 import Login from '../src/components/login/login'
 import MyProfile from '../src/components/my_profile/my_profile';
 import MyDynamic from '../src/components/my_dynamic/my_dynamic';
-
+import DynamicDetail from '../src/components/dynamic_detail/dynamic_detail';
 
 export default [
     {
@@ -64,6 +64,11 @@ export default [
         exact: true,
         component: MyDynamic,
         isPrivate: true,
+    },
+    {
+        path: '/dynamic/id/:id',
+        title: '动态详情',
+        component: DynamicDetail,
     }
 
 ]

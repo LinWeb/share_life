@@ -33,7 +33,7 @@ class DynamicList extends Component {
                         <Card full key={key} style={{ marginBottom: '15px' }}>
                             <Card.Header
                                 title={<div>{item._author.username}</div>}
-                                thumb={<div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px' }}><img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} /></div>}
+                                thumb={<div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece' }}><img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} /></div>}
                                 extra={item._author._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
                                     onClick={() => { this.updateFollow(item._author._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>}
                             />
@@ -56,7 +56,7 @@ class DynamicList extends Component {
                                     <span style={{ marginRight: '20px', color: item.is_liked ? '#e94f4f' : '' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}>
                                         <span className='iconfont icon-dianzan' /> {item.likes_count}
                                     </span>
-                                    <Link to='/hhh' style={{ color: '#888' }}><span className='iconfont icon-weibiaoti527' /> {item.comment_count}</Link>
+                                    <Link to={'/dynamic/id/' + item._id} style={{ color: '#888' }}><span className='iconfont icon-weibiaoti527' /> {item.comment_count}</Link>
                                 </div>} />
                         </Card>
                     )}

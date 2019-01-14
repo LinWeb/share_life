@@ -9,8 +9,11 @@ let fs = require('fs')
 let dynamicController = {
     async search(req, res) {
         try {
-            let { _category, _author, keyword, page, per_page_count } = req.query
+            let { id, _category, _author, keyword, page, per_page_count } = req.query
             let query = {} // 查询参数对象
+            if (id) {
+                query = { _id: id } // 分类条件查询
+            }
             if (_category) {
                 query = { _category } // 分类条件查询
             }
@@ -128,10 +131,9 @@ let dynamicController = {
     },
     async id(req, res) {
         try {
-            let id = req.param('id')
+            let id = req.query.id
             let result = await dynamicModel.findById(id)
-                .populate({ path: '_category', select: 'name -_id' })
-                .populate({ path: '_author', select: 'username password -_id' })
+                .populate({ path: '_author', select: 'username head_img_url' })
             res.send({ status: 1, msg: 'find succeed', data: result })
         } catch (err) {
             config.RES_ERROR(err, res)
