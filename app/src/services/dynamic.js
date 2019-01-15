@@ -17,6 +17,7 @@ let UPLOAD = async ({ file, type }) => {
 }
 
 let DYNAMIC_SEARCH = async (data) => {
+    data['per_page_count'] = 4 // 测试
     return await axios.get(DYNAMIC_SEARCH_URL, { params: data })
 }
 

@@ -7,7 +7,6 @@ import DynamicList from '../../common/dynamic_list/dynamic_list'
 class TabDynamic extends Component {
     state = {
         categoryData: [],
-        dynamicData: [],
         initialPage: 0,
         currentCategoryId: ''
     }
@@ -22,19 +21,8 @@ class TabDynamic extends Component {
             })
         }
     }
-    async getDynamic() {
-        let _category = this.state.currentCategoryId
-        let res = await API.DYNAMIC_SEARCH({ _category })
-        if (res) {
-            this.setState(() => ({
-                dynamicData: res.data
-            }))
-        }
-    }
     changeCurrentCategoryId(id) {
-        this.setState(() => ({ currentCategoryId: id }), () => {
-            this.getDynamic()
-        })
+        this.setState(() => ({ currentCategoryId: id }))
     }
     tabOnChange = (tabData, index) => {
         this.changeCurrentCategoryId(tabData._id)
@@ -43,10 +31,13 @@ class TabDynamic extends Component {
         this.getCategory()
     }
     content = item => {
-        let { dynamicData, currentCategoryId } = this.state
+        let { currentCategoryId } = this.state
+        let params = {
+            _category: currentCategoryId
+        }
         return (<div >
             {currentCategoryId !== item._id ? null
-                : <DynamicList data={dynamicData} style={{ backgroundColor: '#fff', marginBottom: '12px' }}></DynamicList>
+                : <DynamicList params={params} style={{ backgroundColor: '#fff', marginBottom: '12px' }}></DynamicList>
             }
         </div>)
     }

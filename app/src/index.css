@@ -13,3 +13,12 @@ a {
 :global(.am-card-body::before) {
     display: none !important;
 }
+
+:global(.am-activity-indicator) {
+    display: block !important;
+    text-align: center;
+}
+
+:global(.am-activity-indicator .am-activity-indicator-spinner) {
+    margin-top: 54px;
+}

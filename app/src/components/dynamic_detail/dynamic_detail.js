@@ -7,17 +7,7 @@ import { getDetailDate } from '../../utils/filter'
 import { createForm } from 'rc-form';
 class DynamicDetail extends Component {
     state = {
-        dynamicDetailData: {},
         commentData: []
-    }
-    async getDynamicDetail() {
-        let id = this.props.match.params.id;
-        let res = await API.DYNAMIC_SEARCH({ id })
-        if (res) {
-            this.setState(() => ({
-                dynamicDetailData: res.data
-            }))
-        }
     }
     async getCommentData() {
         let _dynamic = this.props.match.params.id;
@@ -30,11 +20,12 @@ class DynamicDetail extends Component {
     }
     async saveComment() {
         let { form } = this.props,
-            { getFieldValue } = form,
+            { getFieldValue, resetFields } = form,
             content = getFieldValue('content'),
             _dynamic = this.props.match.params.id;
         let res = await API.ADD_COMMENT({ _dynamic, content })
         if (res) {
+            resetFields(['content']) // 重置数据
             this.setState(() => ({
                 commentData: [res.data, ...this.state.commentData]
             }))
@@ -59,16 +50,18 @@ class DynamicDetail extends Component {
         }
     }
     UNSAFE_componentWillMount() {
-        this.getDynamicDetail();
         this.getCommentData();
     }
     render() {
-        let { dynamicDetailData, commentData } = this.state
-        let { form } = this.props,
+        let { commentData } = this.state
+        let { form, match } = this.props,
             { getFieldProps } = form;
+        let params = {
+            id: match.params.id
+        }
         return (
             <div>
-                <DynamicList data={dynamicDetailData} type={1} />
+                <DynamicList params={params} type={1}></DynamicList>
                 <div className={styles.comment_list}>
                     <div className={styles.comment_count}>评价 {commentData.length}</div>
                     {commentData.map((item, key) => (
