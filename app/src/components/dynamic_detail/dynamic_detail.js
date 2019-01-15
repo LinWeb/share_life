@@ -5,16 +5,46 @@ import API from '../../services/index'
 import { Button, TextareaItem } from 'antd-mobile'
 import { getDetailDate } from '../../utils/filter'
 import { createForm } from 'rc-form';
+import RefreshContainer from '../common/refresh_container/refresh_container'
+
+
 class DynamicDetail extends Component {
     state = {
-        commentData: []
+        commentData: [],
+        page: 0, // 页码
+        page_num: 0, // 总页数
+        loading: true,
     }
-    async getCommentData() {
+    async getCommentData(isCover) {
         let _dynamic = this.props.match.params.id;
-        let res = await API.GET_COMMENT({ _dynamic })
+        let params = { _dynamic }
+        let commentData = []
+        this.setState(() => ({
+            loading: true,
+        }))
+        if (!isCover) {
+            // 请求下一页数据
+            let { page, page_num } = this.state
+            page += 1;
+            if (page <= page_num) {
+                params = { ...params, page }
+                commentData = [...this.state.commentData]
+            } else {
+                // 已经超过总页数
+                this.setState(() => ({
+                    loading: false,
+                }))
+                return;
+            }
+        }
+        let res = await API.GET_COMMENT(params)
         if (res) {
+            commentData = [...commentData, ...res.data]
             this.setState(() => ({
-                commentData: res.data
+                commentData,
+                page: res.pagination.page,
+                page_num: res.pagination.page_num,
+                loading: false,
             }))
         }
     }
@@ -50,7 +80,7 @@ class DynamicDetail extends Component {
         }
     }
     UNSAFE_componentWillMount() {
-        this.getCommentData();
+        this.getCommentData(true);
     }
     render() {
         let { commentData } = this.state
@@ -60,22 +90,24 @@ class DynamicDetail extends Component {
             id: match.params.id
         }
         return (
-            <div>
-                <DynamicList params={params} type={1}></DynamicList>
-                <div className={styles.comment_list}>
-                    <div className={styles.comment_count}>评价 {commentData.length}</div>
-                    {commentData.map((item, key) => (
-                        <div className={styles.comment_item} key={key}>
-                            <div className={styles.head_img}><img src={item._user.head_img_url} alt='' /></div>
-                            <div className={styles.comment_main}>
-                                <div className={styles.username}>{item._user.username} </div>
-                                <div className={styles.content}>{item.content} </div>
-                                <div className={styles.create_time}>{getDetailDate(item.create_time)} </div>
+            <div style={{ marginBottom: '45px' }}>
+                <RefreshContainer onRefresh={(isCover) => { this.getCommentData(isCover) }} disabledTopRefresh>
+                    <DynamicList params={params} type={1}></DynamicList>
+                    <div className={styles.comment_list}>
+                        <div className={styles.comment_count}>评价 {commentData.length}</div>
+                        {commentData.map((item, key) => (
+                            <div className={styles.comment_item} key={key}>
+                                <div className={styles.head_img}><img src={item._user.head_img_url} alt='' /></div>
+                                <div className={styles.comment_main}>
+                                    <div className={styles.username}>{item._user.username} </div>
+                                    <div className={styles.content}>{item.content} </div>
+                                    <div className={styles.create_time}>{getDetailDate(item.create_time)} </div>
+                                </div>
+                                <div className={styles.like} style={{ color: item.is_liked ? 'rgb(233, 79, 79)' : '' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}><span className='iconfont icon-dianzan' /> {item.likes_count || '赞'}</div>
                             </div>
-                            <div className={styles.like} style={{ color: item.is_liked ? 'rgb(233, 79, 79)' : '' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}><span className='iconfont icon-dianzan' /> {item.likes_count || '赞'}</div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                </RefreshContainer>
                 <div className={styles.comment}>
                     <div style={{ position: "relative" }}>
                         <TextareaItem
@@ -88,6 +120,7 @@ class DynamicDetail extends Component {
                     </div>
                 </div>
             </div>
+
         )
     }
 }

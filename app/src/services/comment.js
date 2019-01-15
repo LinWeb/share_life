@@ -2,6 +2,7 @@ import { GET_COMMENT_URL, ADD_COMMENT_URL, COMMENT_UPDATE_LIKE_URL } from '../..
 import axios from 'axios'
 
 let GET_COMMENT = async (data) => {
+    data['per_page_count'] = 4 // 测试
     return await axios.get(GET_COMMENT_URL, { params: data })
 }
 let ADD_COMMENT = async (data) => {

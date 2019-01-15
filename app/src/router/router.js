@@ -16,7 +16,7 @@ function RouterConfig({ history }) {
         }}>
           <Header excludesPages={['/']} mainPages={['/news', '/user']} ></Header>
         </div>
-        <div className='content-container' style={{ marginTop: '45px', marginBottom: '45px' }}>
+        <div className='content-container' style={{ marginTop: '45px', }}>
           <Switch>
             {routerConfig.map(({ isPrivate, ...res }, key) =>
               isPrivate ?

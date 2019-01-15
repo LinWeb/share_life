@@ -5,6 +5,7 @@ import { Link } from 'dva/router';
 import { connect } from 'dva'
 import API from '../../../services/index'
 import RefreshContainer from '../../common/refresh_container/refresh_container'
+
 class DynamicList extends Component {
     state = {
         dynamicData: [],
@@ -81,56 +82,63 @@ class DynamicList extends Component {
     UNSAFE_componentWillMount() {
         this.getDynamicData(true)
     }
-    render() {
+    dynamic = () => {
         let { userId } = this.props
+        let { dynamicData } = this.state
         let noData = <div style={{ backgroundColor: '#fff', textAlign: 'center', height: "634px", lineHeight: '634px' }}>暂无数据</div>
-        let { dynamicData, loading } = this.state
+
+        return <div>
+            {!dynamicData.length ? noData :
+                dynamicData.map((item, key) =>
+                    <Card full key={key} style={{ marginBottom: '15px' }}>
+                        <Card.Header
+                            title={<div>{item._author.username}</div>}
+                            thumb={<div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
+                                <img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} alt='' /></div>}
+                            extra={item._author._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
+                                onClick={() => { this.updateFollow(item._author._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>}
+                        />
+                        <Card.Body>
+                            <div style={{ marginBottom: '5px' }}>{item.content}</div>
+                            <Grid data={item.images}
+                                columnNum={3}
+                                hasLine={false}
+                                activeStyle={false}
+                                renderItem={dataItem => (
+                                    <div style={{ padding: '0px 5px' }}>
+                                        <img src={dataItem} style={{ width: '100%', height: '100%' }} alt="" />
+                                    </div>
+                                )}
+                            />
+                        </Card.Body>
+                        <Card.Footer style={{ margin: '12px 0 5px' }}
+                            content={getDetailDate(item.create_time)}
+                            extra={<div>
+                                <span style={{ color: item.is_liked ? '#e94f4f' : '' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}>
+                                    <span className='iconfont icon-dianzan' /> {item.likes_count || '赞'}
+                                </span>
+                                {this.props.type ? null : <Link to={'/dynamic/id/' + item._id} style={{ marginLeft: '20px', color: '#888' }}><span className='iconfont icon-weibiaoti527' /> {item.comment_count}</Link>}
+                            </div>} />
+                    </Card>
+                )
+            }
+        </div>
+    }
+    render() {
+        let { type } = this.props
+        let { loading } = this.state
 
         return (
             <div className="dynamic_list">
-                <RefreshContainer
-                    onRefresh={(isCover) => {
-                        this.getDynamicData(isCover)
-                    }}
-                    loading={loading}
-                // 在收到数据的时候关闭loading
-                >
-                    {!dynamicData.length ? noData :
-                        dynamicData.map((item, key) =>
-                            <Card full key={key} style={{ marginBottom: '15px' }}>
-                                <Card.Header
-                                    title={<div>{item._author.username}</div>}
-                                    thumb={<div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
-                                        <img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} alt='' /></div>}
-                                    extra={item._author._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
-                                        onClick={() => { this.updateFollow(item._author._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>}
-                                />
-                                <Card.Body>
-                                    <div style={{ marginBottom: '5px' }}>{item.content}</div>
-                                    <Grid data={item.images}
-                                        columnNum={3}
-                                        hasLine={false}
-                                        activeStyle={false}
-                                        renderItem={dataItem => (
-                                            <div style={{ padding: '0px 5px' }}>
-                                                <img src={dataItem} style={{ width: '100%', height: '100%' }} alt="" />
-                                            </div>
-                                        )}
-                                    />
-                                </Card.Body>
-                                <Card.Footer style={{ margin: '12px 0 5px' }}
-                                    content={getDetailDate(item.create_time)}
-                                    extra={<div>
-                                        <span style={{ color: item.is_liked ? '#e94f4f' : '' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}>
-                                            <span className='iconfont icon-dianzan' /> {item.likes_count || '赞'}
-                                        </span>
-                                        {this.props.type ? null : <Link to={'/dynamic/id/' + item._id} style={{ marginLeft: '20px', color: '#888' }}><span className='iconfont icon-weibiaoti527' /> {item.comment_count}</Link>}
-                                    </div>} />
-                            </Card>
-                        )
-                    }
-                </RefreshContainer>
-
+                {!type ?
+                    <RefreshContainer
+                        onRefresh={(isCover) => { this.getDynamicData(isCover) }}
+                        loading={loading}
+                    >
+                        {this.dynamic()}
+                    </RefreshContainer>
+                    : this.dynamic()
+                }
             </div>
         )
     }

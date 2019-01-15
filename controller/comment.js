@@ -4,17 +4,42 @@ let config = require('../config/index')
 let commentController = {
     async get(req, res) {
         try {
-            let result = await commnetModel.find(req.query)
+            let { _dynamic, page, per_page_count } = req.query
+            if (page) {
+                page = Number(page)
+            } else {
+                page = 1   // 页码条件查询，默认1
+            }
+            if (per_page_count) {
+                per_page_count = Number(per_page_count)
+            } else {
+                per_page_count = 20  // 每页显示数条件查询，默认20
+            }
+            let result = await commnetModel.find({ _dynamic })
                 .populate({ path: '_user', select: 'username head_img_url' })
+                .skip(per_page_count * (page - 1)) // 跳到指定位置
+                .limit(per_page_count) // 限制查询数据条数
                 .sort({ create_time: -1 }) // 按照时间倒序
                 .lean() // 转化为JavaScript对象
+
+            // 查询全部数据的个数
+            let total = (await commnetModel.find({ _dynamic }).count())
+            let page_num = Math.ceil(total / per_page_count)
+            // 分页数据集合
+            let pagination = {
+                total,
+                page,
+                page_num,
+                per_page_count
+            }
+
             let user_id = req.session.user_id; // 当前用户id
             result.forEach(item => {
                 let likesCount = item._likes.length;
                 item['is_liked'] = user_id ? item._likes.includes(user_id) : false  // 当前用户是否已经点赞
                 item['likes_count'] = likesCount  // 点赞数
             })
-            res.send({ status: 1, msg: 'find succeed', data: result })
+            res.send({ status: 1, msg: 'find succeed', data: result, pagination })
         } catch (err) {
             config.RES_ERROR(err, res)
         }

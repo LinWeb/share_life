@@ -50,9 +50,9 @@ class TabDynamic extends Component {
                     initialPage={initialPage}
                     renderTabBar={
                         props =>
-                            // <div style={{ position: 'fixed', top: '53px', width: '100%', zIndex: 10 }}>
-                            <Tabs.DefaultTabBar {...props} page={4} />
-                        // </div>
+                            <div style={{ position: 'fixed', top: '43px', width: '100%', zIndex: 10 }}>
+                                <Tabs.DefaultTabBar {...props} page={4} />
+                            </div>
                     }>
                     {this.content}
                 </Tabs>

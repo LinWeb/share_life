@@ -24,19 +24,24 @@ class RefreshContainer extends Component {
         let pageY = e.targetTouches[0].pageY
         let touchDistance = pageY - this.state.initPageY
         let { maxDistance } = this.state
+        let { disabledTopRefresh, disabledBottomRefresh } = this.props
         if (touchDistance > 0) {
-            if (scrollTop === 0 && touchDistance < maxDistance) {
-                // 滚动到顶部情况下，下拉刷新
-                this.setState(() => ({
-                    touchDistance
-                }))
+            if (!disabledTopRefresh) {
+                if (scrollTop === 0 && touchDistance < maxDistance) {
+                    // 滚动到顶部情况下，下拉刷新
+                    this.setState(() => ({
+                        touchDistance
+                    }))
+                }
             }
         } else {
-            if (scrollTop + clientHeight === scrollHeight && touchDistance > -maxDistance) {
-                // 滚动到底部情况下，上拉刷新
-                this.setState(() => ({
-                    touchDistance
-                }))
+            if (!disabledBottomRefresh) {
+                if (scrollTop + clientHeight === scrollHeight && touchDistance > -maxDistance) {
+                    // 滚动到底部情况下，上拉刷新
+                    this.setState(() => ({
+                        touchDistance
+                    }))
+                }
             }
         }
     }
@@ -71,19 +76,17 @@ class RefreshContainer extends Component {
         }
     }
     UNSAFE_componentWillReceiveProps(nextProps) {
-        console.log(nextProps.loading)
         if (!nextProps.loading) {
-            // 获取数据那刻关闭loading
-            // this.setState(() => ({
-            //     touchDistance: 0,
-            //     topLoading: false,
-            //     bottomLoading: false
-            // }))
+            this.setState(() => ({
+                touchDistance: 0,
+                topLoading: false,
+                bottomLoading: false
+            }))
         }
     }
     render() {
-        // let noData = <div style={{ backgroundColor: '#fff', textAlign: 'center', height: "634px", lineHeight: '634px' }}>暂无数据</div>
         let { touchDistance, maxDistance, topLoading, bottomLoading } = this.state
+
         let translateY = `translateY(${touchDistance}px)` // 滑动样式
 
         // 顶部loading
@@ -92,9 +95,11 @@ class RefreshContainer extends Component {
         </div>
 
         // 底部loading
-        let refreshBottomTip = <div style={{ textAlign: 'center' }}>
-            {bottomLoading ? <ActivityIndicator animating /> : "已加载完"}
-        </div>
+        let refreshBottomTip = bottomLoading ?
+            <div style={{ textAlign: 'center' }}><ActivityIndicator animating /></div>
+            : null
+
+
         return (
             <div className="refresh_container" style={{ transition: '.3s', transform: translateY }} onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove} onTouchEnd={this.onTouchEnd}>
                 {refreshTopTip}
