@@ -5,7 +5,8 @@ import User from '../src/components/user/user';
 import Register from '../src/components/register/register'
 import Login from '../src/components/login/login'
 import MyProfile from '../src/components/my_profile/my_profile';
-import MyDynamic from '../src/components/my_dynamic/my_dynamic';
+import MyDynamic from '../src/components/my_dynamics/my_dynamics';
+import UserList from '../src/components/common/user_list/user_list'
 import DynamicDetail from '../src/components/dynamic_detail/dynamic_detail';
 
 export default [
@@ -59,10 +60,16 @@ export default [
         isPrivate: true,
     },
     {
-        path: '/user/dynamic',
+        path: '/user/dynamics',
         title: '我的动态',
         exact: true,
         component: MyDynamic,
+        isPrivate: true,
+    },
+    {
+        path: '/user/:type/id/:id',  //关注、粉丝列表
+        exact: true,
+        component: UserList,
         isPrivate: true,
     },
     {

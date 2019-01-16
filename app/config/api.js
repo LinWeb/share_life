@@ -13,6 +13,8 @@ const UPLOAD_URL = '/upload'
 const DYNAMIC_SEARCH_URL = '/dynamic/search'
 const DYNAMIC_UPDATE_LIKE_URL = '/dynamic/update_like'
 const UPDATE_FOLLOW_URL = '/user/update_follow'
+const GET_FOLLOWS_URL = '/user/get_follows'
+const GET_FANS_URL = '/user/get_fans'
 const GET_COMMENT_URL = '/comment'
 const ADD_COMMENT_URL = '/comment/add'
 const COMMENT_UPDATE_LIKE_URL = '/comment/update_like'
@@ -25,6 +27,6 @@ export {
     PRIVATE_URLS,
     REGISTER_URL, LOGIN_URL, CATEGORY_URL, USER_INFO_URL, UPDATE_USER_INFO_URL,
     PUBLISH_URL, UPLOAD_URL, LOGOUT_URL,
-    DYNAMIC_SEARCH_URL, DYNAMIC_UPDATE_LIKE_URL, UPDATE_FOLLOW_URL,
+    DYNAMIC_SEARCH_URL, DYNAMIC_UPDATE_LIKE_URL, UPDATE_FOLLOW_URL, GET_FOLLOWS_URL, GET_FANS_URL,
     GET_COMMENT_URL, ADD_COMMENT_URL, COMMENT_UPDATE_LIKE_URL
 }

@@ -8,6 +8,10 @@ let userSchema = new mongoose.Schema(
             default: 1,
             enum: [-1, 0, 1]
         }, //-1 隐身 0 下线 1 在线
+        nickname: {
+            type: String,
+            default: ''
+        },
         username: {
             type: String,
             unique: true,

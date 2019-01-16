@@ -13,12 +13,14 @@ class DynamicList extends Component {
         page_num: 0, // 总页数
         loading: true
     }
-    async updateFollow(_id, is_followed) {
-        let res = await API.UPDATE_FOLLOW({ _id, is_followed })
+    async updateFollow(passive_id, is_followed) {
+        let { userId } = this.props
+        let active_id = userId
+        let res = await API.UPDATE_FOLLOW({ active_id, passive_id, is_followed })
         if (res) {
             let dynamicData = this.state.dynamicData.map(item => {
                 let { is_followed } = item
-                if (item._author._id === _id) {
+                if (item._author._id === passive_id) {
                     is_followed = !is_followed
                 }
                 return { ...item, is_followed }

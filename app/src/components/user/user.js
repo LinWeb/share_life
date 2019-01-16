@@ -13,7 +13,7 @@ class User extends Component {
         dispatch({ type: 'user/logoutAction' })
     }
     render() {
-        let { username, head_img_url, sign,
+        let { nickname, head_img_url, sign,
             dynamic_count, follows_count,
             fans_count, sex } = this.props.userInfo
         return (
@@ -27,7 +27,7 @@ class User extends Component {
                             onClick={() => { }}
                             className={styles.head_img}
                         >
-                            {username}
+                            {nickname}
                             &nbsp;
                         {sex ?
                                 <span className="iconfont icon-nan" style={{ color: 'rgb(51, 163, 244)' }} />
@@ -41,11 +41,21 @@ class User extends Component {
                 <WhiteSpace />
                 <WhiteSpace />
                 <List>
-                    <Link to='/user/dynamic'>
+                    <Link to='/user/dynamics'>
                         <Item extra={dynamic_count} arrow="horizontal" onClick={() => { }}>我的动态</Item>
                     </Link>
-                    <Item extra={follows_count} arrow="horizontal" onClick={() => { }}>我的关注</Item>
-                    <Item extra={fans_count} arrow="horizontal" onClick={() => { }}>我的粉丝</Item>
+                    <Link to={{
+                        pathname: `/user/follows/id/${this.props.userId}`,
+                        search: 'title=我的关注',
+                    }}>
+                        <Item extra={follows_count} arrow="horizontal" onClick={() => { }}>我的关注</Item>
+                    </Link>
+                    <Link to={{
+                        pathname: `/user/fans/id/${this.props.userId}`,
+                        search: 'title=我的粉丝',
+                    }}>
+                        <Item extra={fans_count} arrow="horizontal" onClick={() => { }}>我的粉丝</Item>
+                    </Link>
                 </List>
                 <WhiteSpace />
                 <WhiteSpace />

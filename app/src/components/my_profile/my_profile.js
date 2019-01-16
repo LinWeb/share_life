@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import API from '../../services/index'
 import { connect } from 'dva'
-import { List, WhiteSpace, DatePicker, Picker, Tag, TextareaItem, Button } from 'antd-mobile';
+import { List, WhiteSpace, DatePicker, InputItem, Picker, Tag, TextareaItem, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { district } from 'antd-mobile-demo-data'
 
@@ -78,7 +78,7 @@ class MyProfile extends Component {
     }
     render() {
         let { sexData, hobbiesData, newUserInfo } = this.state
-        let { head_img_url, sign, hobbies,
+        let { nickname, head_img_url, sign, hobbies,
             birthday, address, sex } = newUserInfo
         let { getFieldProps } = this.props.form
         return (
@@ -92,6 +92,12 @@ class MyProfile extends Component {
                         <input type='file' accept="image/*" id="file" style={{ display: 'none' }} onChange={(e) => { this.replaceHeadImg(e) }} />
                         更换头像
                     </Item>
+                    <InputItem
+                        clear
+                        value={nickname}
+                        placeholder="请填写您的昵称"
+                        onBlur={val => { this.updateNewUserInfo({ nickname: val }) }}
+                    >昵称</InputItem>
                     <TextareaItem
                         value={sign}
                         title="个人签名"

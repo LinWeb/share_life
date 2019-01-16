@@ -9,8 +9,9 @@ let userController = {
             let origin = req.protocol + '://' + req.get('host');
             let head_img_url = origin + config.DEFAULT_HEAD_URL
             let username = req.param('username'),
-                password = req.param('password');
-            await userModel.insertMany({ username, password, head_img_url })
+                password = req.param('password'),
+                nickname = username;
+            await userModel.insertMany({ username, password, nickname, head_img_url })
             res.send({ status: 1, msg: 'register succeed' })
         } catch (err) {
             config.RES_ERROR(err, res)
@@ -96,6 +97,82 @@ let userController = {
             config.RES_ERROR(err, res)
         }
     },
+    // 关注
+    async update_follow(req, res) {
+        try {
+            // let user_id = req.session.user_id; // 当前用户id
+            // let _id = req.param('_id') // 对方用户id
+            let { active_id, passive_id, is_followed } = req.body; //active_id是主动关注的用户id，passive_id是被关注的用户id
+            let _follows = (await userModel.findById(active_id))._follows // 主动关注的用户的关注集合
+            let _fans = (await userModel.findById(passive_id))._fans //  被关注的用户的粉丝集合
+            if (is_followed) {
+                // 关注
+                if (_follows.includes(passive_id)) {
+                    res.send({ status: 0, msg: 'already follow' })
+                } else {
+                    _follows.push(passive_id)
+                    _fans.push(active_id)
+                }
+            } else {
+                // 取消关注
+                if (!_follows.includes(passive_id)) {
+                    res.send({ status: 0, msg: 'never follow' })
+                } else {
+                    _follows = _follows.filter(item => item !== passive_id)
+                    _fans = _fans.filter(item => item !== active_id)
+                }
+            }
+            let data = await userModel.findByIdAndUpdate(active_id, { $set: { _follows } }, { new: true })
+            await userModel.findByIdAndUpdate(passive_id, { $set: { _fans } }, { new: true })
+
+            res.send({ status: 1, msg: 'update succeed', data: { count: data._follows.length } })
+
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
+    },
+    async get_follows(req, res) {
+        try {
+            let { _id, type } = req.query
+            if (!_id) {
+                _id = req.session.user_id
+            }
+            let result = await userModel.findById(_id, '_follows')
+                .populate({ path: '_follows', select: 'nickname head_img_url sign sex' })
+                .lean() // 转化为JavaScript对象
+
+            let user_id = req.session.user_id
+            let user = null,
+                _follows = [];
+            if (user_id) {
+                user = await userModel.findById(user_id, '_follows')
+                _follows = user._follows// 获取当前用户关注的人的集合
+            }
+
+            let data = result._follows.map(item => {
+                item['is_followed'] = _follows.includes(item._id.toString()) // 当前用户是否已经关注当前动态的作者
+                return item
+            })
+
+            res.send({ status: 1, msg: 'find success', data })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
+    },
+    async get_fans(req, res) {
+        try {
+            let { _id, type } = req.query
+            if (!_id) {
+                _id = req.session.user_id
+            }
+            let result = await userModel.findById(_id, '_fans')
+                .populate({ path: '_fans', select: 'nickname head_img_url sign sex' })
+                .lean() // 转化为JavaScript对象
+            res.send({ status: 1, msg: 'find success', data: result._fans })
+        } catch (err) {
+            config.RES_ERROR(err, res)
+        }
+    }
 }
 
 
