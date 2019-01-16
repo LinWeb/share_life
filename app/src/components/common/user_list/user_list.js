@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva'
+import { Link } from 'dva/router'
 import { List, Button } from 'antd-mobile'
 import API from '../../../services/index'
 const Item = List.Item
@@ -9,16 +10,15 @@ class UserList extends Component {
         userData: []
     }
     async getUserData() {
-        let type = this.props.match.params.type
+        let { type, id } = this.props.match.params
         let res = {}
         if (type === 'follows') {
             // 获取关注数据
-            res = await API.GET_FOLLOWS({})
+            res = await API.GET_FOLLOWS({ _id: id })
         } else {
             // 获取粉丝数据
-            res = await API.GET_FANS({})
+            res = await API.GET_FANS({ _id: id })
         }
-
         if (res) {
             this.setState(() => ({
                 userData: res.data
@@ -43,13 +43,17 @@ class UserList extends Component {
     }
     getRightBtn(item) {
         let { userId } = this.props
-        let type = this.props.match.params.type
-        if (type === 'follows') {
-            return item._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
-                onClick={() => { this.updateFollow(userId, item._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>
+        let { type, id } = this.props.match.params
+        if (userId === id) {
+            if (type === 'follows') {
+                return item._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
+                    onClick={() => { this.updateFollow(userId, item._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>
+            } else {
+                return <Button type='ghost' inline size="small" style={{ marginRight: '4px' }}
+                    onClick={() => { this.updateFollow(item._id, userId, false) }}>移除粉丝</Button>
+            }
         } else {
-            return <Button type='ghost' inline size="small" style={{ marginRight: '4px' }}
-                onClick={() => { this.updateFollow(item._id, userId, false) }}>移除粉丝</Button>
+            return null
         }
     }
     UNSAFE_componentWillMount() {
@@ -66,7 +70,12 @@ class UserList extends Component {
                             extra={this.getRightBtn(item)}
                             thumb={
                                 <div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
-                                    <img style={{ width: '100%', height: '100%' }} src={item.head_img_url} alt='' />
+                                    <Link to={{
+                                        pathname: `/user/id/${item._id}`,
+                                        search: `title=${item.nickname}的主页`
+                                    }}>
+                                        <img style={{ width: '100%', height: '100%' }} src={item.head_img_url} alt='' />
+                                    </Link>
                                 </div>
                             }
                             multipleLine

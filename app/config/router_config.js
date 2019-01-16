@@ -67,7 +67,7 @@ export default [
         isPrivate: true,
     },
     {
-        path: '/user/dynamics',
+        path: '/user/dynamics/id/:id',
         exact: true,
         component: MyDynamic,
         isPrivate: true,

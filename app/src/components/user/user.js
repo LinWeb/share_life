@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'antd-mobile';
 import UserHomepage from '../common/user_homepage/user_homepage'
+import { connect } from 'dva'
 
 class User extends Component {
     logout = async () => {
@@ -19,4 +20,4 @@ class User extends Component {
     }
 }
 
-export default User
+export default connect()(User)

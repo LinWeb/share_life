@@ -10,9 +10,9 @@ class Login extends Component {
             username = getFieldValue('username'),
             password = getFieldValue('password'),
             from = location.state ? location.state.from.pathname : '/';
-        validateFields((error, value) => {
-            console.log(11111, error, value);
-        });
+        // validateFields((error, value) => {
+        //     console.log(11111, error, value);
+        // });
         // 采用插件来校验？
         dispatch({ type: 'user/loginAction', data: { username, password }, from })
     }

@@ -19,7 +19,10 @@ class UserHomepage extends Component {
         let { nickname, head_img_url, sign,
             dynamic_count, follows_count,
             fans_count, sex, birthday, address, hobbies, create_time } = this.props.userInfo
-        let { hobbiesData } = this.props
+        let { hobbiesData, history, match, userId } = this.props,
+            id = match.params.id;
+
+
         birthday = moment(birthday).format('YYYY-MM-DD');
         let hometown = ''
         if (address) {
@@ -42,34 +45,35 @@ class UserHomepage extends Component {
         return (
             <div className="userHomepage">
                 <List>
-                    <Link to='/user/profile'>
-                        <Item
-                            arrow="horizontal"
-                            thumb={head_img_url}
-                            multipleLine
-                            onClick={() => { }}
-                            className={styles.head_img}
-                        >
-                            {nickname}
-                            &nbsp;
+                    <Item
+                        arrow={!id && "horizontal"}
+                        thumb={head_img_url}
+                        multipleLine
+                        onClick={() => { !id && history.push('/user/profile') }}
+                        className={styles.head_img}
+                    >
+                        {nickname}
+                        &nbsp;
                             {sex ?
-                                <span className="iconfont icon-nan" style={{ color: 'rgb(51, 163, 244)' }} />
-                                : <span className="iconfont icon-nv" style={{ color: 'rgb(255, 77, 148)' }} />
-                            }
-                            <Brief>{sign}</Brief>
-                        </Item>
-                    </Link>
+                            <span className="iconfont icon-nan" style={{ color: 'rgb(51, 163, 244)' }} />
+                            : <span className="iconfont icon-nv" style={{ color: 'rgb(255, 77, 148)' }} />
+                        }
+                        <Brief>{sign}</Brief>
+                    </Item>
                     <Item>
                         <Flex style={{ textAlign: 'center', fontSize: '14px', lineHeight: '12px' }}>
                             <Flex.Item >
-                                <Link to='/user/dynamics'>
+                                <Link to={{
+                                    pathname: `/user/dynamics/id/${id || userId}`,
+                                    search: 'title=动态',
+                                }}>
                                     <p>动态</p>
                                     <p>{dynamic_count}</p>
                                 </Link>
                             </Flex.Item>
                             <Flex.Item>
                                 <Link to={{
-                                    pathname: `/user/follows/id/${this.props.userId}`,
+                                    pathname: `/user/follows/id/${id || userId}`,
                                     search: 'title=关注',
                                 }}>
                                     <p>关注</p>
@@ -78,7 +82,7 @@ class UserHomepage extends Component {
                             </Flex.Item>
                             <Flex.Item>
                                 <Link to={{
-                                    pathname: `/user/fans/id/${this.props.userId}`,
+                                    pathname: `/user/fans/id/${id || userId}`,
                                     search: 'title=粉丝',
                                 }}>
                                     <p>粉丝</p>
@@ -100,11 +104,11 @@ class UserHomepage extends Component {
                                     <span key={value} style={{
                                         marginRight: '10px',
                                         textAlign: 'center',
-                                        padding: '0 15px',
+                                        padding: '3px 15px',
                                         color: '#108ee9',
                                         border: '1px solid #108ee9',
                                         borderRadius: '3px',
-                                        fontSize: '14px'
+                                        fontSize: '14px',
                                     }}>
                                         {label}
                                     </span>

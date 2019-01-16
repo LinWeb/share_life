@@ -4,8 +4,9 @@ import { connect } from 'dva'
 
 class MyDynamic extends Component {
     render() {
+        let { _author, match } = this.props
         let params = {
-            _author: this.props._author
+            _author: match.params.id || _author
         }
         return (
             <div>

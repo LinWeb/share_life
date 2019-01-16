@@ -94,15 +94,19 @@ class DynamicList extends Component {
                 dynamicData.map((item, key) =>
                     <Card full key={key} style={{ marginBottom: '15px' }}>
                         <Card.Header
-                            title={<div>{item._author.nickname}&nbsp;{item.sex ?
-                                <span className="iconfont icon-nan" style={{ color: 'rgb(51, 163, 244)' }} />
-                                : <span className="iconfont icon-nv" style={{ color: 'rgb(255, 77, 148)' }} />
-                            }</div>}
+                            title={
+                                <div>
+                                    {item._author.nickname}&nbsp;{item._author.sex ?
+                                        <span className="iconfont icon-nan" style={{ color: 'rgb(51, 163, 244)' }} />
+                                        : <span className="iconfont icon-nv" style={{ color: 'rgb(255, 77, 148)' }} />
+                                    }
+                                </div>
+                            }
                             thumb={
                                 <div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
                                     <Link to={{
-                                        pathname: `/user/id/${item._id}`,
-                                        search: `title=${item._author.nickname}`
+                                        pathname: `/user/id/${item._author._id}`,
+                                        search: `title=${item._author.nickname}的主页`
                                     }}>
                                         <img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} alt='' />
                                     </Link>
