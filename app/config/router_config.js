@@ -8,6 +8,7 @@ import MyProfile from '../src/components/my_profile/my_profile';
 import MyDynamic from '../src/components/my_dynamics/my_dynamics';
 import UserList from '../src/components/common/user_list/user_list'
 import DynamicDetail from '../src/components/dynamic_detail/dynamic_detail';
+import UserHomepage from '../src/components/common/user_homepage/user_homepage'
 
 export default [
     {
@@ -39,6 +40,12 @@ export default [
         isPrivate: true,
     },
     {
+        path: '/user/id/:id',
+        exact: true,
+        component: UserHomepage,
+        isPrivate: true,
+    },
+    {
         path: '/register',
         title: '注册',
         exact: true,
@@ -61,7 +68,6 @@ export default [
     },
     {
         path: '/user/dynamics',
-        title: '我的动态',
         exact: true,
         component: MyDynamic,
         isPrivate: true,
@@ -74,7 +80,6 @@ export default [
     },
     {
         path: '/dynamic/id/:id',
-        title: '动态详情',
         component: DynamicDetail,
     }
 

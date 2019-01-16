@@ -64,8 +64,11 @@ class UserList extends Component {
                         <Item
                             key={key}
                             extra={this.getRightBtn(item)}
-                            thumb={<div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
-                                <img style={{ width: '100%', height: '100%' }} src={item.head_img_url} alt='' /></div>}
+                            thumb={
+                                <div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
+                                    <img style={{ width: '100%', height: '100%' }} src={item.head_img_url} alt='' />
+                                </div>
+                            }
                             multipleLine
                             onClick={() => { }}
                         >

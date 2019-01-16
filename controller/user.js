@@ -40,7 +40,10 @@ let userController = {
     // 获取用户数据
     async info(req, res) {
         try {
-            let id = req.param('id');
+            let { id } = req.query
+            if (!id) {
+                id = req.session.user_id
+            }
             let result = await userModel.findById(id).lean()
             let dynamic_count = await dynamicModel.find({ _author: id }).count()
             result['dynamic_count'] = dynamic_count || 0

@@ -61,8 +61,7 @@ export default {
                 yield put(routerRedux.push('/login'))
             }
         },
-        *getUserInfoAction(action, { put, call, select }) {
-            let id = yield select((state) => state.user.userId)
+        *getUserInfoAction({ id }, { put, call, select }) {
             let res = yield call(API.USER_INFO, { id })
             if (res) {
                 yield put({ type: 'updateUserInfo', userInfo: res.data })
@@ -78,10 +77,11 @@ export default {
     },
     subscriptions: {
         get({ history, dispatch }) {
-            return history.listen(({ pathname }, action) => {
-                if (pathname === '/user') {
-                    dispatch({ type: 'getUserInfoAction' })
-                }
+            return history.listen(function (aa, action) {
+                // let { pathname } = aa
+                // if (pathname === '/user' || pathname === '/user/profile') {
+                //     dispatch({ type: 'getUserInfoAction' })
+                // }
             })
         }
     }

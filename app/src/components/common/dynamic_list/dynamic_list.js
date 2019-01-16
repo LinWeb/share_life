@@ -98,8 +98,16 @@ class DynamicList extends Component {
                                 <span className="iconfont icon-nan" style={{ color: 'rgb(51, 163, 244)' }} />
                                 : <span className="iconfont icon-nv" style={{ color: 'rgb(255, 77, 148)' }} />
                             }</div>}
-                            thumb={<div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
-                                <img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} alt='' /></div>}
+                            thumb={
+                                <div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
+                                    <Link to={{
+                                        pathname: `/user/id/${item._id}`,
+                                        search: `title=${item._author.nickname}`
+                                    }}>
+                                        <img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} alt='' />
+                                    </Link>
+                                </div>
+                            }
                             extra={item._author._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
                                 onClick={() => { this.updateFollow(item._author._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>}
                         />
