@@ -37,7 +37,7 @@ let dynamicController = {
 
             // 数据根据分页数据查询
             let result = await dynamicModel.find(query)
-                .populate({ path: '_author', select: 'username head_img_url' })
+                .populate({ path: '_author', select: 'nickname head_img_url' })
                 .skip(per_page_count * (page - 1)) // 跳到指定位置
                 .limit(per_page_count) // 限制查询数据条数
                 .sort({ create_time: -1 }) // 按照时间倒序

@@ -69,7 +69,12 @@ class UserList extends Component {
                             multipleLine
                             onClick={() => { }}
                         >
-                            {item.nickname} <Brief>{item.sign}</Brief>
+                            {item.nickname} &nbsp;
+                            {item.sex ?
+                                <span className="iconfont icon-nan" style={{ color: 'rgb(51, 163, 244)' }} />
+                                : <span className="iconfont icon-nv" style={{ color: 'rgb(255, 77, 148)' }} />
+                            }
+                            <Brief>{item.sign}</Brief>
                         </Item>
                     )}
                 </List>

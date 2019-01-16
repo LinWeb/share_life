@@ -5,7 +5,35 @@ export default {
     namespace: 'user',
     state: {
         userId: localStorage.getItem('userId') || '',
-        userInfo: {}
+        userInfo: {},
+        hobbiesData: [
+            {
+                value: '1',
+                label: '游泳',
+                isSelected: false
+            },
+            {
+                value: '2',
+                label: '篮球',
+                isSelected: false
+            },
+            {
+                value: '3',
+                label: '羽毛球',
+                isSelected: false
+            },
+            {
+                value: '4',
+                label: '摄影',
+                isSelected: false
+            },
+            {
+                value: '5',
+                label: '旅游',
+                isSelected: false
+            }
+        ]
+
     },
     reducers: {
         updateLogin(state, { userId }) {

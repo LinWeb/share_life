@@ -17,34 +17,6 @@ class MyProfile extends Component {
             value: 1,
             label: '男'
         }],
-        hobbiesData: [
-            {
-                value: '1',
-                label: '游泳',
-                isSelected: false
-            },
-            {
-                value: '2',
-                label: '篮球',
-                isSelected: false
-            },
-            {
-                value: '3',
-                label: '羽毛球',
-                isSelected: false
-            },
-            {
-                value: '4',
-                label: '摄影',
-                isSelected: false
-            },
-            {
-                value: '5',
-                label: '旅游',
-                isSelected: false
-            }
-        ]
-
     }
     async replaceHeadImg(event) {
         let file = event.target.files[0]
@@ -77,7 +49,8 @@ class MyProfile extends Component {
         }));
     }
     render() {
-        let { sexData, hobbiesData, newUserInfo } = this.state
+        let { sexData, newUserInfo } = this.state
+        let { hobbiesData, } = this.props
         let { nickname, head_img_url, sign, hobbies,
             birthday, address, sex } = newUserInfo
         let { getFieldProps } = this.props.form
@@ -167,5 +140,6 @@ export default connect((state) => {
     return {
         _author: state.user.userId,
         userInfo: state.user.userInfo,
+        hobbiesData: state.user.hobbiesData,
     }
 })(createForm()(MyProfile)) 
