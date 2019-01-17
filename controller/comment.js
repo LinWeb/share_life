@@ -16,7 +16,7 @@ let commentController = {
                 per_page_count = 20  // 每页显示数条件查询，默认20
             }
             let result = await commnetModel.find({ _dynamic })
-                .populate({ path: '_user', select: 'username head_img_url' })
+                .populate({ path: '_user', select: 'nickname sex head_img_url' })
                 .skip(per_page_count * (page - 1)) // 跳到指定位置
                 .limit(per_page_count) // 限制查询数据条数
                 .sort({ create_time: -1 }) // 按照时间倒序

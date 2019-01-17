@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Grid, Button } from 'antd-mobile';
 import { getDetailDate } from '../../../utils/filter'
-import { Link } from 'dva/router';
+import { withRouter } from 'dva/router';
 import { connect } from 'dva'
 import API from '../../../services/index'
 import RefreshContainer from '../../common/refresh_container/refresh_container'
@@ -85,35 +85,56 @@ class DynamicList extends Component {
         this.getDynamicData(true)
     }
     dynamic = () => {
-        let { userId } = this.props
+        let { userId, history, type } = this.props
         let { dynamicData } = this.state
         let noData = <div style={{ backgroundColor: '#fff', textAlign: 'center', height: "634px", lineHeight: '634px' }}>暂无数据</div>
 
         return <div>
             {!dynamicData.length ? noData :
                 dynamicData.map((item, key) =>
-                    <Card full key={key} style={{ marginBottom: '15px' }}>
+                    <Card full key={key} style={{ marginBottom: '15px' }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            !type && history.push({
+                                pathname: `/dynamic/id/${item._id}`,
+                            })
+                        }}>
                         <Card.Header
                             title={
-                                <div>
-                                    {item._author.nickname}&nbsp;{item._author.sex ?
+                                <div onClick={(e) => {
+                                    e.stopPropagation();
+                                    history.push({
+                                        pathname: `/user/id/${item._author._id}`,
+                                        search: `title=${item._author.nickname}的主页`
+                                    })
+                                }}>
+                                    &nbsp;{item._author.nickname}&nbsp;{item._author.sex ?
                                         <span className="iconfont icon-nan" style={{ color: 'rgb(51, 163, 244)' }} />
                                         : <span className="iconfont icon-nv" style={{ color: 'rgb(255, 77, 148)' }} />
                                     }
                                 </div>
                             }
                             thumb={
-                                <div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
-                                    <Link to={{
-                                        pathname: `/user/id/${item._author._id}`,
-                                        search: `title=${item._author.nickname}的主页`
+                                <div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        history.push({
+                                            pathname: `/user/id/${item._author._id}`,
+                                            search: `title=${item._author.nickname}的主页`
+                                        })
                                     }}>
-                                        <img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} alt='' />
-                                    </Link>
+                                    <img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} alt='' />
                                 </div>
                             }
                             extra={item._author._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
-                                onClick={() => { this.updateFollow(item._author._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    this.updateFollow(item._author._id, !item.is_followed)
+                                }}
+                            >
+                                {item.is_followed ? '取消关注' : '关注'}
+                            </Button>
+                            }
                         />
                         <Card.Body>
                             <div style={{ marginBottom: '5px' }}>{item.content}</div>
@@ -131,10 +152,19 @@ class DynamicList extends Component {
                         <Card.Footer style={{ margin: '12px 0 5px' }}
                             content={getDetailDate(item.create_time)}
                             extra={<div>
-                                <span style={{ color: item.is_liked ? '#e94f4f' : '' }} onClick={() => { this.updateLike(item._id, !item.is_liked) }}>
+                                <span style={{ color: item.is_liked ? '#e94f4f' : '' }}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        this.updateLike(item._id, !item.is_liked)
+                                    }}
+                                >
                                     <span className='iconfont icon-dianzan' /> {item.likes_count || '赞'}
                                 </span>
-                                {this.props.type ? null : <Link to={'/dynamic/id/' + item._id} style={{ marginLeft: '20px', color: '#888' }}><span className='iconfont icon-weibiaoti527' /> {item.comment_count}</Link>}
+                                {type ? null :
+                                    <span style={{ marginLeft: '20px', color: '#888' }}>
+                                        <span className='iconfont icon-weibiaoti527' /> {item.comment_count}
+                                    </span>
+                                }
                             </div>} />
                     </Card>
                 )
@@ -165,4 +195,4 @@ let mapStateToProps = (state) => {
         userId: state.user.userId
     }
 }
-export default connect(mapStateToProps)(DynamicList)
+export default withRouter(connect(mapStateToProps)(DynamicList))

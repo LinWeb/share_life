@@ -9,7 +9,7 @@ import checkLogin from '../check/check_login'
 
 axios.defaults.baseURL = BASE_URL;
 axios.interceptors.request.use((config) => {
-    config.params.per_page_count = 4 // 测试
+    if (config.params) config.params.per_page_count = 4 // 测试
     // Toast.loading('', 0)
     if (PRIVATE_URLS.includes(config.url)) {
         // 判断哪些url需要验证是否已登录

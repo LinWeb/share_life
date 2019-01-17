@@ -9,7 +9,7 @@ import MyDynamic from '../src/components/my_dynamics/my_dynamics';
 import UserList from '../src/components/common/user_list/user_list'
 import DynamicDetail from '../src/components/dynamic_detail/dynamic_detail';
 import UserHomepage from '../src/components/common/user_homepage/user_homepage'
-
+import SearchResult from '../src/components/search_result/search_result'
 export default [
     {
         path: '/',
@@ -81,6 +81,11 @@ export default [
     {
         path: '/dynamic/id/:id',
         component: DynamicDetail,
-    }
-
+    },
+    {
+        path: '/dynamic/search/:keyword',
+        exact: true,
+        component: SearchResult,
+        isPrivate: false,
+    },
 ]

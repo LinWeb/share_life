@@ -3,6 +3,7 @@ import DynamicList from '../common/dynamic_list/dynamic_list'
 import styles from './dynamic_detail.css'
 import API from '../../services/index'
 import { Button, TextareaItem } from 'antd-mobile'
+import { Link } from 'dva/router'
 import { getDetailDate } from '../../utils/filter'
 import { createForm } from 'rc-form';
 import RefreshContainer from '../common/refresh_container/refresh_container'
@@ -94,9 +95,21 @@ class DynamicDetail extends Component {
                         <div className={styles.comment_count}>评价 {commentData.length}</div>
                         {commentData.map((item, key) => (
                             <div className={styles.comment_item} key={key}>
-                                <div className={styles.head_img}><img src={item._user.head_img_url} alt='' /></div>
+                                <div className={styles.head_img}>
+                                    <Link to={{
+                                        pathname: `/user/id/${item._user._id}`,
+                                        search: `title=${item._user.nickname}的主页`
+                                    }}>
+                                        <img src={item._user.head_img_url} alt='' />
+                                    </Link>
+                                </div>
                                 <div className={styles.comment_main}>
-                                    <div className={styles.username}>{item._user.username} </div>
+                                    <Link to={{
+                                        pathname: `/user/id/${item._user._id}`,
+                                        search: `title=${item._user.nickname}的主页`
+                                    }} className={styles.username}>
+                                        {item._user.nickname}
+                                    </Link>
                                     <div className={styles.content}>{item.content} </div>
                                     <div className={styles.create_time}>{getDetailDate(item.create_time)} </div>
                                 </div>

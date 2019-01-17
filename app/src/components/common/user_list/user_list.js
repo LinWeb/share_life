@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'dva'
-import { Link } from 'dva/router'
 import { List, Button } from 'antd-mobile'
 import API from '../../../services/index'
 import RefreshContainer from '../refresh_container/refresh_container'
@@ -66,11 +65,12 @@ class UserList extends Component {
         let { type, id } = this.props.match.params
         if (userId === id) {
             if (type === 'follows') {
-                return item._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
-                    onClick={() => { this.updateFollow(userId, item._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>
+                return item._id === userId ? null :
+                    <Button type={item.is_followed ? 'ghost' : 'warning'} className="btn" inline size="small" style={{ marginRight: '4px' }}
+                        onClick={(e) => { e.stopPropagation(); this.updateFollow(userId, item._id, !item.is_followed) }}>{item.is_followed ? '取消关注' : '关注'}</Button>
             } else {
-                return <Button type='ghost' inline size="small" style={{ marginRight: '4px' }}
-                    onClick={() => { this.updateFollow(item._id, userId, false) }}>移除粉丝</Button>
+                return <Button type='ghost' className="btn" inline size="small" style={{ marginRight: '4px' }}
+                    onClick={(e) => { e.stopPropagation(); this.updateFollow(item._id, userId, false) }}>移除粉丝</Button>
             }
         } else {
             return null
@@ -80,7 +80,8 @@ class UserList extends Component {
         this.getUserData()
     }
     render() {
-        let { userData, loading } = this.state
+        let { userData, loading, } = this.state
+        let { history } = this.props
         return (
             <RefreshContainer
                 onRefresh={() => { this.getUserData() }}
@@ -94,16 +95,16 @@ class UserList extends Component {
                             extra={this.getRightBtn(item)}
                             thumb={
                                 <div style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '6px', border: '1px solid #d0cece', overflow: 'hidden' }}>
-                                    <Link to={{
-                                        pathname: `/user/id/${item._id}`,
-                                        search: `title=${item.nickname}的主页`
-                                    }}>
-                                        <img style={{ width: '100%', height: '100%' }} src={item.head_img_url} alt='' />
-                                    </Link>
+                                    <img style={{ width: '100%', height: '100%' }} src={item.head_img_url} alt='' />
                                 </div>
                             }
                             multipleLine
-                            onClick={() => { }}
+                            onClick={(e) => {
+                                history.push({
+                                    pathname: `/user/id/${item._id}`,
+                                    search: `title=${item.nickname}的主页`
+                                })
+                            }}
                         >
                             {item.nickname} &nbsp;
                             {item.sex ?

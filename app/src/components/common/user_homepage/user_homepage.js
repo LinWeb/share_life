@@ -25,7 +25,7 @@ class UserHomepage extends Component {
     }
     getRightBtn(id, is_followed) {
         let { userId } = this.props
-        if (userId !== id) {
+        if (id) {
             return id === userId ? null
                 : <Button type={is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
                     onClick={() => { this.updateFollow(userId, id, !is_followed) }}   >{is_followed ? '取消关注' : '关注'}</Button>
@@ -39,7 +39,6 @@ class UserHomepage extends Component {
             fans_count, sex, birthday, address, hobbies, create_time } = this.props.userInfo
         let { hobbiesData, history, match, userId } = this.props,
             id = match.params.id;
-
 
         birthday = moment(birthday).format('YYYY-MM-DD');
         let hometown = ''
