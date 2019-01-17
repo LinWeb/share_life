@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { List, WhiteSpace, Flex } from 'antd-mobile';
+import { List, WhiteSpace, Flex, Button } from 'antd-mobile';
 import styles from './user_homepage.css'
 import { connect } from 'dva'
 import { Link, withRouter } from 'dva/router'
 import moment from 'moment'
 import { district } from 'antd-mobile-demo-data'
+import API from '../../../services/index'
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -15,8 +16,25 @@ class UserHomepage extends Component {
             id = match.params.id;
         dispatch({ type: 'user/getUserInfoAction', id })
     }
+    async updateFollow(active_id, passive_id, is_followed) {
+        let res = await API.UPDATE_FOLLOW({ active_id, passive_id, is_followed })
+        if (res) {
+            let { userInfo, dispatch } = this.props
+            dispatch({ type: 'user/updateUserInfo', userInfo: { ...userInfo, is_followed } })
+        }
+    }
+    getRightBtn(id, is_followed) {
+        let { userId } = this.props
+        if (userId !== id) {
+            return id === userId ? null
+                : <Button type={is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
+                    onClick={() => { this.updateFollow(userId, id, !is_followed) }}   >{is_followed ? '取消关注' : '关注'}</Button>
+        } else {
+            return null
+        }
+    }
     render() {
-        let { nickname, head_img_url, sign,
+        let { nickname, head_img_url, sign, is_followed,
             dynamic_count, follows_count,
             fans_count, sex, birthday, address, hobbies, create_time } = this.props.userInfo
         let { hobbiesData, history, match, userId } = this.props,
@@ -49,6 +67,7 @@ class UserHomepage extends Component {
                         arrow={!id && "horizontal"}
                         thumb={head_img_url}
                         multipleLine
+                        extra={this.getRightBtn(id, is_followed)}
                         onClick={() => { !id && history.push('/user/profile') }}
                         className={styles.head_img}
                     >

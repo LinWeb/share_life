@@ -3,25 +3,45 @@ import { connect } from 'dva'
 import { Link } from 'dva/router'
 import { List, Button } from 'antd-mobile'
 import API from '../../../services/index'
+import RefreshContainer from '../refresh_container/refresh_container'
 const Item = List.Item
 const Brief = Item.Brief;
 class UserList extends Component {
     state = {
-        userData: []
+        userData: [],
+        page: 0, // 页码
+        page_num: 1, // 总页数
+        loading: false,
     }
     async getUserData() {
         let { type, id } = this.props.match.params
+        let params = { _id: id }
         let res = {}
+        let userData = []
+        let { page, page_num } = this.state
+        page += 1;
+        if (page > page_num) {
+            this.setState(() => ({
+                loading: false,
+            }))
+            return;
+        }
+        params = { ...params, page }
+        userData = [...this.state.userData]
         if (type === 'follows') {
             // 获取关注数据
-            res = await API.GET_FOLLOWS({ _id: id })
+            res = await API.GET_FOLLOWS(params)
         } else {
             // 获取粉丝数据
-            res = await API.GET_FANS({ _id: id })
+            res = await API.GET_FANS(params)
         }
         if (res) {
+            userData = [...userData, ...res.data]
             this.setState(() => ({
-                userData: res.data
+                userData,
+                page: res.pagination.page,
+                page_num: res.pagination.page_num,
+                loading: false,
             }))
         }
     }
@@ -60,9 +80,13 @@ class UserList extends Component {
         this.getUserData()
     }
     render() {
-        let { userData } = this.state
+        let { userData, loading } = this.state
         return (
-            <div>
+            <RefreshContainer
+                onRefresh={() => { this.getUserData() }}
+                disabledTopRefresh
+                loading={loading}
+            >
                 <List>
                     {userData.map((item, key) =>
                         <Item
@@ -90,7 +114,7 @@ class UserList extends Component {
                         </Item>
                     )}
                 </List>
-            </div>
+            </RefreshContainer>
         )
     }
 }

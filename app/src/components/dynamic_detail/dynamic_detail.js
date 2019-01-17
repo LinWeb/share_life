@@ -12,31 +12,28 @@ class DynamicDetail extends Component {
     state = {
         commentData: [],
         page: 0, // 页码
-        page_num: 0, // 总页数
-        loading: true,
+        page_num: 1, // 总页数
+        loading: false,
     }
-    async getCommentData(isCover) {
+    async getCommentData() {
         let _dynamic = this.props.match.params.id;
         let params = { _dynamic }
         let commentData = []
+        // 请求下一页数据
+        let { page, page_num } = this.state
+        page += 1;
+        if (page > page_num) {
+            // 已经超过总页数
+            this.setState(() => ({
+                loading: false,
+            }))
+            return;
+        }
         this.setState(() => ({
             loading: true,
         }))
-        if (!isCover) {
-            // 请求下一页数据
-            let { page, page_num } = this.state
-            page += 1;
-            if (page <= page_num) {
-                params = { ...params, page }
-                commentData = [...this.state.commentData]
-            } else {
-                // 已经超过总页数
-                this.setState(() => ({
-                    loading: false,
-                }))
-                return;
-            }
-        }
+        params = { ...params, page }
+        commentData = [...this.state.commentData]
         let res = await API.GET_COMMENT(params)
         if (res) {
             commentData = [...commentData, ...res.data]
@@ -80,7 +77,7 @@ class DynamicDetail extends Component {
         }
     }
     UNSAFE_componentWillMount() {
-        this.getCommentData(true);
+        this.getCommentData();
     }
     render() {
         let { commentData } = this.state
@@ -91,7 +88,7 @@ class DynamicDetail extends Component {
         }
         return (
             <div style={{ marginBottom: '45px' }}>
-                <RefreshContainer onRefresh={(isCover) => { this.getCommentData(isCover) }} disabledTopRefresh>
+                <RefreshContainer onRefresh={() => { this.getCommentData() }} disabledTopRefresh>
                     <DynamicList params={params} type={1}></DynamicList>
                     <div className={styles.comment_list}>
                         <div className={styles.comment_count}>评价 {commentData.length}</div>
