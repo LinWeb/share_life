@@ -8,6 +8,7 @@ let uploadController = {
     async upload(req, res) {
         try {
             let form = new formidable.IncomingForm();
+
             form.parse(req, function (err, fields, files) {
                 let type = fields.type
                 let URL = ''
@@ -24,7 +25,7 @@ let uploadController = {
                 let filename = name.slice(0, index) + '_' + Date.now()
                 let ext = name.slice(index)
                 let fileUrl = config.PUBLIC + URL + filename + ext
-
+                res.send({ fields, files })
                 fs.writeFile(fileUrl, data, (err, result) => {
                     if (!err) {
                         let origin = req.protocol + '://' + req.get('host');
