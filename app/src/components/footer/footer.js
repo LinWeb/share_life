@@ -16,12 +16,14 @@ class Footer extends Component {
                 selectedIcon: 'icon-fabiaoyouji',
                 title: '发表',
                 key: '/publish',
-            }, {
-                icon: 'icon-xiaoxi',
-                selectedIcon: 'icon-xiaoxi',
-                title: '消息',
-                key: '/news',
-            }, {
+            },
+            // {
+            //     icon: 'icon-xiaoxi',
+            //     selectedIcon: 'icon-xiaoxi',
+            //     title: '消息',
+            //     key: '/news',
+            // },
+            {
                 icon: 'icon-wode',
                 selectedIcon: 'icon-wode',
                 title: '我的',

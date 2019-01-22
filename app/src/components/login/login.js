@@ -6,7 +6,7 @@ import { Link } from 'dva/router';
 class Login extends Component {
     async submit() {
         let { form, dispatch, location } = this.props,
-            { getFieldValue, validateFields } = form,
+            { getFieldValue } = form,
             username = getFieldValue('username'),
             password = getFieldValue('password'),
             from = location.state ? location.state.from.pathname : '/';

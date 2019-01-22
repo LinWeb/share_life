@@ -16,7 +16,7 @@ class TabDynamic extends Component {
             let data = res.data.map(({ name, _id }) => {
                 return { title: name, _id }
             });
-            this.setState(() => ({ categoryData: data }), () => {
+            data.length && this.setState(() => ({ categoryData: data }), () => {
                 this.changeCurrentCategoryId(data[0]._id)
             })
         }
