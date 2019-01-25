@@ -28,9 +28,10 @@ let uploadController = {
                 let filename = name.slice(0, index) + '_' + Date.now()
                 let ext = name.slice(index)
                 let fileUrl = '/home/share_life/' + config.PUBLIC + URL + filename + ext
-                res.send({ fileUrl })
 
                 fs.writeFile(fileUrl, data, (err, result) => {
+                    res.send({ fileUrl, data, err, result })
+
                     if (!err) {
                         let origin = req.protocol + '://' + req.get('host');
                         let url = origin + URL + filename + ext
