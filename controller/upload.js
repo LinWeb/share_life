@@ -4,8 +4,11 @@ let formidable = require('formidable')
 let fs = require('fs')
 let config = require('../config/index')
 
+
 let uploadController = {
     async upload(req, res) {
+        console.log(__dirname)
+
         try {
             let form = new formidable.IncomingForm();
             form.encoding = 'utf-8'; // 编码
