@@ -27,7 +27,7 @@ let uploadController = {
                 let index = name.lastIndexOf('.')
                 let filename = name.slice(0, index) + '_' + Date.now()
                 let ext = name.slice(index)
-                let fileUrl = config.PUBLIC + URL + filename + ext
+                let fileUrl = '/home/share_life/' + config.PUBLIC + URL + filename + ext
                 fs.writeFile(fileUrl, data, (err, result) => {
                     res.send({ fileUrl, data, err, result })
                     if (!err) {
