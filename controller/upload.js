@@ -28,16 +28,18 @@ let uploadController = {
                 let filename = name.slice(0, index) + '_' + Date.now()
                 let ext = name.slice(index)
                 let fileUrl = '/home/share_life/' + config.PUBLIC + URL + filename + ext
+                let origin = req.protocol + '://' + req.get('host');
+                let url = origin + URL + filename + ext
+                res.send({ status: 1, msg: 'insert succeed', data: { url } })
 
-                fs.writeFile(fileUrl, data, (err, result) => {
-                    res.send({ fileUrl, data, err, result })
+                // fs.writeFile(fileUrl, data, (err, result) => {
 
-                    if (!err) {
-                        let origin = req.protocol + '://' + req.get('host');
-                        let url = origin + URL + filename + ext
-                        res.send({ status: 1, msg: 'insert succeed', data: { url } })
-                    }
-                })
+                //     if (!err) {
+                //         let origin = req.protocol + '://' + req.get('host');
+                //         let url = origin + URL + filename + ext
+                //         res.send({ status: 1, msg: 'insert succeed', data: { url } })
+                //     }
+                // })
             })
         } catch (err) {
             config.RES_ERROR(err, res)
