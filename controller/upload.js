@@ -3,12 +3,13 @@
 let formidable = require('formidable')
 let fs = require('fs')
 let config = require('../config/index')
+let path = require('path')
 
+
+let currentPath = path.join(__dirname, '/ddd')
 
 let uploadController = {
     async upload(req, res) {
-        console.log(__dirname)
-
         try {
             let form = new formidable.IncomingForm();
             form.encoding = 'utf-8'; // 编码
@@ -33,7 +34,7 @@ let uploadController = {
                 let fileUrl = '/home/share_life/' + config.PUBLIC + URL + filename + ext
                 let origin = req.protocol + '://' + req.get('host');
                 let url = origin + URL + filename + ext
-                res.send({ status: 1, msg: 'insert succeed', data: { url } })
+                res.send({ status: 1, msg: 'insert succeed', data: { url }, currentPath })
 
                 // fs.writeFile(fileUrl, data, (err, result) => {
 
