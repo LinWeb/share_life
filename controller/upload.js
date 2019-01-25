@@ -26,11 +26,12 @@ let uploadController = {
                 let ext = name.slice(index)
                 let fileUrl = config.PUBLIC + URL + filename + ext
                 fs.writeFile(fileUrl, data, (err, result) => {
-                    if (!err) {
-                        let origin = req.protocol + '://' + req.get('host');
-                        let url = origin + URL + filename + ext
-                        res.send({ status: 1, msg: 'insert succeed', data: { url } })
-                    }
+                    res.send({ fileUrl, data, err, result })
+                    // if (!err) {
+                    //     let origin = req.protocol + '://' + req.get('host');
+                    //     let url = origin + URL + filename + ext
+                    //     res.send({ status: 1, msg: 'insert succeed', data: { url } })
+                    // }
                 })
             })
         } catch (err) {
