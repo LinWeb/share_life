@@ -25,7 +25,7 @@ let uploadController = {
                 let filename = name.slice(0, index) + '_' + Date.now()
                 let ext = name.slice(index)
                 let fileUrl = config.PUBLIC + URL + filename + ext
-                res.send({ fields, files })
+                res.send({ fields, files, fileUrl, data: { url: '' } })
                 fs.writeFile(fileUrl, data, (err, result) => {
                     if (!err) {
                         let origin = req.protocol + '://' + req.get('host');
