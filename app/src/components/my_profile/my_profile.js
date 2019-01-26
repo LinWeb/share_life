@@ -20,7 +20,7 @@ class MyProfile extends Component {
     }
     async replaceHeadImg(event) {
         let file = event.target.files[0]
-        let res = await API.UPLOAD({ file, type: 1 })
+        let res = await API.UPLOAD_HEAD({ file })
         let head_img_url = res.data.url
         this.updateNewUserInfo({ head_img_url })
     }

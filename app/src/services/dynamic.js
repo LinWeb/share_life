@@ -1,21 +1,26 @@
 
 import axios from 'axios'
-import { PUBLISH_URL, DYNAMIC_SEARCH_URL, UPLOAD_URL, DYNAMIC_UPDATE_LIKE_URL } from '../../config/api'
+import { PUBLISH_URL, DYNAMIC_SEARCH_URL, UPLOAD_HEAD_URL, UPLOAD_DYNAMIC_URL, DYNAMIC_UPDATE_LIKE_URL } from '../../config/api'
 
 let PUBLISH = async (data) => {
     return await axios.post(PUBLISH_URL, data)
 }
-let UPLOAD = async ({ file, type }) => {
+let UPLOAD_HEAD = async ({ file }) => {
     let config = {
         headers: { 'Content-Type': 'multipart/form-data' }
     }
     let formData = new FormData();
     formData.append('file', file)
-    formData.append('type', type)
-
-    return await axios.post(UPLOAD_URL, formData, config)
+    return await axios.post(UPLOAD_HEAD_URL, formData, config)
 }
-
+let UPLOAD_DYNAMIC = async ({ file }) => {
+    let config = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    }
+    let formData = new FormData();
+    formData.append('file', file)
+    return await axios.post(UPLOAD_DYNAMIC_URL, formData, config)
+}
 let DYNAMIC_SEARCH = async (data) => {
     return await axios.get(DYNAMIC_SEARCH_URL, { params: data })
 }
@@ -25,5 +30,5 @@ let DYNAMIC_UPDATE_LIKE = async (data) => {
 }
 
 export {
-    PUBLISH, DYNAMIC_SEARCH, UPLOAD, DYNAMIC_UPDATE_LIKE,
+    PUBLISH, DYNAMIC_SEARCH, UPLOAD_HEAD, UPLOAD_DYNAMIC, DYNAMIC_UPDATE_LIKE,
 }

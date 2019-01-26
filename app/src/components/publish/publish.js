@@ -42,7 +42,7 @@ class Publish extends Component {
         // console.log(files, type, index);
         // console.log(this.state.files)
         // console.log(newFile)
-        let res = await API.UPLOAD({ file: newFile, type: 2 })
+        let res = await API.UPLOAD_DYNAMIC({ file: newFile })
         let imgUrl = res.data.url
         this.setState((preState) => {
             let images = [...preState.images, imgUrl]

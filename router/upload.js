@@ -5,5 +5,7 @@ var upload = multer(); // for parsing multipart/form-data
 let uploadController = require('../controller/upload')
 let checkLogin = require('../middlewares/check_login')
 
-router.post('/', checkLogin, uploadController.upload)
+router.post('/head', checkLogin, uploadController.upload)
+router.post('/dynamic', checkLogin, uploadController.upload)
+
 module.exports = router
