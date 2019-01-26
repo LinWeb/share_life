@@ -1,4 +1,6 @@
 let path = require('path')
+const ROOT_PATH = path.join(__dirname, '../')
+
 module.exports = {
     MAIN_DB_URL: 'mongodb://localhost:27017/share_life',
     SESSION_DB_URL: 'mongodb://localhost:27017/session',
@@ -10,6 +12,5 @@ module.exports = {
     HEAD_IMGS_UPLOAD_URL: '/upload/head_imgs/',
     RES_ERROR(err, res) {
         res.send({ status: 0, msg: err.message })
-    },
-    ROOT_PATH: path.join(__dirname, '../')
+    }, ROOT_PATH
 }

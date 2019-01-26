@@ -7,9 +7,13 @@ let MongoStore = require('connect-mongo')(session);
 let config = require('./config/index')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 let router = require('./router/index')
 
 var app = express();
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
