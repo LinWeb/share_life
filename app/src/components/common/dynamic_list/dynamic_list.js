@@ -143,9 +143,14 @@ class DynamicList extends Component {
                                 hasLine={false}
                                 activeStyle={false}
                                 renderItem={dataItem => (
-                                    <div style={{ padding: '0px 5px' }}>
-                                        <img src={dataItem} style={{ width: '100%', height: '100%' }} alt="" />
-                                    </div>
+                                    <div style={{
+                                        width: '90%',
+                                        height: '100%',
+                                        backgroundSize: '120%',
+                                        backgroundRepeat: 'no-repeat',
+                                        backgroundPosition: 'center',
+                                        backgroundImage: `url('${dataItem}')`
+                                    }}></div>
                                 )}
                             />
                         </Card.Body>

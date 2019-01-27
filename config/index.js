@@ -12,5 +12,7 @@ module.exports = {
     HEAD_IMGS_UPLOAD_URL: '/upload/head_imgs/',
     RES_ERROR(err, res) {
         res.send({ status: 0, msg: err.message })
-    }, ROOT_PATH
+    },
+    ROOT_PATH,
+    MAX_FILE_SIZE: 5 * 1024 * 1024
 }

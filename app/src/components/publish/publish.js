@@ -39,21 +39,23 @@ class Publish extends Component {
     }
     selectImgs = async (files, type, index) => {
         let newFile = files[files.length - 1].file
+
         // console.log(files, type, index);
         // console.log(this.state.files)
         // console.log(newFile)
         let res = await API.UPLOAD_DYNAMIC({ file: newFile })
-        let imgUrl = res.data.url
-        this.setState((preState) => {
-            let images = [...preState.images, imgUrl]
-            return {
-                files,
-                images,
-            }
-        });
+        if (res) {
+            let imgUrl = res.data.url
+            this.setState((preState) => {
+                let images = [...preState.images, imgUrl]
+                return {
+                    files,
+                    images,
+                }
+            });
+        }
     }
     submit = async () => {
-
         let { form, history, _author } = this.props,
             { getFieldValue } = form,
             content = getFieldValue('content'),
