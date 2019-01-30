@@ -5,7 +5,7 @@ let dynamicSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true,
-        minlength: 10,
+        minlength: 1,
         maxlength: 200
     },
     images: [String],

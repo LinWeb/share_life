@@ -594,452 +594,12 @@ __webpack_require__.d(dynamic_namespaceObject, "DYNAMIC_UPDATE_LIKE", function()
 var objectSpread = __webpack_require__("vVw/");
 var objectSpread_default = /*#__PURE__*/__webpack_require__.n(objectSpread);
 
-// EXTERNAL MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/style/css.js
-var css = __webpack_require__("LxtN");
+// EXTERNAL MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/toast/style/css.js
+var css = __webpack_require__("mXQN");
 
-// EXTERNAL MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/icon/style/css.js
-var style_css = __webpack_require__("6DHp");
+// EXTERNAL MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/toast/index.js + 4 modules
+var toast = __webpack_require__("EjTF");
 
-// EXTERNAL MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/toast/style/index.css
-var style = __webpack_require__("cJdA");
-var style_default = /*#__PURE__*/__webpack_require__.n(style);
-
-// CONCATENATED MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/toast/style/css.js
-
-
-
-// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__("a3Yh");
-var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
-
-// EXTERNAL MODULE: ./node_modules/_classnames@2.2.6@classnames/index.js
-var _classnames_2_2_6_classnames = __webpack_require__("ZQJc");
-var _classnames_2_2_6_classnames_default = /*#__PURE__*/__webpack_require__.n(_classnames_2_2_6_classnames);
-
-// EXTERNAL MODULE: ./node_modules/_react@16.7.0@react/index.js
-var _react_16_7_0_react = __webpack_require__("0282");
-var _react_16_7_0_react_default = /*#__PURE__*/__webpack_require__.n(_react_16_7_0_react);
-
-// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/objectWithoutProperties.js
-var objectWithoutProperties = __webpack_require__("A9zj");
-var objectWithoutProperties_default = /*#__PURE__*/__webpack_require__.n(objectWithoutProperties);
-
-// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js
-var helpers_extends = __webpack_require__("4YfN");
-var extends_default = /*#__PURE__*/__webpack_require__.n(helpers_extends);
-
-// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/classCallCheck.js
-var classCallCheck = __webpack_require__("AA3o");
-var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
-
-// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/createClass.js
-var createClass = __webpack_require__("xSur");
-var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
-
-// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__("UzKs");
-var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
-
-// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/inherits.js
-var inherits = __webpack_require__("Y7Ml");
-var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
-
-// EXTERNAL MODULE: ./node_modules/_prop-types@15.6.2@prop-types/index.js
-var _prop_types_15_6_2_prop_types = __webpack_require__("/mFE");
-var _prop_types_15_6_2_prop_types_default = /*#__PURE__*/__webpack_require__.n(_prop_types_15_6_2_prop_types);
-
-// EXTERNAL MODULE: ./node_modules/_react-dom@16.7.0@react-dom/index.js
-var _react_dom_16_7_0_react_dom = __webpack_require__("qicm");
-var _react_dom_16_7_0_react_dom_default = /*#__PURE__*/__webpack_require__.n(_react_dom_16_7_0_react_dom);
-
-// EXTERNAL MODULE: ./node_modules/_rc-animate@2.6.0@rc-animate/es/Animate.js + 5 modules
-var Animate = __webpack_require__("XC18");
-
-// CONCATENATED MODULE: ./node_modules/_rc-util@4.6.0@rc-util/es/createChainedFunction.js
-/**
- * Safe chained function
- *
- * Will only create a new function if needed,
- * otherwise will pass back existing functions or null.
- *
- * @returns {function|null}
- */
-function createChainedFunction() {
-  var args = [].slice.call(arguments, 0);
-  if (args.length === 1) {
-    return args[0];
-  }
-
-  return function chainedFunction() {
-    for (var i = 0; i < args.length; i++) {
-      if (args[i] && args[i].apply) {
-        args[i].apply(this, arguments);
-      }
-    }
-  };
-}
-// CONCATENATED MODULE: ./node_modules/_rmc-notification@1.0.0@rmc-notification/es/Notice.js
-
-
-
-
-
-
-
-
-
-var Notice_Notice = function (_Component) {
-  inherits_default()(Notice, _Component);
-
-  function Notice() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    classCallCheck_default()(this, Notice);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = possibleConstructorReturn_default()(this, (_ref = Notice.__proto__ || Object.getPrototypeOf(Notice)).call.apply(_ref, [this].concat(args))), _this), _this.close = function () {
-      _this.clearCloseTimer();
-      _this.props.onClose();
-    }, _this.startCloseTimer = function () {
-      if (_this.props.duration) {
-        _this.closeTimer = setTimeout(function () {
-          _this.close();
-        }, _this.props.duration * 1000);
-      }
-    }, _this.clearCloseTimer = function () {
-      if (_this.closeTimer) {
-        clearTimeout(_this.closeTimer);
-        _this.closeTimer = null;
-      }
-    }, _temp), possibleConstructorReturn_default()(_this, _ret);
-  }
-
-  createClass_default()(Notice, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.startCloseTimer();
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.clearCloseTimer();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _className;
-
-      var props = this.props;
-      var componentClass = props.prefixCls + '-notice';
-      var className = (_className = {}, defineProperty_default()(_className, '' + componentClass, 1), defineProperty_default()(_className, componentClass + '-closable', props.closable), defineProperty_default()(_className, props.className, !!props.className), _className);
-      return _react_16_7_0_react_default.a.createElement(
-        'div',
-        { className: _classnames_2_2_6_classnames_default()(className), style: props.style },
-        _react_16_7_0_react_default.a.createElement(
-          'div',
-          { className: componentClass + '-content' },
-          props.children
-        ),
-        props.closable ? _react_16_7_0_react_default.a.createElement(
-          'a',
-          { tabIndex: '0', onClick: this.close, className: componentClass + '-close' },
-          _react_16_7_0_react_default.a.createElement('span', { className: componentClass + '-close-x' })
-        ) : null
-      );
-    }
-  }]);
-
-  return Notice;
-}(_react_16_7_0_react["Component"]);
-
-Notice_Notice.propTypes = {
-  duration: _prop_types_15_6_2_prop_types_default.a.number,
-  onClose: _prop_types_15_6_2_prop_types_default.a.func,
-  children: _prop_types_15_6_2_prop_types_default.a.any
-};
-Notice_Notice.defaultProps = {
-  onEnd: function onEnd() {},
-  onClose: function onClose() {},
-
-  duration: 1.5,
-  style: {
-    right: '50%'
-  }
-};
-/* harmony default export */ var es_Notice = (Notice_Notice);
-// CONCATENATED MODULE: ./node_modules/_rmc-notification@1.0.0@rmc-notification/es/Notification.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var seed = 0;
-var now = Date.now();
-
-function getUuid() {
-  return 'rcNotification_' + now + '_' + seed++;
-}
-
-var Notification_Notification = function (_Component) {
-  inherits_default()(Notification, _Component);
-
-  function Notification() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    classCallCheck_default()(this, Notification);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = possibleConstructorReturn_default()(this, (_ref = Notification.__proto__ || Object.getPrototypeOf(Notification)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      notices: []
-    }, _this.add = function (notice) {
-      var key = notice.key = notice.key || getUuid();
-      _this.setState(function (previousState) {
-        var notices = previousState.notices;
-        if (!notices.filter(function (v) {
-          return v.key === key;
-        }).length) {
-          return {
-            notices: notices.concat(notice)
-          };
-        }
-      });
-    }, _this.remove = function (key) {
-      _this.setState(function (previousState) {
-        return {
-          notices: previousState.notices.filter(function (notice) {
-            return notice.key !== key;
-          })
-        };
-      });
-    }, _temp), possibleConstructorReturn_default()(_this, _ret);
-  }
-
-  createClass_default()(Notification, [{
-    key: 'getTransitionName',
-    value: function getTransitionName() {
-      var props = this.props;
-      var transitionName = props.transitionName;
-      if (!transitionName && props.animation) {
-        transitionName = props.prefixCls + '-' + props.animation;
-      }
-      return transitionName;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this,
-          _className;
-
-      var props = this.props;
-      var noticeNodes = this.state.notices.map(function (notice) {
-        var onClose = createChainedFunction(_this2.remove.bind(_this2, notice.key), notice.onClose);
-        return _react_16_7_0_react_default.a.createElement(
-          es_Notice,
-          extends_default()({
-            prefixCls: props.prefixCls
-          }, notice, {
-            onClose: onClose
-          }),
-          notice.content
-        );
-      });
-      var className = (_className = {}, defineProperty_default()(_className, props.prefixCls, 1), defineProperty_default()(_className, props.className, !!props.className), _className);
-      return _react_16_7_0_react_default.a.createElement(
-        'div',
-        { className: _classnames_2_2_6_classnames_default()(className), style: props.style },
-        _react_16_7_0_react_default.a.createElement(
-          Animate["a" /* default */],
-          { transitionName: this.getTransitionName() },
-          noticeNodes
-        )
-      );
-    }
-  }]);
-
-  return Notification;
-}(_react_16_7_0_react["Component"]);
-
-Notification_Notification.propTypes = {
-  prefixCls: _prop_types_15_6_2_prop_types_default.a.string,
-  transitionName: _prop_types_15_6_2_prop_types_default.a.string,
-  animation: _prop_types_15_6_2_prop_types_default.a.oneOfType([_prop_types_15_6_2_prop_types_default.a.string, _prop_types_15_6_2_prop_types_default.a.object]),
-  style: _prop_types_15_6_2_prop_types_default.a.object
-};
-Notification_Notification.defaultProps = {
-  prefixCls: 'rmc-notification',
-  animation: 'fade',
-  style: {
-    top: 65,
-    left: '50%'
-  }
-};
-
-
-Notification_Notification.newInstance = function newNotificationInstance(properties, callback) {
-  var _ref2 = properties || {},
-      getContainer = _ref2.getContainer,
-      props = objectWithoutProperties_default()(_ref2, ['getContainer']);
-
-  var div = void 0;
-  if (getContainer) {
-    div = getContainer();
-  } else {
-    div = document.createElement('div');
-    document.body.appendChild(div);
-  }
-  var called = false;
-  function ref(notification) {
-    if (called) {
-      return;
-    }
-    called = true;
-    callback({
-      notice: function notice(noticeProps) {
-        notification.add(noticeProps);
-      },
-      removeNotice: function removeNotice(key) {
-        notification.remove(key);
-      },
-
-      component: notification,
-      destroy: function destroy() {
-        _react_dom_16_7_0_react_dom_default.a.unmountComponentAtNode(div);
-        if (!getContainer) {
-          document.body.removeChild(div);
-        }
-      }
-    });
-  }
-  _react_dom_16_7_0_react_dom_default.a.render(_react_16_7_0_react_default.a.createElement(Notification_Notification, extends_default()({}, props, { ref: ref })), div);
-};
-
-/* harmony default export */ var es_Notification = (Notification_Notification);
-// CONCATENATED MODULE: ./node_modules/_rmc-notification@1.0.0@rmc-notification/es/index.js
-
-/* harmony default export */ var es = (es_Notification);
-// EXTERNAL MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/icon/index.js + 1 modules
-var icon = __webpack_require__("/2tB");
-
-// CONCATENATED MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/toast/index.js
-
-
-
-
-
-var messageInstance = void 0;
-var prefixCls = 'am-toast';
-function getMessageInstance(mask, callback) {
-    var _classnames;
-
-    if (messageInstance) {
-        messageInstance.destroy();
-        messageInstance = null;
-    }
-    es.newInstance({
-        prefixCls: prefixCls,
-        style: {},
-        transitionName: 'am-fade',
-        className: _classnames_2_2_6_classnames_default()((_classnames = {}, defineProperty_default()(_classnames, prefixCls + '-mask', mask), defineProperty_default()(_classnames, prefixCls + '-nomask', !mask), _classnames))
-    }, function (notification) {
-        return callback && callback(notification);
-    });
-}
-function toast_notice(content, type) {
-    var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3;
-    var _onClose = arguments[3];
-    var mask = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-
-    var iconTypes = {
-        info: '',
-        success: 'success',
-        fail: 'fail',
-        offline: 'dislike',
-        loading: 'loading'
-    };
-    var iconType = iconTypes[type];
-    getMessageInstance(mask, function (notification) {
-        messageInstance = notification;
-        notification.notice({
-            duration: duration,
-            style: {},
-            content: !!iconType ? _react_16_7_0_react_default.a.createElement(
-                'div',
-                { className: prefixCls + '-text ' + prefixCls + '-text-icon', role: 'alert', 'aria-live': 'assertive' },
-                _react_16_7_0_react_default.a.createElement(icon["a" /* default */], { type: iconType, size: 'lg' }),
-                _react_16_7_0_react_default.a.createElement(
-                    'div',
-                    { className: prefixCls + '-text-info' },
-                    content
-                )
-            ) : _react_16_7_0_react_default.a.createElement(
-                'div',
-                { className: prefixCls + '-text', role: 'alert', 'aria-live': 'assertive' },
-                _react_16_7_0_react_default.a.createElement(
-                    'div',
-                    null,
-                    content
-                )
-            ),
-            closable: true,
-            onClose: function onClose() {
-                if (_onClose) {
-                    _onClose();
-                }
-                notification.destroy();
-                notification = null;
-                messageInstance = null;
-            }
-        });
-    });
-}
-/* harmony default export */ var toast = ({
-    SHORT: 3,
-    LONG: 8,
-    show: function show(content, duration, mask) {
-        return toast_notice(content, 'info', duration, function () {}, mask);
-    },
-    info: function info(content, duration, onClose, mask) {
-        return toast_notice(content, 'info', duration, onClose, mask);
-    },
-    success: function success(content, duration, onClose, mask) {
-        return toast_notice(content, 'success', duration, onClose, mask);
-    },
-    fail: function fail(content, duration, onClose, mask) {
-        return toast_notice(content, 'fail', duration, onClose, mask);
-    },
-    offline: function offline(content, duration, onClose, mask) {
-        return toast_notice(content, 'offline', duration, onClose, mask);
-    },
-    loading: function loading(content, duration, onClose, mask) {
-        return toast_notice(content, 'loading', duration, onClose, mask);
-    },
-    hide: function hide() {
-        if (messageInstance) {
-            messageInstance.destroy();
-            messageInstance = null;
-        }
-    }
-});
 // EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.0.0-beta.46@@babel/runtime/core-js/promise.js
 var promise = __webpack_require__("Ri2b");
 var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
@@ -1060,6 +620,7 @@ var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerat
 var hostname = window.location.hostname;
 var protocol = window.location.protocol;
 var BASE_URL = "".concat(protocol, "//").concat(hostname, ":3000");
+var MAX_FILE_SIZE = 5 * 1024 * 1024;
 var REGISTER_URL = '/user/register';
 var LOGIN_URL = '/user/login';
 var LOGOUT_URL = '/user/logout';
@@ -1462,6 +1023,8 @@ function () {
 
 
 
+
+
 var PUBLISH =
 /*#__PURE__*/
 function () {
@@ -1491,32 +1054,78 @@ function () {
   };
 }();
 
-var UPLOAD_HEAD =
+var UPLOAD =
 /*#__PURE__*/
 function () {
   var _ref3 = asyncToGenerator_default()(
   /*#__PURE__*/
   regenerator_default.a.mark(function _callee2(_ref2) {
-    var file, config, formData;
+    var API_URL, file, config, formData;
     return regenerator_default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            file = _ref2.file;
+            API_URL = _ref2.API_URL, file = _ref2.file;
             config = {
               headers: {
                 'Content-Type': 'multipart/form-data'
               }
             };
+
+            if (!(file.size < MAX_FILE_SIZE)) {
+              _context2.next = 10;
+              break;
+            }
+
+            // const name = file.name; //文件名
+            // const reader = new FileReader();
+            // reader.readAsDataURL(file)
+            // reader.onload = async (e) => {
+            //     let src = e.target.result
+            //     const img = new Image()
+            //     img.src = src
+            //     img.onload = (e) => {
+            //         const w = img.width;
+            //         const h = img.width;
+            //         const quality = 0.8
+            //         const canvas = document.createElement('canvas')
+            //         const ctx = canvas.getContext('2d')
+            //         const anw = document.createAttribute('width')
+            //         anw.nodeValue = w;
+            //         const anh = document.createAttribute('height')
+            //         anh.nodeValue = h
+            //         canvas.setAttributeNode(anw)
+            //         canvas.setAttributeNode(anh)
+            //         ctx.fillStyle = '#fff'
+            //         ctx.fillRect(0, 0, w, h)
+            //         ctx.drawImage(img, 0, 0, w, h)
+            //         const base64 = canvas.toDataURL('image/jpeg', quality)
+            //         const bytes = window.atob(base64.split(',')[1])
+            //         const ab = new ArrayBuffer(bytes.length)
+            //         const ia = new Uint8Array(ab)
+            //         for (let i = 0; i < bytes.length; i++) {
+            //             ia[i] = bytes.charCodeAt(i)
+            //         }
+            //         file = new Blob([ab], { type: 'image/jpeg' })
+            //         file.name = name
+            //         console.log(file)
+            //         let formData = new FormData();
+            //         formData.append('file', file)
+            //         axios.post(UPLOAD_DYNAMIC_URL, formData, config)
+            //     }
+            // }
             formData = new FormData();
             formData.append('file', file);
-            _context2.next = 6;
-            return _axios_0_18_0_axios_default.a.post(UPLOAD_HEAD_URL, formData, config);
-
-          case 6:
-            return _context2.abrupt("return", _context2.sent);
+            _context2.next = 7;
+            return _axios_0_18_0_axios_default.a.post(API_URL, formData, config);
 
           case 7:
+            return _context2.abrupt("return", _context2.sent);
+
+          case 10:
+            toast["a" /* default */].fail('file is too big!', 1);
+
+          case 11:
           case "end":
             return _context2.stop();
         }
@@ -1524,37 +1133,33 @@ function () {
     }, _callee2, this);
   }));
 
-  return function UPLOAD_HEAD(_x2) {
+  return function UPLOAD(_x2) {
     return _ref3.apply(this, arguments);
   };
 }();
 
-var UPLOAD_DYNAMIC =
+var UPLOAD_HEAD =
 /*#__PURE__*/
 function () {
   var _ref5 = asyncToGenerator_default()(
   /*#__PURE__*/
   regenerator_default.a.mark(function _callee3(_ref4) {
-    var file, config, formData;
+    var file;
     return regenerator_default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             file = _ref4.file;
-            config = {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            };
-            formData = new FormData();
-            formData.append('file', file);
-            _context3.next = 6;
-            return _axios_0_18_0_axios_default.a.post(UPLOAD_DYNAMIC_URL, formData, config);
+            _context3.next = 3;
+            return UPLOAD({
+              API_URL: UPLOAD_HEAD_URL,
+              file: file
+            });
 
-          case 6:
+          case 3:
             return _context3.abrupt("return", _context3.sent);
 
-          case 7:
+          case 4:
           case "end":
             return _context3.stop();
         }
@@ -1562,30 +1167,33 @@ function () {
     }, _callee3, this);
   }));
 
-  return function UPLOAD_DYNAMIC(_x3) {
+  return function UPLOAD_HEAD(_x3) {
     return _ref5.apply(this, arguments);
   };
 }();
 
-var DYNAMIC_SEARCH =
+var UPLOAD_DYNAMIC =
 /*#__PURE__*/
 function () {
-  var _ref6 = asyncToGenerator_default()(
+  var _ref7 = asyncToGenerator_default()(
   /*#__PURE__*/
-  regenerator_default.a.mark(function _callee4(data) {
+  regenerator_default.a.mark(function _callee4(_ref6) {
+    var file;
     return regenerator_default.a.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            _context4.next = 2;
-            return _axios_0_18_0_axios_default.a.get(DYNAMIC_SEARCH_URL, {
-              params: data
+            file = _ref6.file;
+            _context4.next = 3;
+            return UPLOAD({
+              API_URL: UPLOAD_DYNAMIC_URL,
+              file: file
             });
 
-          case 2:
+          case 3:
             return _context4.abrupt("return", _context4.sent);
 
-          case 3:
+          case 4:
           case "end":
             return _context4.stop();
         }
@@ -1593,15 +1201,15 @@ function () {
     }, _callee4, this);
   }));
 
-  return function DYNAMIC_SEARCH(_x4) {
-    return _ref6.apply(this, arguments);
+  return function UPLOAD_DYNAMIC(_x4) {
+    return _ref7.apply(this, arguments);
   };
 }();
 
-var DYNAMIC_UPDATE_LIKE =
+var DYNAMIC_SEARCH =
 /*#__PURE__*/
 function () {
-  var _ref7 = asyncToGenerator_default()(
+  var _ref8 = asyncToGenerator_default()(
   /*#__PURE__*/
   regenerator_default.a.mark(function _callee5(data) {
     return regenerator_default.a.wrap(function _callee5$(_context5) {
@@ -1609,7 +1217,9 @@ function () {
         switch (_context5.prev = _context5.next) {
           case 0:
             _context5.next = 2;
-            return _axios_0_18_0_axios_default.a.post(DYNAMIC_UPDATE_LIKE_URL, data);
+            return _axios_0_18_0_axios_default.a.get(DYNAMIC_SEARCH_URL, {
+              params: data
+            });
 
           case 2:
             return _context5.abrupt("return", _context5.sent);
@@ -1622,8 +1232,37 @@ function () {
     }, _callee5, this);
   }));
 
-  return function DYNAMIC_UPDATE_LIKE(_x5) {
-    return _ref7.apply(this, arguments);
+  return function DYNAMIC_SEARCH(_x5) {
+    return _ref8.apply(this, arguments);
+  };
+}();
+
+var DYNAMIC_UPDATE_LIKE =
+/*#__PURE__*/
+function () {
+  var _ref9 = asyncToGenerator_default()(
+  /*#__PURE__*/
+  regenerator_default.a.mark(function _callee6(data) {
+    return regenerator_default.a.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.next = 2;
+            return _axios_0_18_0_axios_default.a.post(DYNAMIC_UPDATE_LIKE_URL, data);
+
+          case 2:
+            return _context6.abrupt("return", _context6.sent);
+
+          case 3:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, this);
+  }));
+
+  return function DYNAMIC_UPDATE_LIKE(_x6) {
+    return _ref9.apply(this, arguments);
   };
 }();
 
@@ -1666,7 +1305,7 @@ _axios_0_18_0_axios_default.a.interceptors.request.use(function (config) {
 
 _axios_0_18_0_axios_default.a.interceptors.response.use(function (response) {
   if (response.data.status !== 1) {
-    toast.fail(response.data.msg, 1);
+    toast["a" /* default */].fail(response.data.msg, 1);
 
     return null;
   } else {
@@ -1676,7 +1315,7 @@ _axios_0_18_0_axios_default.a.interceptors.response.use(function (response) {
 }, function (error) {
   console.log(error);
 
-  toast.fail(error.message, 1);
+  toast["a" /* default */].fail(error.message, 1);
 
   return promise_default.a.reject(error);
 });
@@ -3183,6 +2822,14 @@ module.exports = warning;
 
 })));
 
+
+/***/ }),
+
+/***/ "1qD1":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"img_view":"img_view___3C7zx","img":"img___TXqQR"};
 
 /***/ }),
 
@@ -10373,6 +10020,446 @@ module.exports = function (TO_STRING) {
 
 /***/ }),
 
+/***/ "EjTF":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/defineProperty.js
+var defineProperty = __webpack_require__("a3Yh");
+var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
+
+// EXTERNAL MODULE: ./node_modules/_classnames@2.2.6@classnames/index.js
+var _classnames_2_2_6_classnames = __webpack_require__("ZQJc");
+var _classnames_2_2_6_classnames_default = /*#__PURE__*/__webpack_require__.n(_classnames_2_2_6_classnames);
+
+// EXTERNAL MODULE: ./node_modules/_react@16.7.0@react/index.js
+var _react_16_7_0_react = __webpack_require__("0282");
+var _react_16_7_0_react_default = /*#__PURE__*/__webpack_require__.n(_react_16_7_0_react);
+
+// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/objectWithoutProperties.js
+var objectWithoutProperties = __webpack_require__("A9zj");
+var objectWithoutProperties_default = /*#__PURE__*/__webpack_require__.n(objectWithoutProperties);
+
+// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/extends.js
+var helpers_extends = __webpack_require__("4YfN");
+var extends_default = /*#__PURE__*/__webpack_require__.n(helpers_extends);
+
+// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/classCallCheck.js
+var classCallCheck = __webpack_require__("AA3o");
+var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
+
+// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/createClass.js
+var createClass = __webpack_require__("xSur");
+var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
+
+// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/possibleConstructorReturn.js
+var possibleConstructorReturn = __webpack_require__("UzKs");
+var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
+
+// EXTERNAL MODULE: ./node_modules/_babel-runtime@6.26.0@babel-runtime/helpers/inherits.js
+var inherits = __webpack_require__("Y7Ml");
+var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
+
+// EXTERNAL MODULE: ./node_modules/_prop-types@15.6.2@prop-types/index.js
+var _prop_types_15_6_2_prop_types = __webpack_require__("/mFE");
+var _prop_types_15_6_2_prop_types_default = /*#__PURE__*/__webpack_require__.n(_prop_types_15_6_2_prop_types);
+
+// EXTERNAL MODULE: ./node_modules/_react-dom@16.7.0@react-dom/index.js
+var _react_dom_16_7_0_react_dom = __webpack_require__("qicm");
+var _react_dom_16_7_0_react_dom_default = /*#__PURE__*/__webpack_require__.n(_react_dom_16_7_0_react_dom);
+
+// EXTERNAL MODULE: ./node_modules/_rc-animate@2.6.0@rc-animate/es/Animate.js + 5 modules
+var Animate = __webpack_require__("XC18");
+
+// CONCATENATED MODULE: ./node_modules/_rc-util@4.6.0@rc-util/es/createChainedFunction.js
+/**
+ * Safe chained function
+ *
+ * Will only create a new function if needed,
+ * otherwise will pass back existing functions or null.
+ *
+ * @returns {function|null}
+ */
+function createChainedFunction() {
+  var args = [].slice.call(arguments, 0);
+  if (args.length === 1) {
+    return args[0];
+  }
+
+  return function chainedFunction() {
+    for (var i = 0; i < args.length; i++) {
+      if (args[i] && args[i].apply) {
+        args[i].apply(this, arguments);
+      }
+    }
+  };
+}
+// CONCATENATED MODULE: ./node_modules/_rmc-notification@1.0.0@rmc-notification/es/Notice.js
+
+
+
+
+
+
+
+
+
+var Notice_Notice = function (_Component) {
+  inherits_default()(Notice, _Component);
+
+  function Notice() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    classCallCheck_default()(this, Notice);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = possibleConstructorReturn_default()(this, (_ref = Notice.__proto__ || Object.getPrototypeOf(Notice)).call.apply(_ref, [this].concat(args))), _this), _this.close = function () {
+      _this.clearCloseTimer();
+      _this.props.onClose();
+    }, _this.startCloseTimer = function () {
+      if (_this.props.duration) {
+        _this.closeTimer = setTimeout(function () {
+          _this.close();
+        }, _this.props.duration * 1000);
+      }
+    }, _this.clearCloseTimer = function () {
+      if (_this.closeTimer) {
+        clearTimeout(_this.closeTimer);
+        _this.closeTimer = null;
+      }
+    }, _temp), possibleConstructorReturn_default()(_this, _ret);
+  }
+
+  createClass_default()(Notice, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.startCloseTimer();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.clearCloseTimer();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _className;
+
+      var props = this.props;
+      var componentClass = props.prefixCls + '-notice';
+      var className = (_className = {}, defineProperty_default()(_className, '' + componentClass, 1), defineProperty_default()(_className, componentClass + '-closable', props.closable), defineProperty_default()(_className, props.className, !!props.className), _className);
+      return _react_16_7_0_react_default.a.createElement(
+        'div',
+        { className: _classnames_2_2_6_classnames_default()(className), style: props.style },
+        _react_16_7_0_react_default.a.createElement(
+          'div',
+          { className: componentClass + '-content' },
+          props.children
+        ),
+        props.closable ? _react_16_7_0_react_default.a.createElement(
+          'a',
+          { tabIndex: '0', onClick: this.close, className: componentClass + '-close' },
+          _react_16_7_0_react_default.a.createElement('span', { className: componentClass + '-close-x' })
+        ) : null
+      );
+    }
+  }]);
+
+  return Notice;
+}(_react_16_7_0_react["Component"]);
+
+Notice_Notice.propTypes = {
+  duration: _prop_types_15_6_2_prop_types_default.a.number,
+  onClose: _prop_types_15_6_2_prop_types_default.a.func,
+  children: _prop_types_15_6_2_prop_types_default.a.any
+};
+Notice_Notice.defaultProps = {
+  onEnd: function onEnd() {},
+  onClose: function onClose() {},
+
+  duration: 1.5,
+  style: {
+    right: '50%'
+  }
+};
+/* harmony default export */ var es_Notice = (Notice_Notice);
+// CONCATENATED MODULE: ./node_modules/_rmc-notification@1.0.0@rmc-notification/es/Notification.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var seed = 0;
+var now = Date.now();
+
+function getUuid() {
+  return 'rcNotification_' + now + '_' + seed++;
+}
+
+var Notification_Notification = function (_Component) {
+  inherits_default()(Notification, _Component);
+
+  function Notification() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    classCallCheck_default()(this, Notification);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = possibleConstructorReturn_default()(this, (_ref = Notification.__proto__ || Object.getPrototypeOf(Notification)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      notices: []
+    }, _this.add = function (notice) {
+      var key = notice.key = notice.key || getUuid();
+      _this.setState(function (previousState) {
+        var notices = previousState.notices;
+        if (!notices.filter(function (v) {
+          return v.key === key;
+        }).length) {
+          return {
+            notices: notices.concat(notice)
+          };
+        }
+      });
+    }, _this.remove = function (key) {
+      _this.setState(function (previousState) {
+        return {
+          notices: previousState.notices.filter(function (notice) {
+            return notice.key !== key;
+          })
+        };
+      });
+    }, _temp), possibleConstructorReturn_default()(_this, _ret);
+  }
+
+  createClass_default()(Notification, [{
+    key: 'getTransitionName',
+    value: function getTransitionName() {
+      var props = this.props;
+      var transitionName = props.transitionName;
+      if (!transitionName && props.animation) {
+        transitionName = props.prefixCls + '-' + props.animation;
+      }
+      return transitionName;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this,
+          _className;
+
+      var props = this.props;
+      var noticeNodes = this.state.notices.map(function (notice) {
+        var onClose = createChainedFunction(_this2.remove.bind(_this2, notice.key), notice.onClose);
+        return _react_16_7_0_react_default.a.createElement(
+          es_Notice,
+          extends_default()({
+            prefixCls: props.prefixCls
+          }, notice, {
+            onClose: onClose
+          }),
+          notice.content
+        );
+      });
+      var className = (_className = {}, defineProperty_default()(_className, props.prefixCls, 1), defineProperty_default()(_className, props.className, !!props.className), _className);
+      return _react_16_7_0_react_default.a.createElement(
+        'div',
+        { className: _classnames_2_2_6_classnames_default()(className), style: props.style },
+        _react_16_7_0_react_default.a.createElement(
+          Animate["a" /* default */],
+          { transitionName: this.getTransitionName() },
+          noticeNodes
+        )
+      );
+    }
+  }]);
+
+  return Notification;
+}(_react_16_7_0_react["Component"]);
+
+Notification_Notification.propTypes = {
+  prefixCls: _prop_types_15_6_2_prop_types_default.a.string,
+  transitionName: _prop_types_15_6_2_prop_types_default.a.string,
+  animation: _prop_types_15_6_2_prop_types_default.a.oneOfType([_prop_types_15_6_2_prop_types_default.a.string, _prop_types_15_6_2_prop_types_default.a.object]),
+  style: _prop_types_15_6_2_prop_types_default.a.object
+};
+Notification_Notification.defaultProps = {
+  prefixCls: 'rmc-notification',
+  animation: 'fade',
+  style: {
+    top: 65,
+    left: '50%'
+  }
+};
+
+
+Notification_Notification.newInstance = function newNotificationInstance(properties, callback) {
+  var _ref2 = properties || {},
+      getContainer = _ref2.getContainer,
+      props = objectWithoutProperties_default()(_ref2, ['getContainer']);
+
+  var div = void 0;
+  if (getContainer) {
+    div = getContainer();
+  } else {
+    div = document.createElement('div');
+    document.body.appendChild(div);
+  }
+  var called = false;
+  function ref(notification) {
+    if (called) {
+      return;
+    }
+    called = true;
+    callback({
+      notice: function notice(noticeProps) {
+        notification.add(noticeProps);
+      },
+      removeNotice: function removeNotice(key) {
+        notification.remove(key);
+      },
+
+      component: notification,
+      destroy: function destroy() {
+        _react_dom_16_7_0_react_dom_default.a.unmountComponentAtNode(div);
+        if (!getContainer) {
+          document.body.removeChild(div);
+        }
+      }
+    });
+  }
+  _react_dom_16_7_0_react_dom_default.a.render(_react_16_7_0_react_default.a.createElement(Notification_Notification, extends_default()({}, props, { ref: ref })), div);
+};
+
+/* harmony default export */ var es_Notification = (Notification_Notification);
+// CONCATENATED MODULE: ./node_modules/_rmc-notification@1.0.0@rmc-notification/es/index.js
+
+/* harmony default export */ var es = (es_Notification);
+// EXTERNAL MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/icon/index.js + 1 modules
+var icon = __webpack_require__("/2tB");
+
+// CONCATENATED MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/toast/index.js
+
+
+
+
+
+var messageInstance = void 0;
+var prefixCls = 'am-toast';
+function getMessageInstance(mask, callback) {
+    var _classnames;
+
+    if (messageInstance) {
+        messageInstance.destroy();
+        messageInstance = null;
+    }
+    es.newInstance({
+        prefixCls: prefixCls,
+        style: {},
+        transitionName: 'am-fade',
+        className: _classnames_2_2_6_classnames_default()((_classnames = {}, defineProperty_default()(_classnames, prefixCls + '-mask', mask), defineProperty_default()(_classnames, prefixCls + '-nomask', !mask), _classnames))
+    }, function (notification) {
+        return callback && callback(notification);
+    });
+}
+function toast_notice(content, type) {
+    var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3;
+    var _onClose = arguments[3];
+    var mask = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+
+    var iconTypes = {
+        info: '',
+        success: 'success',
+        fail: 'fail',
+        offline: 'dislike',
+        loading: 'loading'
+    };
+    var iconType = iconTypes[type];
+    getMessageInstance(mask, function (notification) {
+        messageInstance = notification;
+        notification.notice({
+            duration: duration,
+            style: {},
+            content: !!iconType ? _react_16_7_0_react_default.a.createElement(
+                'div',
+                { className: prefixCls + '-text ' + prefixCls + '-text-icon', role: 'alert', 'aria-live': 'assertive' },
+                _react_16_7_0_react_default.a.createElement(icon["a" /* default */], { type: iconType, size: 'lg' }),
+                _react_16_7_0_react_default.a.createElement(
+                    'div',
+                    { className: prefixCls + '-text-info' },
+                    content
+                )
+            ) : _react_16_7_0_react_default.a.createElement(
+                'div',
+                { className: prefixCls + '-text', role: 'alert', 'aria-live': 'assertive' },
+                _react_16_7_0_react_default.a.createElement(
+                    'div',
+                    null,
+                    content
+                )
+            ),
+            closable: true,
+            onClose: function onClose() {
+                if (_onClose) {
+                    _onClose();
+                }
+                notification.destroy();
+                notification = null;
+                messageInstance = null;
+            }
+        });
+    });
+}
+/* harmony default export */ var toast = __webpack_exports__["a"] = ({
+    SHORT: 3,
+    LONG: 8,
+    show: function show(content, duration, mask) {
+        return toast_notice(content, 'info', duration, function () {}, mask);
+    },
+    info: function info(content, duration, onClose, mask) {
+        return toast_notice(content, 'info', duration, onClose, mask);
+    },
+    success: function success(content, duration, onClose, mask) {
+        return toast_notice(content, 'success', duration, onClose, mask);
+    },
+    fail: function fail(content, duration, onClose, mask) {
+        return toast_notice(content, 'fail', duration, onClose, mask);
+    },
+    offline: function offline(content, duration, onClose, mask) {
+        return toast_notice(content, 'offline', duration, onClose, mask);
+    },
+    loading: function loading(content, duration, onClose, mask) {
+        return toast_notice(content, 'loading', duration, onClose, mask);
+    },
+    hide: function hide() {
+        if (messageInstance) {
+            messageInstance.destroy();
+            messageInstance = null;
+        }
+    }
+});
+
+/***/ }),
+
 /***/ "Ekhf":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14432,7 +14519,7 @@ var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 var asyncToGenerator = __webpack_require__("2mSJ");
 var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
-// EXTERNAL MODULE: ./src/services/index.js + 11 modules
+// EXTERNAL MODULE: ./src/services/index.js + 5 modules
 var services = __webpack_require__("+vOg");
 
 // EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.0.0-beta.46@@babel/runtime/helpers/toConsumableArray.js
@@ -16800,7 +16887,8 @@ function (_Component) {
       var _this$props = _this.props,
           userId = _this$props.userId,
           history = _this$props.history,
-          type = _this$props.type;
+          type = _this$props.type,
+          dispatch = _this$props.dispatch;
       var dynamicData = _this.state.dynamicData;
       var noData = _react_16_7_0_react_default.a.createElement("div", {
         style: {
@@ -16891,17 +16979,22 @@ function (_Component) {
           activeStyle: false,
           renderItem: function renderItem(dataItem) {
             return _react_16_7_0_react_default.a.createElement("div", {
-              style: {
-                padding: '0px 5px'
-              }
-            }, _react_16_7_0_react_default.a.createElement("img", {
-              src: dataItem,
-              style: {
-                width: '100%',
-                height: '100%'
+              onClick: function onClick(e) {
+                e.stopPropagation();
+                dispatch({
+                  type: 'imgView/showImgView',
+                  imgUrl: dataItem
+                });
               },
-              alt: ""
-            }));
+              style: {
+                width: '90%',
+                height: '100%',
+                backgroundSize: '120%',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundImage: "url('".concat(dataItem, "')")
+              }
+            });
           }
         })), _react_16_7_0_react_default.a.createElement(card.Footer, {
           style: {
@@ -22136,7 +22229,7 @@ function (_Component) {
     }
 
     return helpers_possibleConstructorReturn_default()(_this, (_temp = _this = helpers_possibleConstructorReturn_default()(this, (_getPrototypeOf2 = getPrototypeOf_default()(Publish)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      files: [],
+      filesData: [],
       categoryData: [],
       categoryId: '',
       images: []
@@ -22151,29 +22244,53 @@ function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                newFile = files[files.length - 1].file; // console.log(files, type, index);
-                // console.log(this.state.files)
-                // console.log(newFile)
+                if (!(type === 'add')) {
+                  _context.next = 8;
+                  break;
+                }
 
-                _context.next = 3;
+                newFile = files[files.length - 1].file;
+                _context.next = 4;
                 return services["a" /* default */].UPLOAD_DYNAMIC({
                   file: newFile
                 });
 
-              case 3:
+              case 4:
                 res = _context.sent;
-                imgUrl = res.data.url;
 
+                if (res) {
+                  imgUrl = res.data.url;
+
+                  _this.setState(function (preState) {
+                    var images = toConsumableArray_default()(preState.images).concat([imgUrl]);
+
+                    var filesData = toConsumableArray_default()(preState.filesData).concat([files[files.length - 1]]);
+
+                    return {
+                      filesData: filesData,
+                      images: images
+                    };
+                  });
+                }
+
+                _context.next = 9;
+                break;
+
+              case 8:
                 _this.setState(function (preState) {
-                  var images = toConsumableArray_default()(preState.images).concat([imgUrl]);
-
+                  var images = preState.images.filter(function (item, i) {
+                    return i !== index;
+                  });
+                  var filesData = preState.filesData.filter(function (item, i) {
+                    return i !== index;
+                  });
                   return {
-                    files: files,
+                    filesData: filesData,
                     images: images
                   };
                 });
 
-              case 6:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -22296,10 +22413,12 @@ function (_Component) {
       var _this3 = this;
 
       var _this$state2 = this.state,
-          files = _this$state2.files,
+          filesData = _this$state2.filesData,
           categoryData = _this$state2.categoryData,
           categoryId = _this$state2.categoryId;
-      var form = this.props.form,
+      var _this$props2 = this.props,
+          form = _this$props2.form,
+          dispatch = _this$props2.dispatch,
           getFieldProps = form.getFieldProps;
       return _react_16_7_0_react_default.a.createElement("div", null, _react_16_7_0_react_default.a.createElement(picker, {
         data: categoryData,
@@ -22318,12 +22437,16 @@ function (_Component) {
         rows: 5,
         count: 100
       }))), _react_16_7_0_react_default.a.createElement(wing_blank, null, _react_16_7_0_react_default.a.createElement(image_picker, {
-        files: files,
+        files: filesData,
         onChange: this.selectImgs,
-        onImageClick: function onImageClick(index, fs) {
-          return console.log(index, fs);
+        onImageClick: function onImageClick(index, files) {
+          var imgUrl = files[index].url;
+          dispatch({
+            type: 'imgView/showImgView',
+            imgUrl: imgUrl
+          });
         },
-        selectable: files.length < 9,
+        selectable: filesData.length < 9,
         multiple: true
       })), _react_16_7_0_react_default.a.createElement(es_button, {
         type: "primary",
@@ -23685,7 +23808,15 @@ input_item_InputItem.contextTypes = {
     antLocale: _prop_types_15_6_2_prop_types_default.a.object
 };
 /* harmony default export */ var input_item = (input_item_InputItem);
+// EXTERNAL MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/toast/style/css.js
+var toast_style_css = __webpack_require__("mXQN");
+
+// EXTERNAL MODULE: ./node_modules/_antd-mobile@2.2.8@antd-mobile/es/toast/index.js + 4 modules
+var es_toast = __webpack_require__("EjTF");
+
 // CONCATENATED MODULE: ./src/components/register/register.js
+
+
 
 
 
@@ -23722,24 +23853,35 @@ function (_Component) {
       var _submit = asyncToGenerator_default()(
       /*#__PURE__*/
       regenerator_default.a.mark(function _callee() {
-        var _this$props, form, history, getFieldValue, username, password, data;
+        var _this$props, form, history, getFieldValue, username, password, rePassword, data;
 
         return regenerator_default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this$props = this.props, form = _this$props.form, history = _this$props.history, getFieldValue = form.getFieldValue, username = getFieldValue('username'), password = getFieldValue('password');
-                _context.next = 3;
+                _this$props = this.props, form = _this$props.form, history = _this$props.history, getFieldValue = form.getFieldValue, username = getFieldValue('username'), password = getFieldValue('password'), rePassword = getFieldValue('rePassword');
+
+                if (!(password === rePassword)) {
+                  _context.next = 8;
+                  break;
+                }
+
+                _context.next = 4;
                 return services["a" /* default */].REGISTER({
                   username: username,
                   password: password
                 });
 
-              case 3:
+              case 4:
                 data = _context.sent;
                 data && history.push('/login');
+                _context.next = 9;
+                break;
 
-              case 5:
+              case 8:
+                es_toast["a" /* default */].fail('Inconsistency between new password and confirmation password', 1);
+
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -26319,6 +26461,62 @@ function (_Component) {
 }(_react_16_7_0_react["Component"]);
 
 /* harmony default export */ var footer_footer = (Object(router["withRouter"])(footer_Footer));
+// EXTERNAL MODULE: ./src/components/img_view/img_view.css
+var img_view = __webpack_require__("1qD1");
+var img_view_default = /*#__PURE__*/__webpack_require__.n(img_view);
+
+// CONCATENATED MODULE: ./src/components/img_view/img_view.js
+
+
+
+
+
+
+
+
+
+var img_view_ImgView =
+/*#__PURE__*/
+function (_Component) {
+  function ImgView() {
+    helpers_classCallCheck_default()(this, ImgView);
+
+    return helpers_possibleConstructorReturn_default()(this, getPrototypeOf_default()(ImgView).apply(this, arguments));
+  }
+
+  helpers_createClass_default()(ImgView, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          data = _this$props.data,
+          dispatch = _this$props.dispatch;
+      return data.isShow ? _react_16_7_0_react_default.a.createElement("div", {
+        className: img_view_default.a.img_view,
+        onClick: function onClick() {
+          dispatch({
+            type: 'imgView/hideImgView'
+          });
+        }
+      }, _react_16_7_0_react_default.a.createElement("img", {
+        src: data.imgUrl,
+        alt: "",
+        className: img_view_default.a.img
+      })) : null;
+    }
+  }]);
+
+  helpers_inherits_default()(ImgView, _Component);
+
+  return ImgView;
+}(_react_16_7_0_react["Component"]);
+
+var img_view_mapStateToProps = function mapStateToProps(state) {
+  return {
+    data: state.imgView
+  };
+};
+
+/* harmony default export */ var img_view_img_view = (Object(_dva_2_4_1_dva["connect"])(img_view_mapStateToProps)(img_view_ImgView));
 // EXTERNAL MODULE: ./src/check/check_login.js
 var check_login = __webpack_require__("GwXL");
 
@@ -26381,6 +26579,7 @@ function (_Component) {
 
 
 
+
 function RouterConfig(_ref) {
   var history = _ref.history;
   return _react_16_7_0_react_default.a.createElement(router["Router"], {
@@ -26417,7 +26616,7 @@ function RouterConfig(_ref) {
     className: "footer-container"
   }, _react_16_7_0_react_default.a.createElement(footer_footer, {
     includesPages: ['/', '/news', '/user']
-  }))));
+  })), _react_16_7_0_react_default.a.createElement(img_view_img_view, null)));
 }
 
 /* harmony default export */ var router_router = __webpack_exports__["default"] = (RouterConfig);
@@ -39648,6 +39847,86 @@ var Animate__initialiseProps = function _initialiseProps() {
 
 /***/ }),
 
+/***/ "XO3c":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_regenerator__ = __webpack_require__("UVnk");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_objectSpread__ = __webpack_require__("vVw/");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_objectSpread___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_objectSpread__);
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespace: 'imgView',
+  state: {
+    isShow: false,
+    imgUrl: ''
+  },
+  reducers: {
+    updateImgView: function updateImgView(state, _ref) {
+      var data = _ref.data;
+      return __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_objectSpread___default()({}, state, data);
+    }
+  },
+  effects: {
+    showImgView:
+    /*#__PURE__*/
+    __WEBPACK_IMPORTED_MODULE_0__babel_runtime_regenerator___default.a.mark(function showImgView(_ref2, _ref3) {
+      var imgUrl, put;
+      return __WEBPACK_IMPORTED_MODULE_0__babel_runtime_regenerator___default.a.wrap(function showImgView$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              imgUrl = _ref2.imgUrl;
+              put = _ref3.put;
+              _context.next = 4;
+              return put({
+                type: 'updateImgView',
+                data: {
+                  isShow: true,
+                  imgUrl: imgUrl
+                }
+              });
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, showImgView, this);
+    }),
+    hideImgView:
+    /*#__PURE__*/
+    __WEBPACK_IMPORTED_MODULE_0__babel_runtime_regenerator___default.a.mark(function hideImgView(action, _ref4) {
+      var put;
+      return __WEBPACK_IMPORTED_MODULE_0__babel_runtime_regenerator___default.a.wrap(function hideImgView$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              put = _ref4.put;
+              _context2.next = 3;
+              return put({
+                type: 'updateImgView',
+                data: {
+                  isShow: false,
+                  imgUrl: ''
+                }
+              });
+
+            case 3:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, hideImgView, this);
+    })
+  }
+});
+
+/***/ }),
+
 /***/ "XTbl":
 /***/ (function(module, exports) {
 
@@ -47540,7 +47819,8 @@ var app = __WEBPACK_IMPORTED_MODULE_0_dva___default()({
 // app.use(createLoading({ namespace: 'Loading' }));
 // 3. Model
 
-app.model(__webpack_require__("/7YS").default); // 4. Router
+app.model(__webpack_require__("/7YS").default);
+app.model(__webpack_require__("XO3c").default); // 4. Router
 
 app.router(__webpack_require__("JU1R").default); // 5. Start
 
@@ -48179,6 +48459,20 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
+
+/***/ }),
+
+/***/ "mXQN":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_css__ = __webpack_require__("LxtN");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__icon_style_css__ = __webpack_require__("6DHp");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_css__ = __webpack_require__("cJdA");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__index_css__);
+
+
+
 
 /***/ }),
 
