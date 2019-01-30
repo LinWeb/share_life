@@ -8,7 +8,7 @@ import API from '../../services/index'
 import { connect } from 'dva';
 class Publish extends Component {
     state = {
-        files: [],
+        filesData: [],
         categoryData: [],
         categoryId: '',
         images: []
@@ -38,18 +38,26 @@ class Publish extends Component {
         }
     }
     selectImgs = async (files, type, index) => {
-        let newFile = files[files.length - 1].file
-
-        // console.log(files, type, index);
-        // console.log(this.state.files)
-        // console.log(newFile)
-        let res = await API.UPLOAD_DYNAMIC({ file: newFile })
-        if (res) {
-            let imgUrl = res.data.url
+        if (type === 'add') {
+            let newFile = files[files.length - 1].file
+            let res = await API.UPLOAD_DYNAMIC({ file: newFile })
+            if (res) {
+                let imgUrl = res.data.url
+                this.setState((preState) => {
+                    let images = [...preState.images, imgUrl]
+                    let filesData = [...preState.filesData, files[files.length - 1]]
+                    return {
+                        filesData,
+                        images,
+                    }
+                });
+            }
+        } else {
             this.setState((preState) => {
-                let images = [...preState.images, imgUrl]
+                let images = preState.images.filter((item, i) => i !== index)
+                let filesData = preState.filesData.filter((item, i) => i !== index)
                 return {
-                    files,
+                    filesData,
                     images,
                 }
             });
@@ -67,8 +75,8 @@ class Publish extends Component {
         }
     }
     render() {
-        let { files, categoryData, categoryId } = this.state;
-        let { form } = this.props,
+        let { filesData, categoryData, categoryId } = this.state;
+        let { form, dispatch } = this.props,
             { getFieldProps } = form;
 
         return (
@@ -92,10 +100,13 @@ class Publish extends Component {
                 </List>
                 <WingBlank>
                     <ImagePicker
-                        files={files}
+                        files={filesData}
                         onChange={this.selectImgs}
-                        onImageClick={(index, fs) => console.log(index, fs)}
-                        selectable={files.length < 9}
+                        onImageClick={(index, files) => {
+                            let imgUrl = files[index].url
+                            dispatch({ type: 'imgView/showImgView', imgUrl })
+                        }}
+                        selectable={filesData.length < 9}
                         multiple={true}
                     />
                 </WingBlank>
