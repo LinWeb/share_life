@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, InputItem, Button, WhiteSpace } from 'antd-mobile';
+import { List, InputItem, Button, WhiteSpace, Toast } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import API from '../../services/index'
 import { Link } from 'dva/router';
@@ -9,9 +9,14 @@ class Register extends Component {
         let { form, history } = this.props,
             { getFieldValue } = form,
             username = getFieldValue('username'),
-            password = getFieldValue('password');
-        let data = await API.REGISTER({ username, password })
-        data && history.push('/login')
+            password = getFieldValue('password'),
+            rePassword = getFieldValue('rePassword');
+        if (password === rePassword) {
+            let data = await API.REGISTER({ username, password })
+            data && history.push('/login')
+        } else {
+            Toast.fail('Inconsistency between new password and confirmation password', 1);
+        }
     }
     render() {
         const { getFieldProps } = this.props.form;
