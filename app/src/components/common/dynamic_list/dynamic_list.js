@@ -85,7 +85,7 @@ class DynamicList extends Component {
         this.getDynamicData(true)
     }
     dynamic = () => {
-        let { userId, history, type } = this.props
+        let { userId, history, type, dispatch } = this.props
         let { dynamicData } = this.state
         let noData = <div style={{ backgroundColor: '#fff', textAlign: 'center', height: "634px", lineHeight: '634px' }}>暂无数据</div>
 
@@ -143,14 +143,18 @@ class DynamicList extends Component {
                                 hasLine={false}
                                 activeStyle={false}
                                 renderItem={dataItem => (
-                                    <div style={{
-                                        width: '90%',
-                                        height: '100%',
-                                        backgroundSize: '120%',
-                                        backgroundRepeat: 'no-repeat',
-                                        backgroundPosition: 'center',
-                                        backgroundImage: `url('${dataItem}')`
-                                    }}></div>
+                                    <div onClick={(e) => {
+                                        e.stopPropagation();
+                                        dispatch({ type: 'imgView/showImgView', imgUrl: dataItem })
+                                    }}
+                                        style={{
+                                            width: '90%',
+                                            height: '100%',
+                                            backgroundSize: '120%',
+                                            backgroundRepeat: 'no-repeat',
+                                            backgroundPosition: 'center',
+                                            backgroundImage: `url('${dataItem}')`
+                                        }}></div>
                                 )}
                             />
                         </Card.Body>

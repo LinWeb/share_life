@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, Switch, } from 'dva/router';
 import Header from '../components/header/header'
 import Footer from '../components/footer/footer'
+import ImgView from '../components/img_view/img_view'
 import PrivateRoute from './private_route'
 import routerConfig from '../../config/router_config'
 
@@ -34,6 +35,7 @@ function RouterConfig({ history }) {
         <div className='footer-container'>
           <Footer includesPages={['/', '/news', '/user']} ></Footer>
         </div>
+        <ImgView></ImgView>
       </div>
     </Router>
   );
