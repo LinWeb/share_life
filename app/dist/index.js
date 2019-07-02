@@ -619,7 +619,7 @@ var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerat
 // CONCATENATED MODULE: ./config/api.js
 var hostname = window.location.hostname;
 var protocol = window.location.protocol;
-var BASE_URL = "".concat(protocol, "//").concat(hostname, ":3000");
+var BASE_URL = "".concat(protocol, "//").concat(hostname, ":3001");
 var MAX_FILE_SIZE = 5 * 1024 * 1024;
 var REGISTER_URL = '/user/register';
 var LOGIN_URL = '/user/login';

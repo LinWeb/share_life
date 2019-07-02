@@ -3,7 +3,7 @@
 
 const hostname = window.location.hostname;
 const protocol = window.location.protocol;
-const BASE_URL = `${protocol}//${hostname}:3000`
+const BASE_URL = `${protocol}//${hostname}:3001`
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const REGISTER_URL = '/user/register'
 const LOGIN_URL = '/user/login'
