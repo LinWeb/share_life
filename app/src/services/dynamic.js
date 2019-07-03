@@ -6,12 +6,9 @@ import { MAX_FILE_SIZE, PUBLISH_URL, DYNAMIC_SEARCH_URL, UPLOAD_HEAD_URL, UPLOAD
 let PUBLISH = async (data) => {
     return await axios.post(PUBLISH_URL, data)
 }
-let UPLOAD = async ({ API_URL, file }) => {
-    let config = {
-        headers: { 'Content-Type': 'multipart/form-data' }
-    }
-    if (file.size < MAX_FILE_SIZE) {
-        const name = file.name; //文件名
+
+let compressImg = async (file, name) => {
+    return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file)
         reader.onload = async (e) => {
@@ -21,7 +18,6 @@ let UPLOAD = async ({ API_URL, file }) => {
             img.onload = (e) => {
                 const w = img.width;
                 const h = img.width;
-                const quality = 0.8
                 const canvas = document.createElement('canvas')
                 const ctx = canvas.getContext('2d')
 
@@ -37,35 +33,26 @@ let UPLOAD = async ({ API_URL, file }) => {
                 ctx.fillRect(0, 0, w, h)
 
                 ctx.drawImage(img, 0, 0, w, h)
-                // const base64 = canvas.toDataURL('image/jpeg', quality)
 
-                // console.log(111111111, base64)
-                // const bytes = window.atob(base64.split(',')[1])
-                // const ab = new ArrayBuffer(bytes.length)
-                // const ia = new Uint8Array(ab)
-                // for (let i = 0; i < bytes.length; i++) {
-                //     ia[i] = bytes.charCodeAt(i)
-                // }
-                // file = new Blob([ab], { type: 'image/jpeg' })
-                // file.name = name
-                // let formData = new FormData();
-                // formData.append('file', file)
-
+                const quality = 0.7
                 canvas.toBlob((blob) => {
-                    // 怎么设置传文件名称
-                    console.log(11111111, file, blob)
+                    blob.name = name
                     let formData = new FormData();
                     formData.append('file', blob)
-                    axios.post(API_URL, formData, config)
-                }, 'image/jpeg', 0.92)
-
-                // axios.post(API_URL, formData, config)
+                    resolve(formData)
+                }, 'image/jpeg', quality)
             }
         }
-
-        // let formData = new FormData();
-        // formData.append('file', file)
-        // return await axios.post(API_URL, formData, config)
+    })
+}
+let UPLOAD = async ({ API_URL, file }) => {
+    let config = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    }
+    if (file.size < MAX_FILE_SIZE) {
+        const name = file.name; //文件名
+        let formData = await compressImg(file, name)
+        return axios.post(API_URL, formData, config)
     } else {
         Toast.fail('file is too big!', 1);
     }

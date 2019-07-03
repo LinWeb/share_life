@@ -35,7 +35,7 @@ let uploadController = {
                     let filename = name.slice(0, index) + '_' + Date.now()
                     let ext = name.slice(index)
 
-                    let newFilePath = uploadDir + filename + ext
+                    let newFilePath = uploadDir + filename + ext + '.jpg'
                     fs.renameSync(filePath, newFilePath) // 重命名文件
 
                     let fileName = path.basename(newFilePath) // 文件名称

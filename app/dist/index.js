@@ -1282,6 +1282,7 @@ function () {
 
 
 
+
 var PUBLISH =
 /*#__PURE__*/
 function () {
@@ -1311,112 +1312,73 @@ function () {
   };
 }();
 
-var UPLOAD =
+var compressImg =
 /*#__PURE__*/
 function () {
-  var _ref3 = asyncToGenerator_default()(
+  var _ref2 = asyncToGenerator_default()(
   /*#__PURE__*/
-  regenerator_default.a.mark(function _callee2(_ref2) {
-    var API_URL, file, config, formData;
-    return regenerator_default.a.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            API_URL = _ref2.API_URL, file = _ref2.file;
-            config = {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            };
-
-            if (!(file.size < MAX_FILE_SIZE)) {
-              _context2.next = 10;
-              break;
-            }
-
-            // const name = file.name; //文件名
-            // const reader = new FileReader();
-            // reader.readAsDataURL(file)
-            // reader.onload = async (e) => {
-            //     let src = e.target.result
-            //     const img = new Image()
-            //     img.src = src
-            //     img.onload = (e) => {
-            //         const w = img.width;
-            //         const h = img.width;
-            //         const quality = 0.8
-            //         const canvas = document.createElement('canvas')
-            //         const ctx = canvas.getContext('2d')
-            //         const anw = document.createAttribute('width')
-            //         anw.nodeValue = w;
-            //         const anh = document.createAttribute('height')
-            //         anh.nodeValue = h
-            //         canvas.setAttributeNode(anw)
-            //         canvas.setAttributeNode(anh)
-            //         ctx.fillStyle = '#fff'
-            //         ctx.fillRect(0, 0, w, h)
-            //         ctx.drawImage(img, 0, 0, w, h)
-            //         const base64 = canvas.toDataURL('image/jpeg', quality)
-            //         const bytes = window.atob(base64.split(',')[1])
-            //         const ab = new ArrayBuffer(bytes.length)
-            //         const ia = new Uint8Array(ab)
-            //         for (let i = 0; i < bytes.length; i++) {
-            //             ia[i] = bytes.charCodeAt(i)
-            //         }
-            //         file = new Blob([ab], { type: 'image/jpeg' })
-            //         file.name = name
-            //         console.log(file)
-            //         let formData = new FormData();
-            //         formData.append('file', file)
-            //         axios.post(UPLOAD_DYNAMIC_URL, formData, config)
-            //     }
-            // }
-            formData = new FormData();
-            formData.append('file', file);
-            _context2.next = 7;
-            return _axios_0_18_0_axios_default.a.post(API_URL, formData, config);
-
-          case 7:
-            return _context2.abrupt("return", _context2.sent);
-
-          case 10:
-            toast["a" /* default */].fail('file is too big!', 1);
-
-          case 11:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, this);
-  }));
-
-  return function UPLOAD(_x2) {
-    return _ref3.apply(this, arguments);
-  };
-}();
-
-var UPLOAD_HEAD =
-/*#__PURE__*/
-function () {
-  var _ref5 = asyncToGenerator_default()(
-  /*#__PURE__*/
-  regenerator_default.a.mark(function _callee3(_ref4) {
-    var file;
+  regenerator_default.a.mark(function _callee3(file, name) {
     return regenerator_default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            file = _ref4.file;
-            _context3.next = 3;
-            return UPLOAD({
-              API_URL: UPLOAD_HEAD_URL,
-              file: file
-            });
+            return _context3.abrupt("return", new promise_default.a(function (resolve, reject) {
+              var reader = new FileReader();
+              reader.readAsDataURL(file);
 
-          case 3:
-            return _context3.abrupt("return", _context3.sent);
+              reader.onload =
+              /*#__PURE__*/
+              function () {
+                var _ref3 = asyncToGenerator_default()(
+                /*#__PURE__*/
+                regenerator_default.a.mark(function _callee2(e) {
+                  var src, img;
+                  return regenerator_default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          src = e.target.result;
+                          img = new Image();
+                          img.src = src;
 
-          case 4:
+                          img.onload = function (e) {
+                            var w = img.width;
+                            var h = img.width;
+                            var canvas = document.createElement('canvas');
+                            var ctx = canvas.getContext('2d');
+                            var anw = document.createAttribute('width');
+                            anw.nodeValue = w;
+                            var anh = document.createAttribute('height');
+                            anh.nodeValue = h;
+                            canvas.setAttributeNode(anw);
+                            canvas.setAttributeNode(anh);
+                            ctx.fillStyle = '#fff';
+                            ctx.fillRect(0, 0, w, h);
+                            ctx.drawImage(img, 0, 0, w, h);
+                            var quality = 0.7;
+                            canvas.toBlob(function (blob) {
+                              blob.name = name;
+                              var formData = new FormData();
+                              formData.append('file', blob);
+                              resolve(formData);
+                            }, 'image/jpeg', quality);
+                          };
+
+                        case 4:
+                        case "end":
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2, this);
+                }));
+
+                return function (_x4) {
+                  return _ref3.apply(this, arguments);
+                };
+              }();
+            }));
+
+          case 1:
           case "end":
             return _context3.stop();
         }
@@ -1424,33 +1386,47 @@ function () {
     }, _callee3, this);
   }));
 
-  return function UPLOAD_HEAD(_x3) {
-    return _ref5.apply(this, arguments);
+  return function compressImg(_x2, _x3) {
+    return _ref2.apply(this, arguments);
   };
 }();
 
-var UPLOAD_DYNAMIC =
+var UPLOAD =
 /*#__PURE__*/
 function () {
-  var _ref7 = asyncToGenerator_default()(
+  var _ref5 = asyncToGenerator_default()(
   /*#__PURE__*/
-  regenerator_default.a.mark(function _callee4(_ref6) {
-    var file;
+  regenerator_default.a.mark(function _callee4(_ref4) {
+    var API_URL, file, config, name, formData;
     return regenerator_default.a.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            file = _ref6.file;
-            _context4.next = 3;
-            return UPLOAD({
-              API_URL: UPLOAD_DYNAMIC_URL,
-              file: file
-            });
+            API_URL = _ref4.API_URL, file = _ref4.file;
+            config = {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            };
 
-          case 3:
-            return _context4.abrupt("return", _context4.sent);
+            if (!(file.size < MAX_FILE_SIZE)) {
+              _context4.next = 10;
+              break;
+            }
 
-          case 4:
+            name = file.name; //文件名
+
+            _context4.next = 6;
+            return compressImg(file, name);
+
+          case 6:
+            formData = _context4.sent;
+            return _context4.abrupt("return", _axios_0_18_0_axios_default.a.post(API_URL, formData, config));
+
+          case 10:
+            toast["a" /* default */].fail('file is too big!', 1);
+
+          case 11:
           case "end":
             return _context4.stop();
         }
@@ -1458,30 +1434,33 @@ function () {
     }, _callee4, this);
   }));
 
-  return function UPLOAD_DYNAMIC(_x4) {
-    return _ref7.apply(this, arguments);
+  return function UPLOAD(_x5) {
+    return _ref5.apply(this, arguments);
   };
 }();
 
-var DYNAMIC_SEARCH =
+var UPLOAD_HEAD =
 /*#__PURE__*/
 function () {
-  var _ref8 = asyncToGenerator_default()(
+  var _ref7 = asyncToGenerator_default()(
   /*#__PURE__*/
-  regenerator_default.a.mark(function _callee5(data) {
+  regenerator_default.a.mark(function _callee5(_ref6) {
+    var file;
     return regenerator_default.a.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            _context5.next = 2;
-            return _axios_0_18_0_axios_default.a.get(DYNAMIC_SEARCH_URL, {
-              params: data
+            file = _ref6.file;
+            _context5.next = 3;
+            return UPLOAD({
+              API_URL: UPLOAD_HEAD_URL,
+              file: file
             });
 
-          case 2:
+          case 3:
             return _context5.abrupt("return", _context5.sent);
 
-          case 3:
+          case 4:
           case "end":
             return _context5.stop();
         }
@@ -1489,28 +1468,33 @@ function () {
     }, _callee5, this);
   }));
 
-  return function DYNAMIC_SEARCH(_x5) {
-    return _ref8.apply(this, arguments);
+  return function UPLOAD_HEAD(_x6) {
+    return _ref7.apply(this, arguments);
   };
 }();
 
-var DYNAMIC_UPDATE_LIKE =
+var UPLOAD_DYNAMIC =
 /*#__PURE__*/
 function () {
   var _ref9 = asyncToGenerator_default()(
   /*#__PURE__*/
-  regenerator_default.a.mark(function _callee6(data) {
+  regenerator_default.a.mark(function _callee6(_ref8) {
+    var file;
     return regenerator_default.a.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
-            _context6.next = 2;
-            return _axios_0_18_0_axios_default.a.post(DYNAMIC_UPDATE_LIKE_URL, data);
-
-          case 2:
-            return _context6.abrupt("return", _context6.sent);
+            file = _ref8.file;
+            _context6.next = 3;
+            return UPLOAD({
+              API_URL: UPLOAD_DYNAMIC_URL,
+              file: file
+            });
 
           case 3:
+            return _context6.abrupt("return", _context6.sent);
+
+          case 4:
           case "end":
             return _context6.stop();
         }
@@ -1518,8 +1502,68 @@ function () {
     }, _callee6, this);
   }));
 
-  return function DYNAMIC_UPDATE_LIKE(_x6) {
+  return function UPLOAD_DYNAMIC(_x7) {
     return _ref9.apply(this, arguments);
+  };
+}();
+
+var DYNAMIC_SEARCH =
+/*#__PURE__*/
+function () {
+  var _ref10 = asyncToGenerator_default()(
+  /*#__PURE__*/
+  regenerator_default.a.mark(function _callee7(data) {
+    return regenerator_default.a.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            _context7.next = 2;
+            return _axios_0_18_0_axios_default.a.get(DYNAMIC_SEARCH_URL, {
+              params: data
+            });
+
+          case 2:
+            return _context7.abrupt("return", _context7.sent);
+
+          case 3:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7, this);
+  }));
+
+  return function DYNAMIC_SEARCH(_x8) {
+    return _ref10.apply(this, arguments);
+  };
+}();
+
+var DYNAMIC_UPDATE_LIKE =
+/*#__PURE__*/
+function () {
+  var _ref11 = asyncToGenerator_default()(
+  /*#__PURE__*/
+  regenerator_default.a.mark(function _callee8(data) {
+    return regenerator_default.a.wrap(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            _context8.next = 2;
+            return _axios_0_18_0_axios_default.a.post(DYNAMIC_UPDATE_LIKE_URL, data);
+
+          case 2:
+            return _context8.abrupt("return", _context8.sent);
+
+          case 3:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8, this);
+  }));
+
+  return function DYNAMIC_UPDATE_LIKE(_x9) {
+    return _ref11.apply(this, arguments);
   };
 }();
 
