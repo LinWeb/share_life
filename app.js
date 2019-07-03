@@ -23,15 +23,14 @@ app.set('view engine', 'pug');
 
 // 设置头部
 app.use(function (req, res, next) {
-  // let origin = req.headers.origin;
-  // let allow_origins = [
-  //   'http://localhost:8000',
-  //   'http://39.105.228.74:8080',
-  // ]
-  // if (allow_origins.includes(origin)) {
-  //   res.setHeader('Access-Control-Allow-Origin', origin)
-  // }
-  res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
+  let origin = req.headers.origin;
+  let allow_origins = [
+    'http://localhost:8000',
+    'http://39.105.133.130:8089',
+  ]
+  if (allow_origins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin)
+  }
   res.setHeader('Access-control-Allow-Methods', '*')
   res.setHeader('Access-control-Allow-Headers', 'X-Requested-With,content-type')
   res.setHeader('Access-control-Allow-Credentials', true)

@@ -11,53 +11,61 @@ let UPLOAD = async ({ API_URL, file }) => {
         headers: { 'Content-Type': 'multipart/form-data' }
     }
     if (file.size < MAX_FILE_SIZE) {
-        // const name = file.name; //文件名
-        // const reader = new FileReader();
-        // reader.readAsDataURL(file)
-        // reader.onload = async (e) => {
-        //     let src = e.target.result
-        //     const img = new Image()
-        //     img.src = src
-        //     img.onload = (e) => {
-        //         const w = img.width;
-        //         const h = img.width;
-        //         const quality = 0.8
-        //         const canvas = document.createElement('canvas')
-        //         const ctx = canvas.getContext('2d')
+        const name = file.name; //文件名
+        const reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onload = async (e) => {
+            let src = e.target.result
+            const img = new Image()
+            img.src = src
+            img.onload = (e) => {
+                const w = img.width;
+                const h = img.width;
+                const quality = 0.8
+                const canvas = document.createElement('canvas')
+                const ctx = canvas.getContext('2d')
 
-        //         const anw = document.createAttribute('width')
-        //         anw.nodeValue = w;
-        //         const anh = document.createAttribute('height')
-        //         anh.nodeValue = h
+                const anw = document.createAttribute('width')
+                anw.nodeValue = w;
+                const anh = document.createAttribute('height')
+                anh.nodeValue = h
 
-        //         canvas.setAttributeNode(anw)
-        //         canvas.setAttributeNode(anh)
+                canvas.setAttributeNode(anw)
+                canvas.setAttributeNode(anh)
 
-        //         ctx.fillStyle = '#fff'
-        //         ctx.fillRect(0, 0, w, h)
+                ctx.fillStyle = '#fff'
+                ctx.fillRect(0, 0, w, h)
 
-        //         ctx.drawImage(img, 0, 0, w, h)
-        //         const base64 = canvas.toDataURL('image/jpeg', quality)
+                ctx.drawImage(img, 0, 0, w, h)
+                // const base64 = canvas.toDataURL('image/jpeg', quality)
 
+                // console.log(111111111, base64)
+                // const bytes = window.atob(base64.split(',')[1])
+                // const ab = new ArrayBuffer(bytes.length)
+                // const ia = new Uint8Array(ab)
+                // for (let i = 0; i < bytes.length; i++) {
+                //     ia[i] = bytes.charCodeAt(i)
+                // }
+                // file = new Blob([ab], { type: 'image/jpeg' })
+                // file.name = name
+                // let formData = new FormData();
+                // formData.append('file', file)
 
-        //         const bytes = window.atob(base64.split(',')[1])
-        //         const ab = new ArrayBuffer(bytes.length)
-        //         const ia = new Uint8Array(ab)
-        //         for (let i = 0; i < bytes.length; i++) {
-        //             ia[i] = bytes.charCodeAt(i)
-        //         }
-        //         file = new Blob([ab], { type: 'image/jpeg' })
-        //         file.name = name
-        //         console.log(file)
-        //         let formData = new FormData();
-        //         formData.append('file', file)
-        //         axios.post(UPLOAD_DYNAMIC_URL, formData, config)
-        //     }
-        // }
+                canvas.toBlob((blob) => {
+                    // 怎么设置传文件名称
+                    console.log(11111111, file, blob)
+                    let formData = new FormData();
+                    formData.append('file', blob)
+                    axios.post(API_URL, formData, config)
+                }, 'image/jpeg', 0.92)
 
-        let formData = new FormData();
-        formData.append('file', file)
-        return await axios.post(API_URL, formData, config)
+                // axios.post(API_URL, formData, config)
+            }
+        }
+
+        // let formData = new FormData();
+        // formData.append('file', file)
+        // return await axios.post(API_URL, formData, config)
     } else {
         Toast.fail('file is too big!', 1);
     }

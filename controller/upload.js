@@ -29,6 +29,7 @@ let uploadController = {
                 } else {
                     let filePath = files.file.path
 
+                    console.log(111111, files)
                     let name = files.file.name
                     let index = name.lastIndexOf('.')
                     let filename = name.slice(0, index) + '_' + Date.now()
