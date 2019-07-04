@@ -3,7 +3,7 @@ import API from '../../services/index'
 import { connect } from 'dva'
 import { List, WhiteSpace, DatePicker, InputItem, Picker, Tag, TextareaItem, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import { district } from 'antd-mobile-demo-data'
+import AreaData from '../../lib/area'
 
 const Item = List.Item;
 
@@ -103,7 +103,7 @@ class MyProfile extends Component {
                         <List.Item arrow="horizontal">出生日期</List.Item>
                     </DatePicker>
                     <Picker extra="请选择"
-                        data={district}
+                        data={AreaData}
                         {...getFieldProps('district', {
                             initialValue: address,
                         })}

@@ -20,7 +20,7 @@ class AsyncImg extends Component {
         let { url } = this.state
         let { origin, ...rest } = this.props
         return (
-            <img src={url || 'http://iph.href.lu/123x123?text=loading...'} {...rest} />
+            <img src={url || 'http://iph.href.lu/123x123?text=loading...'} {...rest} alt='' />
         )
     }
 }

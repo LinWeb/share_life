@@ -4,7 +4,7 @@ import styles from './user_homepage.css'
 import { connect } from 'dva'
 import { Link, withRouter } from 'dva/router'
 import moment from 'moment'
-import { district } from 'antd-mobile-demo-data'
+import AreaData from '../../../lib/area'
 import API from '../../../services/index'
 
 const Item = List.Item;
@@ -43,7 +43,7 @@ class UserHomepage extends Component {
         birthday = moment(birthday).format('YYYY-MM-DD');
         let hometown = ''
         if (address) {
-            district.forEach(item1 => {
+            AreaData.forEach(item1 => {
                 if (address[0] === item1.value) {
                     hometown += item1.label;
                     item1.children.forEach(item2 => {
