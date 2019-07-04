@@ -5,6 +5,8 @@ import { withRouter } from 'dva/router';
 import { connect } from 'dva'
 import API from '../../../services/index'
 import RefreshContainer from '../../common/refresh_container/refresh_container'
+import AsyncImg from '../../common/asyncImg/asyncImg'
+
 
 class DynamicList extends Component {
     state = {
@@ -123,7 +125,7 @@ class DynamicList extends Component {
                                             search: `title=${item._author.nickname}的主页`
                                         })
                                     }}>
-                                    <img style={{ width: '100%', height: '100%' }} src={item._author.head_img_url} alt='' />
+                                    <AsyncImg style={{ width: '100%', height: '100%' }} origin={item._author.head_img_url} alt='' />
                                 </div>
                             }
                             extra={item._author._id === userId ? null : <Button type={item.is_followed ? 'ghost' : 'warning'} inline size="small" style={{ marginRight: '4px' }}
@@ -147,15 +149,14 @@ class DynamicList extends Component {
                                         e.stopPropagation();
                                         dispatch({ type: 'imgView/showImgView', imgUrl: dataItem })
                                     }}
-                                        style={{
-                                            width: '90%',
+                                    >
+                                        <AsyncImg style={{
+                                            width: '100%',
                                             height: '100%',
-                                            backgroundSize: '120%',
-                                            backgroundRepeat: 'no-repeat',
-                                            backgroundPosition: 'center',
-                                            backgroundImage: `url('${dataItem}')`
-                                        }}></div>
+                                        }} origin={dataItem} alt='' />
+                                    </div>
                                 )}
+                                itemStyle={{ padding: 0 }}
                             />
                         </Card.Body>
                         <Card.Footer style={{ margin: '12px 0 5px' }}
