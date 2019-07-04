@@ -16890,7 +16890,70 @@ function (_Component) {
 }(_react_16_7_0_react["Component"]);
 
 /* harmony default export */ var refresh_container = (refresh_container_RefreshContainer);
+// CONCATENATED MODULE: ./src/components/common/asyncImg/asyncImg.js
+
+
+
+
+
+
+
+
+
+var asyncImg_AsyncImg =
+/*#__PURE__*/
+function (_Component) {
+  function AsyncImg(props) {
+    var _this;
+
+    helpers_classCallCheck_default()(this, AsyncImg);
+
+    _this = helpers_possibleConstructorReturn_default()(this, getPrototypeOf_default()(AsyncImg).call(this, props));
+    _this.state = {
+      url: ''
+    };
+    return _this;
+  }
+
+  helpers_createClass_default()(AsyncImg, [{
+    key: "UNSAFE_componentWillMount",
+    value: function UNSAFE_componentWillMount() {
+      var _this2 = this;
+
+      var img = new Image();
+      img.src = this.props.origin;
+
+      img.onload = function () {
+        _this2.setState(function () {
+          return {
+            url: img.src
+          };
+        });
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var url = this.state.url;
+
+      var _this$props = this.props,
+          origin = _this$props.origin,
+          rest = objectWithoutProperties_default()(_this$props, ["origin"]);
+
+      return _react_16_7_0_react_default.a.createElement("img", extends_default()({
+        src: url || 'http://iph.href.lu/123x123?text=loading...'
+      }, rest));
+    }
+  }]);
+
+  helpers_inherits_default()(AsyncImg, _Component);
+
+  return AsyncImg;
+}(_react_16_7_0_react["Component"]);
+
+/* harmony default export */ var asyncImg = (asyncImg_AsyncImg);
 // CONCATENATED MODULE: ./src/components/common/dynamic_list/dynamic_list.js
+
 
 
 
@@ -16998,12 +17061,12 @@ function (_Component) {
                 search: "title=".concat(item._author.nickname, "\u7684\u4E3B\u9875")
               });
             }
-          }, _react_16_7_0_react_default.a.createElement("img", {
+          }, _react_16_7_0_react_default.a.createElement(asyncImg, {
             style: {
               width: '100%',
               height: '100%'
             },
-            src: item._author.head_img_url,
+            origin: item._author.head_img_url,
             alt: ""
           })),
           extra: item._author._id === userId ? null : _react_16_7_0_react_default.a.createElement(es_button, {
@@ -17036,16 +17099,18 @@ function (_Component) {
                   type: 'imgView/showImgView',
                   imgUrl: dataItem
                 });
-              },
-              style: {
-                width: '90%',
-                height: '100%',
-                backgroundSize: '120%',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                backgroundImage: "url('".concat(dataItem, "')")
               }
-            });
+            }, _react_16_7_0_react_default.a.createElement(asyncImg, {
+              style: {
+                width: '100%',
+                height: '100%'
+              },
+              origin: dataItem,
+              alt: ""
+            }));
+          },
+          itemStyle: {
+            padding: 0
           }
         })), _react_16_7_0_react_default.a.createElement(card.Footer, {
           style: {
