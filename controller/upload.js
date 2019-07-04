@@ -28,14 +28,12 @@ let uploadController = {
                     config.RES_ERROR(err, res)
                 } else {
                     let filePath = files.file.path
-
-                    console.log(111111, files)
                     let name = files.file.name
                     let index = name.lastIndexOf('.')
                     let filename = name.slice(0, index) + '_' + Date.now()
                     let ext = name.slice(index)
 
-                    let newFilePath = uploadDir + filename + ext + '.jpg'
+                    let newFilePath = uploadDir + filename + ext
                     fs.renameSync(filePath, newFilePath) // 重命名文件
 
                     let fileName = path.basename(newFilePath) // 文件名称
