@@ -37,7 +37,7 @@ let compressImg = async (file, name) => {
                     let formData = new FormData();  // 创建表单数据对象
                     formData.append('file', blob, name)  // 添加数据
                     resolve(formData)
-                }, 'image/jpeg', 0.7)
+                }, 'image/jpeg', 0.1)
             }
         }
     })

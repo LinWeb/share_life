@@ -151,12 +151,11 @@ class DynamicList extends Component {
                                     }}
                                     >
                                         <AsyncImg style={{
-                                            width: '100%',
-                                            height: '100%',
+                                            width: '27vw',
+                                            height: '27vw',
                                         }} origin={dataItem} alt='' />
                                     </div>
                                 )}
-                                itemStyle={{ padding: 0 }}
                             />
                         </Card.Body>
                         <Card.Footer style={{ margin: '12px 0 5px' }}
