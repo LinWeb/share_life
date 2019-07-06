@@ -31,5 +31,5 @@ module.exports = {
         res.send({ status: 0, msg: err.message })
     },
     ROOT_PATH,
-    MAX_FILE_SIZE: 5 * 1024 * 1024
+    MAX_FILE_SIZE: 8 * 1024 * 1024
 }
